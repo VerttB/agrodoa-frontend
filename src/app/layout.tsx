@@ -27,7 +27,7 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerBen = ["Inicio", "Causas", "Perfil"];
+  const headerBen = ["Inicio", "causas", "Perfil"];
 
   return (
     <html lang="en">

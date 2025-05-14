@@ -8,7 +8,7 @@ export default function Home() {
   const router = useRouter();
 
   return (
-    <div className="m-auto flex flex-col gap-6">
+    <div className="m-auto flex flex-col gap-6 xl:w-3/4 2xl:w-2/4">
       <div className="flex flex-col gap-6 md:flex-row">
         <div className="flex w-full flex-col gap-4">
           <h1 className="ld:text-4xl text-lg font-medium md:text-2xl">
