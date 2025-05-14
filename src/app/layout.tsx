@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Sofia, Inter } from "next/font/google";
 import "./globals.css";
-import logo from "../../public/logo.svg"
 import Image from "next/image";
+import Link from "next/link";
 const inter = Inter({
   variable: "--font-inter-sans",
   subsets: ["latin"],
@@ -37,7 +37,7 @@ export default function RootLayout({
         <header className="w-full h-16 bg-secondary items-center justify-between flex flex-row-reverse">
           <ul className="flex gap-4 px-4 text-2xl ">
             {headerBen.map((item) => (
-              <li key={item}>{item}</li>
+              <Link href={item} key={item}>{item}</Link>
             ))}
           </ul>
           <div className="flex items-center px-4">
@@ -45,7 +45,9 @@ export default function RootLayout({
           <span className={sofia.className }>Agrodoa</span>
         </div>
         </header>
-        {children}
+        <main className="p-8">
+          {children}
+        </main>
       </body>
     </html>
   );
