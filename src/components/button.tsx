@@ -1,18 +1,29 @@
-
-interface ButtonProps{
-    text: string,
-    onClick?: () => void,
-    type?: "primary" | "outlined",
-    className?: string
+interface ButtonProps {
+  children: React.ReactNode;
+  onClick?: () => void;
+  variant?: "primary" | "outlined";
+  className?: string;
+  type?: "button" | "reset";
 }
 
-export default function Button({type = "primary", text, onClick, className}:ButtonProps){
-    const primary = "bg-accent font-white hover:bg-accent-hover"
-    const outlined = "bg-white b-1 border-accent border-solid"
-
-    return(
-    <button className={`rounded-md cursor-pointer ${className} ${(type == "primary" ? primary : outlined)}`} onClick={onClick}>
-        {text}
+export default function Button({
+  variant = "primary",
+  children,
+  onClick,
+  className,
+  type = "button",
+}: ButtonProps) {
+  const variants = {
+    primary: "bg-accent font-white hover:bg-accent-hover",
+    outlined: "bg-white border-2 border-accent border-solid",
+  };
+  return (
+    <button
+      type={type}
+      className={`cursor-pointer rounded-md ${className} ${variants[variant]}`}
+      onClick={onClick}
+    >
+      {children}
     </button>
-    );
+  );
 }

@@ -1,5 +1,3 @@
-export default function cadastro(){
-    return ( 
-        <div>Cadastrar</div>
-    )
+export default function cadastro() {
+  return <div>Cadastrar</div>;
 }
