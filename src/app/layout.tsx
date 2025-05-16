@@ -52,7 +52,7 @@ export default function RootLayout({
             <span className={sofia.className}>Agrodoa</span>
           </div>
         </header>
-        <main className="p-2 md:p-6">{children}</main>
+        <main className="flex p-2 md:p-6 justify-center">{children}</main>
       </body>
     </html>
   );

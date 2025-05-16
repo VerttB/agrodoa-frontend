@@ -3,7 +3,7 @@ interface ButtonProps {
   onClick?: () => void;
   variant?: "primary" | "outlined";
   className?: string;
-  type?: "button" | "reset";
+  type?: "button" | "submit";
 }
 
 export default function Button({

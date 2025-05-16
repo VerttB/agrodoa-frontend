@@ -3,6 +3,7 @@ import { ICausas } from "@/interfaces/ICausas";
 import Button from "./button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+
 export default function CausaCard() {
   const router = useRouter();
   const props: ICausas = {
