@@ -32,9 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${sofia.variable} bg-primary antialiased`}
+        className={`${inter.variable} ${sofia.variable} bg-primary antialiased min-h-screen`}
       >
-        <header className="bg-secondary flex h-16 w-full flex-row-reverse items-center justify-between">
+        <header className="bg-secondary-darker text-white flex h-16 w-full flex-row-reverse items-center justify-between">
           <ul className="flex gap-4 px-4 text-2xl">
             {headerBen.map((item) => (
               <Link href={item} key={item}>
@@ -52,7 +52,7 @@ export default function RootLayout({
             <span className={sofia.className}>Agrodoa</span>
           </div>
         </header>
-        <main className="flex p-2 md:p-6 justify-center">{children}</main>
+        <main className="flex-1 justify-center">{children}</main>
       </body>
     </html>
   );
