@@ -32,9 +32,9 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${inter.variable} ${sofia.variable} bg-primary antialiased min-h-screen`}
+        className={`${inter.variable} ${sofia.variable} bg-primary min-h-screen antialiased`}
       >
-        <header className="bg-secondary-darker text-white flex h-16 w-full flex-row-reverse items-center justify-between">
+        <header className="bg-secondary-darker flex h-16 w-full flex-row-reverse items-center justify-between text-white">
           <ul className="flex gap-4 px-4 text-2xl">
             {headerBen.map((item) => (
               <Link href={item} key={item}>
@@ -53,8 +53,8 @@ export default function RootLayout({
           </div>
         </header>
         <main className="flex-1 justify-center">{children}</main>
-        <footer className="bg-secondary-darker w-full h-12 flex justify-center">
-        <div className="flex items-center px-4 text-white">
+        <footer className="bg-secondary-darker flex h-12 w-full justify-center">
+          <div className="flex items-center px-4 text-white">
             <Image
               src="/logo.png"
               height={48}

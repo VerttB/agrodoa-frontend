@@ -8,12 +8,12 @@ interface CardImageProps {
 
 export const CardImage = ({ imageUrl, alt, size }: CardImageProps) => {
   return (
-    <div className="relative w-full border-gray-300 border-1 h-[120px]">
+    <div className="relative h-[120px] w-full border-1 border-gray-300">
       <Image
         src={imageUrl}
         alt={alt}
         fill
-        className="object-cover rounded-t-lg"
+        className="rounded-t-lg object-cover"
       />
     </div>
   );
