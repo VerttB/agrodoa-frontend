@@ -3,6 +3,7 @@ import Button from "@/components/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/Card";
+import Waves from "@/assets/Vector.svg";
 export default function Home() {
   const router = useRouter();
   const provisorio = [1, 2, 3];
@@ -60,8 +61,17 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <div className="bg-secondary-darker g:h-screen flex flex-col justify-evenly gap-8 p-2 md:p-6">
+      <div className="flex flex-col ">
+
+        <div className="">
+        <Image className="w-full translate-y-4.5 md:-translate-y-6 absolute" src={"/Vector.svg"} alt="img" width={720} height={32}/>
+        <div className="bg-gradient-to-b from-primary to-secondary-darker w-full h-12 "></div>
+        </div>
+
+
+      <div className="bg-secondary-darker g:h-screen flex flex-col justify-evenly gap-8 p-2 md:p-6 ">
         <div className="flex flex-col gap-8 align-middle md:flex-row">
+
           <Image
             className="self-center md:max-w-[760px] lg:w-full"
             alt="Imagem De Caridade"
@@ -103,6 +113,7 @@ export default function Home() {
             </Card.Root>
           ))}
         </div>
+      </div>
       </div>
       <div className="bg-[url(/mato.jpg)] bg-cover lg:h-screen">
         <div className="flex w-full flex-col justify-between gap-8 px-4 py-6 backdrop-blur-[4px] md:p-6 lg:h-full lg:gap-0">
