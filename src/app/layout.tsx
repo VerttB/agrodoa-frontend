@@ -53,6 +53,17 @@ export default function RootLayout({
           </div>
         </header>
         <main className="flex-1 justify-center">{children}</main>
+        <footer className="bg-secondary-darker w-full h-12 flex justify-center">
+        <div className="flex items-center px-4 text-white">
+            <Image
+              src="/logo.png"
+              height={48}
+              width={48}
+              alt="Logo imagem"
+            ></Image>
+            <span className={sofia.className}>Agrodoa</span>
+          </div>
+        </footer>
       </body>
     </html>
   );

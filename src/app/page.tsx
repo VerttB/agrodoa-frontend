@@ -53,6 +53,7 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-secondary-darker justify-evenly flex flex-col h-screen p-2 md:p-6 gap-8 ">
+
         <div className="flex align-middle gap-8">
           
             <Image 
@@ -86,7 +87,20 @@ export default function Home() {
             
         </div>
       </div>
-      <div className="h-screen p-2 md:p-6">
+      <div className="h-screen  bg-[url(/mato.jpg)] bg-cover ">
+      <div className="backdrop-blur-[4px] h-full w-full p-2 md:p-6 flex flex-col justify-between">
+      <div className="flex items-center">
+        <h1 className="text-3xl w-full">Aqui, fornecedores podem doar excedentes ou vender produtos agroalimentares com responsabilidade social.
+          Beneficiários encontram tanto alimentos gratuitos quanto itens à venda por valores acessíveis, promovendo
+            o equilíbrio entre sustentabilidade, dignidade e acesso.</h1>
+            <Image 
+            className="self-center md:max-w-[760px] lg:w-2/4"
+            alt="Imagem De Caridade" 
+            src={"/donation.jpeg"}
+            width={480}
+            height={40}>
+            </Image>
+        </div>
         <div className="flex justify-between px-2">
              {provisorio.map((i) => 
               <Card.Root key={i} className="flex flex-col md:min-w-[280px] max-w-[280px] bg-secondary-darker rounded-lg text-white">
@@ -108,6 +122,7 @@ export default function Home() {
             </Card.Root>
             )}
             </div>
+      </div>
       </div>
     </div>
   );
