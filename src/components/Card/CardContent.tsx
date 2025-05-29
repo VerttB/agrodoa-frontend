@@ -1,6 +1,6 @@
 interface CardContentProps {
   children: React.ReactNode;
-  className?:string,
+  className?: string;
 }
 
 export const CardContent = ({ children, className }: CardContentProps) => {

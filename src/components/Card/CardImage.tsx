@@ -1,9 +1,9 @@
 import Image from "next/image";
 
 interface CardImageProps {
-  alt: string
-  className?: string
-  imageUrl: string
+  alt: string;
+  className?: string;
+  imageUrl: string;
 }
 
 export const CardImage = ({ imageUrl, alt, className }: CardImageProps) => {
@@ -13,7 +13,7 @@ export const CardImage = ({ imageUrl, alt, className }: CardImageProps) => {
         src={imageUrl}
         alt={alt}
         fill
-        className="rounded-t-lg object-cover "
+        className="rounded-t-lg object-cover"
       />
     </div>
   );

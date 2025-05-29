@@ -40,7 +40,7 @@ export default function Home() {
             height={40}
           ></Image>
         </div>
-        <div className="bg-secondary flex flex-col gap-4 rounded-xl p-6 lg:w-2/3 self-center">
+        <div className="bg-secondary flex flex-col gap-4 self-center rounded-xl p-6 lg:w-2/3">
           <p className="text-sm md:text-lg">
             <strong>AgroDoa</strong> está alinhado com o{" "}
             <strong>
@@ -60,59 +60,62 @@ export default function Home() {
           </Button>
         </div>
       </div>
-      <div className="flex flex-col ">
-
+      <div className="flex flex-col">
         <div className="">
-        <Image className="w-full translate-y-4.5 md:-translate-y-6 absolute" src={"/Vector.svg"} alt="img" width={720} height={32}/>
-        <div className="bg-gradient-to-b from-primary to-secondary-darker w-full h-12 "></div>
-        </div>
-
-
-      <div className="bg-secondary-darker g:h-screen flex flex-col justify-evenly gap-8 p-2 md:p-6 ">
-        <div className="flex flex-col gap-8 align-middle md:flex-row">
-
           <Image
-            className="self-center md:max-w-[760px] lg:w-full"
-            alt="Imagem De Caridade"
-            src={"/homeImg.png"}
-            width={320}
-            height={40}
-          ></Image>
-          <h2 className="font-light text-white md:self-center md:text-3xl">
-            No AgroDoa, você também pode apoiar causas sociais ligadas à
-            alimentação e se voluntariar para transformar a realidade de quem
-            mais precisa. Junte-se a uma rede que vai além da doação: cultive
-            solidariedade!
-          </h2>
+            className="absolute w-full translate-y-4.5 md:-translate-y-6"
+            src={"/Vector.svg"}
+            alt="img"
+            width={720}
+            height={32}
+          />
+          <div className="from-primary to-secondary-darker h-12 w-full bg-gradient-to-b"></div>
         </div>
-        <div className="flex justify-between px-2">
-          {provisorio.map((i) => (
-            <Card.Root
-              key={i}
-              className="bg-primary flex max-w-[280px] flex-col rounded-lg"
-            >
-              <Card.Image
-                alt="Imagem do Produto"
-                imageUrl="/fruits.jpg"
-                className="w-full"
-              />
-              <Card.Content>
-                <h2 className="text-xl font-bold">Titulo</h2>
-                <p className="text-md">
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum,
-                  distinctio, molestias qui tenetur voluptas a excepturi cumque
-                  nemo sint, harum placeat porro?
-                </p>
-              </Card.Content>
-              <Card.Actions>
-                <Button variant="primary" className="px-2 py-1 text-white">
-                  Ver Detalhes
-                </Button>
-              </Card.Actions>
-            </Card.Root>
-          ))}
+
+        <div className="bg-secondary-darker g:h-screen flex flex-col justify-evenly gap-8 p-2 md:p-6">
+          <div className="flex flex-col gap-8 align-middle md:flex-row">
+            <Image
+              className="self-center md:max-w-[760px] lg:w-full"
+              alt="Imagem De Caridade"
+              src={"/homeImg.png"}
+              width={320}
+              height={40}
+            ></Image>
+            <h2 className="font-light text-white md:self-center md:text-3xl">
+              No AgroDoa, você também pode apoiar causas sociais ligadas à
+              alimentação e se voluntariar para transformar a realidade de quem
+              mais precisa. Junte-se a uma rede que vai além da doação: cultive
+              solidariedade!
+            </h2>
+          </div>
+          <div className="flex justify-between px-2">
+            {provisorio.map((i) => (
+              <Card.Root
+                key={i}
+                className="bg-primary flex max-w-[280px] flex-col rounded-lg"
+              >
+                <Card.Image
+                  alt="Imagem do Produto"
+                  imageUrl="/fruits.jpg"
+                  className="w-full"
+                />
+                <Card.Content>
+                  <h2 className="text-xl font-bold">Titulo</h2>
+                  <p className="text-md">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    Eum, distinctio, molestias qui tenetur voluptas a excepturi
+                    cumque nemo sint, harum placeat porro?
+                  </p>
+                </Card.Content>
+                <Card.Actions>
+                  <Button variant="primary" className="px-2 py-1 text-white">
+                    Ver Detalhes
+                  </Button>
+                </Card.Actions>
+              </Card.Root>
+            ))}
+          </div>
         </div>
-      </div>
       </div>
       <div className="bg-[url(/mato.jpg)] bg-cover lg:h-screen">
         <div className="flex w-full flex-col justify-between gap-8 px-4 py-6 backdrop-blur-[4px] md:p-6 lg:h-full lg:gap-0">
