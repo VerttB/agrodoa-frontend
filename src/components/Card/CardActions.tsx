@@ -5,7 +5,7 @@ interface CardActionsProps {
 
 export const CardActions = ({ children, className = "" }: CardActionsProps) => {
   return (
-    <div className={`flex justify-end gap-2 border-t p-3 ${className}`}>
+    <div className={`flex justify-end gap-2 border-t ${className}`}>
       {children}
     </div>
   );

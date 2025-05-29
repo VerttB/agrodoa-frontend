@@ -29,9 +29,10 @@ export default function Login() {
     console.log(data);
   };
   return (
+    <div className="h-screen flex justify-center">
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-1/4 flex-col gap-4 self-center rounded-md bg-white p-6"
+      className="flex w-1/4  md:w-2/5 flex-col justify-center items-center gap-4 self-center rounded-md bg-white p-6"
     >
       <div className="flex flex-col items-center gap-2 self-center">
         <Image
@@ -42,10 +43,11 @@ export default function Login() {
         ></Image>
         <h1 className="font-sofia"> Agrodoa</h1>
       </div>
-      <div className="flex flex-col gap-1">
+      <div className="flex flex-col gap-1 w-2/3">
         <h3 className="text-2xl font-medium">Login</h3>
         <p>Preencha os campos abaixo para acessar sua conta</p>
       </div>
+      <div className="w-2/3 ">
       <label className="flex flex-col gap-1" htmlFor="email">
         Email
         <input
@@ -79,6 +81,8 @@ export default function Login() {
           Entrar com Google
         </Button>
       </div>
+      </div>
     </form>
+    </div>
   );
 }

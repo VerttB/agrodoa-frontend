@@ -14,8 +14,8 @@ export default function Button({
   type = "button",
 }: ButtonProps) {
   const variants = {
-    primary: "bg-accent font-white hover:bg-accent-hover",
-    outlined: "bg-white border-2 border-accent border-solid",
+    primary: "bg-accent text-white hover:bg-accent-hover",
+    outlined: "bg-white border-2 border-accent border-solid hover:",
   };
   return (
     <button

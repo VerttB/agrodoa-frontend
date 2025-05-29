@@ -3,7 +3,6 @@ import Button from "@/components/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/Card";
-import Waves from "@/assets/Vector.svg";
 export default function Home() {
   const router = useRouter();
   const provisorio = [1, 2, 3];
@@ -41,7 +40,7 @@ export default function Home() {
             height={40}
           ></Image>
         </div>
-        <div className="bg-secondary flex flex-col gap-4 rounded-xl p-6">
+        <div className="bg-secondary flex flex-col gap-4 rounded-xl p-6 lg:w-2/3 self-center">
           <p className="text-sm md:text-lg">
             <strong>AgroDoa</strong> está alinhado com o{" "}
             <strong>
@@ -95,7 +94,7 @@ export default function Home() {
               <Card.Image
                 alt="Imagem do Produto"
                 imageUrl="/fruits.jpg"
-                size={64}
+                className="w-full"
               />
               <Card.Content>
                 <h2 className="text-xl font-bold">Titulo</h2>
@@ -142,7 +141,7 @@ export default function Home() {
                 <Card.Image
                   alt="Imagem do Produto"
                   imageUrl="/fruits.jpg"
-                  size={64}
+                  className="w-full"
                 />
                 <Card.Content>
                   <h2 className="text-xl font-bold">Titulo</h2>
