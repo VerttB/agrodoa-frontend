@@ -1,7 +1,7 @@
 "use client";
 import Button from "@/components/button";
 import { Card } from "@/components/Card";
-import { causas } from "@/contants/Causas";
+import { causas } from "@/constants/Causas";
 import { useRouter } from "next/navigation";
 
 export default function Causas() {
