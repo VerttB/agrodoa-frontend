@@ -7,7 +7,7 @@ import { useRouter } from "next/navigation";
 export default function Causas() {
   const router = useRouter();
   return (
-    <div className="flex h-screen flex-col items-center p-8">
+    <div className="flex flex-col items-center p-8">
       <div className="flex w-full flex-col items-center gap-8">
         <div className="flex w-3/4">
           <input
@@ -23,15 +23,15 @@ export default function Causas() {
         {causas.map((c, i) => (
           <Card.Root
             key={c.nome}
-            className="flex w-4/5 flex-col overflow-hidden rounded bg-white md:flex-row md:items-stretch"
+            className="flex w-4/5 flex-col overflow-hidden rounded bg-white md:w-3/5 md:flex-row md:justify-center 2xl:justify-start"
           >
             <Card.Image
               alt="Imagem da causa"
               imageUrl="/mato.jpg"
-              className="border-none md:h-[220px] md:w-2/5"
+              className="border-none md:h-[260px] md:w-2/5 2xl:w-2/6"
             />
-            <Card.Content className="flex flex-col gap-4 md:w-3/5 md:justify-between md:gap-4 md:p-4">
-              <div>
+            <Card.Content className="flex flex-col gap-4 md:w-3/5 md:justify-between md:p-4 2xl:w-full">
+              <div className="h-[100px] overflow-y-scroll">
                 <h1 className="text-center text-lg md:text-xl">{c.nome}</h1>
                 <p className="mt-2 hidden md:block">{c.descricao}</p>
               </div>

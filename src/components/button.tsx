@@ -1,3 +1,4 @@
+import { twMerge } from "tailwind-merge";
 interface ButtonProps {
   children: React.ReactNode;
   onClick?: () => void;
@@ -20,7 +21,11 @@ export default function Button({
   return (
     <button
       type={type}
-      className={`cursor-pointer rounded-md ${className} ${variants[variant]}`}
+      className={twMerge(
+        "cursor-pointer rounded-md",
+        variants[variant],
+        className,
+      )}
       onClick={onClick}
     >
       {children}

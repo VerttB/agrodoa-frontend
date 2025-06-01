@@ -131,7 +131,7 @@ export default function Home() {
               className="self-center md:max-w-[760px] lg:w-2/4"
               alt="Imagem De Caridade"
               src={"/donation.jpeg"}
-              width={480}
+              width={320}
               height={40}
             ></Image>
           </div>

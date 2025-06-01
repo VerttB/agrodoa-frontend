@@ -86,11 +86,12 @@ export default function CausaUnica() {
             Apoiar Causa
           </Button>
         </div>
-        <div className="bg-neutral w-full rounded-3xl px-2 py-6">
+        <div className="bg-neutral w-full rounded-3xl pb-6">
           <h2 className="bg-secondary-darker text-neutral mb-4 rounded-xl px-4 py-2 text-3xl">
             Descrição
           </h2>
-          <p className="text-justify leading-relaxed">
+
+          <p className="px-6 text-justify leading-relaxed">
             {causa.descricao ??
               `Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quam,
               culpa eum corrupti perspiciatis voluptatum, eius qui voluptatem quas nisi
@@ -98,15 +99,6 @@ export default function CausaUnica() {
               aspernatur.`}
           </p>
         </div>
-      </div>
-      <div className="absolute bottom-0 left-0 -z-10 w-full">
-        <Image
-          src="/WaveUnica.svg"
-          alt="Waves Design"
-          width={1920}
-          height={256}
-          className="w-full object-cover"
-        />
       </div>
     </div>
   );
