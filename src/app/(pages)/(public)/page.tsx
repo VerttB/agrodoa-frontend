@@ -20,7 +20,7 @@ export default function Home() {
               conectando doadores, compradores e quem precisa de ajuda, de forma
               simples, segura e humana.
             </p>
-            <span className="text-sm">
+            <span className="text-md">
               Crie sua conta agora agora mesmo e ajude a construir uma rede mais
               justa consciente e sustentável
             </span>
@@ -32,15 +32,17 @@ export default function Home() {
               Cadastre-se
             </Button>
           </div>
-          <Image
-            className="self-center md:max-w-[760px] lg:w-full"
-            src={"/homeImg.png"}
-            alt="imagem pagina inicial"
-            width={320}
-            height={40}
-          ></Image>
+          <div className="w-full">
+            <Image
+              className="object-cover"
+              src={"/homeImg.png"}
+              alt="imagem pagina inicial"
+              width={720}
+              height={40}
+            ></Image>
+          </div>
         </div>
-        <div className="bg-secondary flex flex-col gap-4 self-center rounded-xl p-6 lg:w-2/3">
+        <div className="bg-secondary flex flex-col gap-4 self-center rounded-xl p-6 lg:w-2/4">
           <p className="text-sm md:text-lg">
             <strong>AgroDoa</strong> está alinhado com o{" "}
             <strong>
@@ -88,7 +90,7 @@ export default function Home() {
               solidariedade!
             </h2>
           </div>
-          <div className="flex justify-between px-2">
+          <div className="flex justify-evenly px-2 ">
             {provisorio.map((i) => (
               <Card.Root
                 key={i}
@@ -107,7 +109,7 @@ export default function Home() {
                     cumque nemo sint, harum placeat porro?
                   </p>
                 </Card.Content>
-                <Card.Actions>
+                <Card.Actions className="p-2">
                   <Button variant="primary" className="px-2 py-1 text-white">
                     Ver Detalhes
                   </Button>
@@ -135,11 +137,11 @@ export default function Home() {
               height={40}
             ></Image>
           </div>
-          <div className="flex justify-between px-2">
+          <div className="flex justify-between p-2 sm:overflow-x-auto">
             {provisorio.map((i) => (
               <Card.Root
                 key={i}
-                className="bg-secondary-darker flex max-w-[280px] flex-col rounded-lg text-white md:min-w-[280px]"
+                className="sm:w-full lg:w-full bg-secondary-darker flex max-w-[280px] flex-col rounded-lg text-white md:min-w-[280px]"
               >
                 <Card.Image
                   alt="Imagem do Produto"
@@ -152,7 +154,7 @@ export default function Home() {
                   <p>Negociantes: 0/5</p>
                   <p>Quantidade: 230</p>
                 </Card.Content>
-                <Card.Actions className="flex justify-between">
+                <Card.Actions className="flex justify-between p-2">
                   <Button
                     variant="primary"
                     className="w-full px-2 py-1 text-white"
