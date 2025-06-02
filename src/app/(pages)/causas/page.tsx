@@ -6,6 +6,8 @@ import { useRouter } from "next/navigation";
 
 export default function Causas() {
   const router = useRouter();
+
+  
   return (
     <div className="flex flex-col items-center p-8">
       <div className="flex w-full flex-col items-center gap-8">
