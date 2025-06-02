@@ -3,6 +3,7 @@ import Button from "@/components/button";
 import { Card } from "@/components/Card";
 import { causas } from "@/constants/Causas";
 import { useRouter } from "next/navigation";
+import Input  from "@/components/input"
 
 export default function Causas() {
   const router = useRouter();
@@ -11,13 +12,10 @@ export default function Causas() {
   return (
     <div className="flex flex-col items-center p-8">
       <div className="flex w-full flex-col items-center gap-8">
-        <div className="flex w-3/4">
-          <input
-            className="border-secondary h-12 w-full border-2"
-            type="text"
-            placeholder="Digite o nome de uma causa"
-          />
-          <Button className="w-1/6 px-2 py-2" variant="primary">
+        <div className="flex w-3/5">
+         
+          <Input className="py-2" placeholder="Pesquisar....."/>
+          <Button className="w-1/6 px-2 py-2 rounded-tl-none rounded-bl-none " variant="primary">
             Buscar
           </Button>
         </div>
@@ -30,7 +28,7 @@ export default function Causas() {
             <Card.Image
               alt="Imagem da causa"
               imageUrl="/mato.jpg"
-              className="border-none md:h-[260px] md:w-2/5 2xl:w-2/6"
+              className="border-none md:h-[260px] md:w-2/5 2xl:w-3/6"
             />
             <Card.Content className="flex flex-col gap-4 md:w-3/5 md:justify-between md:p-4 2xl:w-full">
               <div className="h-[100px] overflow-y-scroll">
