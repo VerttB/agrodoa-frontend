@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Sofia, Inter } from "next/font/google";
 import "./globals.css";
+import UserProvider from "@/providers/UserProvider";
 
 const inter = Inter({
     variable: "--font-inter-sans",
@@ -31,7 +32,9 @@ export default function RootLayout({
       <html lang="en">
         <body
           className={`${inter.variable} ${sofia.variable} bg-primary min-h-screen antialiased`}>
-        {children}
+        <UserProvider>
+                {children}
+        </UserProvider>
         </body>
     </html>
     )

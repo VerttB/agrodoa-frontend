@@ -44,7 +44,6 @@ export default function Cadastro() {
   const {
     register,
     handleSubmit,
-    watch,
     formState: { errors },
   } = useForm<userLoginData>({
     resolver: zodResolver(userLoginSchema),

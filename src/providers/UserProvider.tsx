@@ -4,10 +4,14 @@ import {  createContext, useState } from "react";
 
 const userContext = createContext<User | null>(null);
 
-export default function UserProvider(children : React.ReactNode){
+export default function UserProvider({
+    children,
+  }: Readonly<{
+    children: React.ReactNode;
+  }>){
 
     const [user, setUser] = useState<User | null>(null);
-
+    setUser(null)
     return(
         <userContext.Provider value={user}>
             {children}

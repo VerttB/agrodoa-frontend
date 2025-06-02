@@ -20,7 +20,7 @@ export default function Causas() {
           </Button>
         </div>
 
-        {causas.map((c, i) => (
+        {causas.map((c) => (
           <Card.Root
             key={c.nome}
             className="flex w-4/5 flex-col overflow-hidden rounded bg-white md:w-3/5 md:flex-row md:justify-center 2xl:justify-start"
