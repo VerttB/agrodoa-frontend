@@ -26,13 +26,13 @@ export default function Home() {
             </span>
             <Button
               variant="primary"
-              className="self-start px-10 py-1"
+              className="self-start px-12 py-2 shadow-2xs"
               onClick={() => router.push("/cadastro")}
             >
               Cadastre-se
             </Button>
           </div>
-          <div className="w-full">
+          <div className="xl:w-3/4">
             <Image
               className="object-cover"
               src={"/homeImg.png"}
@@ -42,7 +42,7 @@ export default function Home() {
             ></Image>
           </div>
         </div>
-        <div className="bg-secondary flex flex-col gap-4 self-center rounded-xl p-6 lg:w-2/4">
+        <div className="bg-secondary flex flex-col gap-4 self-center rounded-xl p-6 shadow-2xl mb-8 lg:w-2/4">
           <p className="text-sm md:text-lg">
             <strong>AgroDoa</strong> está alinhado com o{" "}
             <strong>
@@ -56,7 +56,7 @@ export default function Home() {
           </p>
           <Button
             variant="primary"
-            className="self-end px-2 py-1 text-white lg:w-48"
+            className="self-end justify-center px-2 py-1 text-white lg:w-48"
           >
             Saiba Mais
           </Button>
@@ -74,16 +74,16 @@ export default function Home() {
           <div className="from-primary to-secondary-darker h-12 w-full bg-gradient-to-b"></div>
         </div>
 
-        <div className="bg-secondary-darker g:h-screen flex flex-col justify-evenly gap-8 p-2 md:p-6">
-          <div className="flex flex-col gap-8 align-middle md:flex-row">
+        <div className="bg-secondary-darker flex flex-col    gap-8 p-2 md:p-8">
+          <div className="flex flex-col gap-8  md:flex-row">
             <Image
-              className="self-center md:max-w-[760px] lg:w-full"
+              className="self-center md:max-w-[760px] lg:w-2/5"
               alt="Imagem De Caridade"
               src={"/homeImg.png"}
               width={320}
               height={40}
             ></Image>
-            <h2 className="font-light text-white md:self-center md:text-3xl">
+            <h2 className="font-light text-white md:self-center md:text-2xl">
               No AgroDoa, você também pode apoiar causas sociais ligadas à
               alimentação e se voluntariar para transformar a realidade de quem
               mais precisa. Junte-se a uma rede que vai além da doação: cultive
@@ -94,7 +94,7 @@ export default function Home() {
             {provisorio.map((i) => (
               <Card.Root
                 key={i}
-                className="bg-primary flex max-w-[280px] flex-col rounded-lg"
+                className="sm:w-full lg:w-full bg-primary flex max-w-[280px] flex-col rounded-lg text-black md:min-w-[280px]"
               >
                 <Card.Image
                   alt="Imagem do Produto"
@@ -120,9 +120,9 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-[url(/mato.jpg)] bg-cover lg:h-screen">
-        <div className="flex w-full flex-col justify-between gap-8 px-4 py-6 backdrop-blur-[4px] md:p-6 lg:h-full lg:gap-0">
+        <div className="flex w-full flex-col justify-between gap-8   px-4 py-6 backdrop-blur-[4px] md:p-6 lg:h-full lg:gap-0">
           <div className="flex flex-col-reverse items-center gap-2 lg:flex-row">
-            <h1 className="w-full text-xl lg:text-3xl">
+            <h1 className="w-full text-xl lg:text-2xl">
               Aqui, fornecedores podem doar excedentes ou vender produtos
               agroalimentares com responsabilidade social. Beneficiários
               encontram tanto alimentos gratuitos quanto itens à venda por
@@ -130,14 +130,15 @@ export default function Home() {
               sustentabilidade, dignidade e acesso.
             </h1>
             <Image
-              className="self-center md:max-w-[760px] lg:w-2/4"
+              className="self-center md:max-w-[760px] lg:w-2/5"
               alt="Imagem De Caridade"
               src={"/donation.jpeg"}
               width={320}
               height={40}
             ></Image>
           </div>
-          <div className="flex justify-between p-2 sm:overflow-x-auto">
+
+          <div className="flex justify-evenly p-2 sm:overflow-x-auto">
             {provisorio.map((i) => (
               <Card.Root
                 key={i}

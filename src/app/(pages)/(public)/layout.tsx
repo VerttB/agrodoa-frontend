@@ -1,6 +1,7 @@
-
+'use client'
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 export default function Layout({
@@ -8,8 +9,8 @@ export default function Layout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerBen = ["Inicio", "causas", "Perfil"];
-
+  const headerBen = ["", "causas", "Perfil"];
+  const router = useRouter()
   return (
   
       <>
@@ -21,7 +22,7 @@ export default function Layout({
               </Link>
             ))}
           </ul>
-          <div className="flex items-center px-4">
+          <div onClick={() => router.push('/')} className="flex items-center px-4 cursor-pointer">
             <Image
               src="/logo.png"
               height={64}

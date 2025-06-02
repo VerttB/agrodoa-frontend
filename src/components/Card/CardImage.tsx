@@ -8,7 +8,7 @@ interface CardImageProps {
 
 export const CardImage = ({ imageUrl, alt, className }: CardImageProps) => {
   return (
-    <div className={`relative h-[140px] border-1 border-gray-300 ${className}`}>
+    <div className={`relative h-[140px] border-1 rounded-t-lg border-gray-300 ${className}`}>
       <Image
         src={imageUrl}
         alt={alt}

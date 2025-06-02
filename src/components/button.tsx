@@ -16,13 +16,13 @@ export default function Button({
 }: ButtonProps) {
   const variants = {
     primary: "bg-accent text-white hover:bg-accent-hover",
-    outlined: "bg-white border-2 border-accent border-solid hover:",
+    outlined: "bg-white border-2 border-accent border-solid hover:bg-primary",
   };
   return (
     <button
       type={type}
       className={twMerge(
-        "cursor-pointer rounded-md",
+        "cursor-pointer rounded-md ",
         variants[variant],
         className,
       )}
