@@ -6,8 +6,10 @@ import { useState } from "react";
 import Image from "next/image";
 import Button from "@/components/button";
 import Input from "@/components/input";
+import { ItemPage } from "@/components/ItemPage";
+import { ItemPageActions } from "@/components/ItemPage/ItemPageActions";
 
-export default function CausaUnica() {
+export default function AnuncioUnico() {
   const { id } = useParams();
   const causa = causas.find((c) => c.id === id);
   const [donationValue, setDonationValue] = useState(0);
@@ -17,22 +19,16 @@ export default function CausaUnica() {
 
   return (
     <div className="bg-primary relative z-0 min-h-screen pb-32">
-      {/* Metade de cima */}
-      <div className="flex flex-col gap-4 p-4 md:flex-row">
-        <Image
-          className="w-full rounded-xl border border-black md:w-3/4"
-          alt="Imagem da causa"
-          src="/mato.jpg"
-          width={512}
-          height={320}
-        />
-        <div className="bg-neutral w-full rounded-xl px-4 py-4">
-          <h2 className="bg-secondary-darker text-neutral mb-4 rounded-xl px-4 py-3 text-3xl">
-            {causa.nome}
-          </h2>
-
-          <div className="flex flex-col gap-4">
-            <p className="flex items-center gap-2 text-xl">
+      <ItemPage.root>
+        <ItemPage.content>
+            <Image
+              className="w-full rounded-xl border border-black md:w-3/4"
+              alt="Imagem da causa"
+              src="/mato.jpg"
+              width={512}
+              height={320}/>
+            <ItemPage.description title={causa.nome}>
+                 <p className="flex items-center gap-2 text-xl">
               <User aria-hidden="true" /> Responsável: {causa.responsavelId}
             </p>
             <p className="flex items-center gap-2 text-xl">
@@ -52,44 +48,37 @@ export default function CausaUnica() {
                 <p>Meta: R$ {causa.meta}</p>
               </div>
             </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Parte de baixo */}
-      <div className="flex flex-col gap-8 px-4 md:flex-row">
-        <div className="flex w-full flex-col gap-4 p-4 md:w-3/4">
-          
+            </ItemPage.description>
+        </ItemPage.content>
+        <ItemPage.content>
+          <ItemPageActions>
           <Input
             type="number"
             className="border-accent w-full rounded-3xl border-2 px-4 py-2"
             placeholder="Digite um valor"
             onChange={(e) => setDonationValue(Number(e.target.value))}
             value={donationValue}
-            min={1}
-          />
-
+            min={1}/>
           <Button
             className="w-full py-2 text-3xl"
             onClick={() => console.log("Doar", donationValue)}
           >
             Apoiar Causa
           </Button>
-        </div>
-        <div className="bg-neutral w-full rounded-3xl pb-6">
-          <h2 className="bg-secondary-darker text-neutral mb-4 rounded-xl px-4 py-2 text-3xl">
-            Descrição
-          </h2>
+        </ItemPageActions>
 
-          <p className="px-6 text-justify leading-relaxed">
+        <ItemPage.description title="Descrição">
+             <p className="px-6 text-justify leading-relaxed">
             {causa.descricao ??
               `Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quam,
               culpa eum corrupti perspiciatis voluptatum, eius qui voluptatem quas nisi
               quia dolore repellendus. Tenetur rem culpa illum voluptatibus! Sapiente,
               aspernatur.`}
           </p>
-        </div>
-      </div>
+        </ItemPage.description>
+        </ItemPage.content>
+      </ItemPage.root>
+      
     </div>
   );
 }
