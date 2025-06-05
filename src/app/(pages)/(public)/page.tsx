@@ -42,7 +42,7 @@ export default function Home() {
             ></Image>
           </div>
         </div>
-        <div className="bg-secondary flex flex-col gap-4 self-center rounded-xl p-6 shadow-2xl mb-8 lg:w-2/4">
+        <div className="bg-secondary mb-8 flex flex-col gap-4 self-center rounded-xl p-6 shadow-2xl lg:w-2/4">
           <p className="text-sm md:text-lg">
             <strong>AgroDoa</strong> está alinhado com o{" "}
             <strong>
@@ -56,7 +56,7 @@ export default function Home() {
           </p>
           <Button
             variant="primary"
-            className="self-end justify-center px-2 py-1 text-white lg:w-48"
+            className="justify-center self-end px-2 py-1 text-white lg:w-48"
           >
             Saiba Mais
           </Button>
@@ -74,8 +74,8 @@ export default function Home() {
           <div className="from-primary to-secondary-darker h-12 w-full bg-gradient-to-b"></div>
         </div>
 
-        <div className="bg-secondary-darker flex flex-col    gap-8 p-2 md:p-8">
-          <div className="flex flex-col gap-8  md:flex-row">
+        <div className="bg-secondary-darker flex flex-col gap-8 p-2 md:p-8">
+          <div className="flex flex-col gap-8 md:flex-row">
             <Image
               className="self-center md:max-w-[760px] lg:w-2/5"
               alt="Imagem De Caridade"
@@ -90,11 +90,11 @@ export default function Home() {
               solidariedade!
             </h2>
           </div>
-          <div className="flex justify-evenly px-2 ">
+          <div className="flex justify-evenly px-2">
             {provisorio.map((i) => (
               <Card.Root
                 key={i}
-                className="sm:w-full lg:w-full bg-primary flex max-w-[280px] flex-col rounded-lg text-black md:min-w-[280px]"
+                className="bg-primary flex max-w-[280px] flex-col rounded-lg text-black sm:w-full md:min-w-[280px] lg:w-full"
               >
                 <Card.Image
                   alt="Imagem do Produto"
@@ -120,7 +120,7 @@ export default function Home() {
         </div>
       </div>
       <div className="bg-[url(/mato.jpg)] bg-cover lg:h-screen">
-        <div className="flex w-full flex-col justify-between gap-8   px-4 py-6 backdrop-blur-[4px] md:p-6 lg:h-full lg:gap-0">
+        <div className="flex w-full flex-col justify-between gap-8 px-4 py-6 backdrop-blur-[4px] md:p-6 lg:h-full lg:gap-0">
           <div className="flex flex-col-reverse items-center gap-2 lg:flex-row">
             <h1 className="w-full text-xl lg:text-2xl">
               Aqui, fornecedores podem doar excedentes ou vender produtos
@@ -142,7 +142,7 @@ export default function Home() {
             {provisorio.map((i) => (
               <Card.Root
                 key={i}
-                className="sm:w-full lg:w-full bg-secondary-darker flex max-w-[280px] flex-col rounded-lg text-white md:min-w-[280px]"
+                className="bg-secondary-darker flex max-w-[280px] flex-col rounded-lg text-white sm:w-full md:min-w-[280px] lg:w-full"
               >
                 <Card.Image
                   alt="Imagem do Produto"

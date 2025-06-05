@@ -22,7 +22,7 @@ export default function Button({
     <button
       type={type}
       className={twMerge(
-        "cursor-pointer rounded-md ",
+        "cursor-pointer rounded-md",
         variants[variant],
         className,
       )}

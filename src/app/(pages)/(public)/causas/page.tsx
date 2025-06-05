@@ -3,19 +3,20 @@ import Button from "@/components/button";
 import { Card } from "@/components/Card";
 import { causas } from "@/constants/Causas";
 import { useRouter } from "next/navigation";
-import Input  from "@/components/input"
+import Input from "@/components/input";
 
 export default function Causas() {
   const router = useRouter();
 
-  
   return (
     <div className="flex flex-col items-center p-8">
       <div className="flex w-full flex-col items-center gap-8">
         <div className="flex w-3/5">
-         
-          <Input className="py-2" placeholder="Pesquisar....."/>
-          <Button className="w-1/6 px-2 py-2 rounded-tl-none rounded-bl-none " variant="primary">
+          <Input className="py-2" placeholder="Pesquisar....." />
+          <Button
+            className="w-1/6 rounded-tl-none rounded-bl-none px-2 py-2"
+            variant="primary"
+          >
             Buscar
           </Button>
         </div>

@@ -21,14 +21,15 @@ export default function AnuncioUnico() {
     <div className="bg-primary relative z-0 min-h-screen pb-32">
       <ItemPage.root>
         <ItemPage.content>
-            <Image
-              className="w-full rounded-xl border border-black md:w-3/4"
-              alt="Imagem da causa"
-              src="/mato.jpg"
-              width={512}
-              height={320}/>
-            <ItemPage.description title={causa.nome}>
-                 <p className="flex items-center gap-2 text-xl">
+          <Image
+            className="w-full rounded-xl border border-black md:w-3/4"
+            alt="Imagem da causa"
+            src="/mato.jpg"
+            width={512}
+            height={320}
+          />
+          <ItemPage.description title={causa.nome}>
+            <p className="flex items-center gap-2 text-xl">
               <User aria-hidden="true" /> Responsável: {causa.responsavelId}
             </p>
             <p className="flex items-center gap-2 text-xl">
@@ -48,37 +49,37 @@ export default function AnuncioUnico() {
                 <p>Meta: R$ {causa.meta}</p>
               </div>
             </div>
-            </ItemPage.description>
+          </ItemPage.description>
         </ItemPage.content>
         <ItemPage.content>
           <ItemPageActions>
-          <Input
-            type="number"
-            className="border-accent w-full rounded-3xl border-2 px-4 py-2"
-            placeholder="Digite um valor"
-            onChange={(e) => setDonationValue(Number(e.target.value))}
-            value={donationValue}
-            min={1}/>
-          <Button
-            className="w-full py-2 text-3xl"
-            onClick={() => console.log("Doar", donationValue)}
-          >
-            Apoiar Causa
-          </Button>
-        </ItemPageActions>
+            <Input
+              type="number"
+              className="border-accent w-full rounded-3xl border-2 px-4 py-2"
+              placeholder="Digite um valor"
+              onChange={(e) => setDonationValue(Number(e.target.value))}
+              value={donationValue}
+              min={1}
+            />
+            <Button
+              className="w-full py-2 text-3xl"
+              onClick={() => console.log("Doar", donationValue)}
+            >
+              Apoiar Causa
+            </Button>
+          </ItemPageActions>
 
-        <ItemPage.description title="Descrição">
-             <p className="px-6 text-justify leading-relaxed">
-            {causa.descricao ??
-              `Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quam,
+          <ItemPage.description title="Descrição">
+            <p className="px-6 text-justify leading-relaxed">
+              {causa.descricao ??
+                `Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quam,
               culpa eum corrupti perspiciatis voluptatum, eius qui voluptatem quas nisi
               quia dolore repellendus. Tenetur rem culpa illum voluptatibus! Sapiente,
               aspernatur.`}
-          </p>
-        </ItemPage.description>
+            </p>
+          </ItemPage.description>
         </ItemPage.content>
       </ItemPage.root>
-      
     </div>
   );
 }

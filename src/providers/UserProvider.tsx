@@ -1,9 +1,8 @@
-'use client'
+"use client";
 
 import { User } from "@/interfaces/IUser";
 import { createContext, useState, useContext } from "react";
 
-// Tipo correto do contexto
 type UserContextType = {
   user: User | null;
   applyUser: (u: User) => void;
@@ -26,7 +25,7 @@ export default function UserProvider({
   const [user, setUser] = useState<User | null>(null);
 
   const applyUser = (u: User) => {
-    setUser(u); 
+    setUser(u);
   };
 
   return (
