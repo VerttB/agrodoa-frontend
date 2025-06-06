@@ -1,4 +1,4 @@
-import { ICausas } from "@/interfaces/ICausas";
+import { ICausas } from "@/core/interfaces/ICausas";
 
 export const causas: ICausas[] = [
   {
