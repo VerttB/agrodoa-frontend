@@ -1,11 +1,11 @@
 "use client";
 
-import { User } from "@/interfaces/IUser";
+import { IUser } from "@/core/interfaces/IUser";
 import { createContext, useState, useContext } from "react";
 
 type UserContextType = {
-  user: User | null;
-  applyUser: (u: User) => void;
+  user: IUser | null;
+  applyUser: (u: IUser) => void;
 };
 
 export const userContext = createContext<UserContextType | null>(null);
@@ -22,9 +22,9 @@ export default function UserProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<IUser | null>(null);
 
-  const applyUser = (u: User) => {
+  const applyUser = (u: IUser) => {
     setUser(u);
   };
 
