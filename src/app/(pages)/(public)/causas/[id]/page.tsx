@@ -1,15 +1,18 @@
 "use client";
 import { useParams } from "next/navigation";
-import Image from "next/image";
 import { User, CalendarDays } from "lucide-react";
 import { causas } from "@/constants/Causas";
-import Button from "@/components/button";
 import { useState } from "react";
 import { ItemPage } from "@/components/ItemPage";
+import { useRouter } from "next/navigation";
+
+import Image from "next/image";
+import Button from "@/components/button";
 import Input from "@/components/input";
 
 export default function CausaUnica() {
   const { id } = useParams();
+  const router = useRouter();
   const causa = causas.find((c) => c.id === id);
   const [donationValue, setDonationValue] = useState(0);
 
@@ -75,7 +78,7 @@ export default function CausaUnica() {
 
             <Button
               className="w-full py-2 text-3xl"
-              onClick={() => console.log("Doar", donationValue)}
+              onClick={() => router.push(`/pagamento?id=${causa.id}&valor=${donationValue} `)}
             >
               Apoiar Causa
             </Button>
