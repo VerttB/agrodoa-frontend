@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-
+import { twMerge } from "tailwind-merge";
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   errors?: string;
@@ -14,7 +14,7 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
         <input
           name={label}
           ref={ref}
-          className={`border-2 border-solid px-2 py-1 ${className} ${errors ? "border-red-600" : "border-secondary-light"} focus:border-secondary`}
+          className={ twMerge("border-2 border-solid px-2 py-1" ,errors ? "border-red-600" : "border-secondary-light",className)}
           {...rest}
         />
         {errors && <span className="text-sm text-red-600">{errors}</span>}
