@@ -18,7 +18,7 @@ export default function AnuncioUnico() {
     return <p className="mt-10 text-center text-xl">Causa não encontrada.</p>;
 
   return (
-    <div className="bg-primary relative z-0 min-h-screen pb-32">
+    <div className="bg-primary relative z-0 min-h-screen px-16">
       <ItemPage.root>
         <ItemPage.content>
           <Image

@@ -6,6 +6,7 @@ import { causas } from "@/constants/Causas";
 import Button from "@/components/button";
 import { useState } from "react";
 import { ItemPage } from "@/components/ItemPage";
+import Input from "@/components/input";
 
 export default function CausaUnica() {
   const { id } = useParams();
@@ -16,7 +17,7 @@ export default function CausaUnica() {
     return <p className="mt-10 text-center text-xl">Causa não encontrada.</p>;
 
   return (
-    <div className="bg-primary relative z-0 min-h-screen pb-32">
+    <div className="bg-primary relative z-0 min-h-screen px-16">
       <ItemPage.root>
         <ItemPage.content>
           <Image
@@ -63,9 +64,9 @@ export default function CausaUnica() {
               ))}
             </div>
 
-            <input
+            <Input
               type="number"
-              className="border-accent w-full rounded-3xl border-2 px-4 py-2"
+              className="border-accent focus:border-accent w-full rounded-3xl border-2 px-4 py-2"
               placeholder="Digite um valor"
               onChange={(e) => setDonationValue(Number(e.target.value))}
               value={donationValue}
