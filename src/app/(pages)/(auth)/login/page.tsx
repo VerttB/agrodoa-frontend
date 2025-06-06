@@ -30,7 +30,7 @@ export default function Login() {
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
-      <div className="flex h-3/4 w-2/5 flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60">
+      <div className="flex m-2 md:m-0 md:h-3/4 md:w-2/5 flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60">
         <div className="flex h-1/5 w-full items-center justify-center gap-2 self-center border-b-1">
           <Image
             src="/logo.png"
