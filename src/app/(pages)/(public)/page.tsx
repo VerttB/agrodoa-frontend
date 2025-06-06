@@ -111,11 +111,12 @@ export default function Home() {
               solidariedade!
             </h2>
           </div>
-          <div className="flex justify-evenly px-2">
+          <div className="overflow-x-auto  w-full scroll-pl-4 scroll-smooth px-2">
+            <div className="flex flex-nowrap gap-4 snap-x snap-mandatory md:flex-wrap md:justify-evenly">
             {provisorio.map((i) => (
               <Card.Root
                 key={i}
-                className="bg-primary flex max-w-[280px] flex-col rounded-lg text-black sm:w-full md:min-w-[280px] lg:w-full"
+                className="min-w-[250px] max-w-[280px] snap-start shrink-0 bg-primary flex flex-col rounded-lg text-black sm:w-full md:min-w-[280px] lg:w-full"
               >
                 <Card.Image
                   alt="Imagem do Produto"
@@ -138,6 +139,7 @@ export default function Home() {
               </Card.Root>
             ))}
           </div>
+          </div>
         </div>
       </div>
       <div className="bg-[url(/mato.jpg)] bg-cover lg:h-screen">
@@ -159,16 +161,17 @@ export default function Home() {
             ></Image>
           </div>
 
-          <div className="flex justify-evenly p-2 sm:overflow-x-auto">
+          <div className="overflow-x-auto  w-full scroll-pl-4 scroll-smooth px-2 shadow-2xl ">
+          <div className="flex flex-nowrap gap-4 snap-x snap-mandatory  md:flex-wrap md:justify-evenly"> 
             {provisorio.map((i) => (
               <Card.Root
                 key={i}
-                className="bg-secondary-darker flex max-w-[280px] flex-col rounded-lg text-white sm:w-full md:min-w-[280px] lg:w-full"
+                className="bg-secondary-darker text-neutral border-none min-w-[250px] max-w-[280px] snap-start shrink-0  flex flex-col rounded-lg sm:w-full md:min-w-[280px] lg:w-full"
               >
                 <Card.Image
                   alt="Imagem do Produto"
                   imageUrl="/fruits.jpg"
-                  className="w-full"
+                  className="w-full border-none"
                 />
                 <Card.Content>
                   <h2 className="text-xl font-bold">Titulo</h2>
@@ -179,7 +182,7 @@ export default function Home() {
                 <Card.Actions className="flex justify-between p-2">
                   <Button
                     variant="primary"
-                    className="w-full px-2 py-1 text-white"
+                    className="w-full px-2 py-1 text-sm md:text-md text-white"
                   >
                     Ver Detalhes
                   </Button>
@@ -192,6 +195,7 @@ export default function Home() {
                 </Card.Actions>
               </Card.Root>
             ))}
+          </div>
           </div>
         </div>
       </div>
