@@ -1,12 +1,7 @@
 import Input from "@/components/input"
 
-interface PagamentoProps{
-  nome: string,
-  quantidade:number,
-  valor: number,
-}
 
-export default function Pagamento({nome,quantidade,valor} : PagamentoProps) {
+export default function Pagamento() {
   return( 
     <div className="min-h-screen flex flex-col md:flex-row w-full p-8 gap-8">
         <div className="flex flex-col w-full gap-8">
