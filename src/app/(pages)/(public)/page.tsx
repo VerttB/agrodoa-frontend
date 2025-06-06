@@ -3,9 +3,30 @@ import Button from "@/components/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/Card";
+import { useUserContext } from "@/providers/UserProvider";
+import { IUser } from "@/core/interfaces/IUser";
+
+const usuarioTeste: IUser = {
+  id: "user-123",
+  nome: "Maria Silva",
+  senha: "SenhaSegura123!",
+  cpf_ou_cnpj: "123.456.789-00",
+  tipo: "beneficiario",
+  voluntario: true,
+  telefone: "(71) 98765-4321",
+  cidade: "Salvador",
+  foto: new URL("https://example.com/foto.jpg"),
+};
+
+
 export default function Home() {
   const router = useRouter();
   const provisorio = [1, 2, 3];
+  const context = useUserContext();
+  
+  context.applyUser(usuarioTeste);
+  console.log(context.user);
+
   return (
     <div className="flex flex-col">
       <div className="flex h-full flex-col justify-between gap-24 p-2 md:p-6">

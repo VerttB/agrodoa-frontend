@@ -3,9 +3,7 @@ import Input from "@/components/input";
 import Button from "@/components/button";
 import { Search, Heart } from "lucide-react";
 import { Card } from "@/components/Card";
-import { useUserContext } from "@/providers/UserProvider";
 export default function Page() {
-  const { user, applyUser } = useUserContext();
   const provisorio = [1, 2, 3, 4, 5, 6];
 
   return (
