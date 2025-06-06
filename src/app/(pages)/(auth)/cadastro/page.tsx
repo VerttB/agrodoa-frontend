@@ -8,6 +8,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { formatCpfCnpj } from "@/utils/formatCpfCnpj";
+import { formatTel } from "@/utils/formatTel";
 export default function Cadastro() {
   const userRegisterchema = z.object({
     email: z
@@ -103,6 +104,9 @@ export default function Cadastro() {
                 errors={errors.phone?.message}
                 placeholder="Insira seu telefone"
                 className="w-full bg-white py-2"
+                onChange={(e) => {
+                  e.target.value = formatTel(e.target.value)
+                }}
               />
             </div>
             <div className="flex gap-2">
