@@ -9,7 +9,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { formatCpfCnpj } from "@/utils/formatCpfCnpj";
 export default function Cadastro() {
-  const userLoginSchema = z.object({
+  const userRegisterchema = z.object({
     email: z
       .string()
       .nonempty("O campo de email não deve estar vazio")
@@ -40,16 +40,16 @@ export default function Cadastro() {
     phone: z.string(),
   });
 
-  type userLoginData = z.infer<typeof userLoginSchema>;
+  type userRegisterData = z.infer<typeof userRegisterchema>;
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<userLoginData>({
-    resolver: zodResolver(userLoginSchema),
+  } = useForm<userRegisterData>({
+    resolver: zodResolver(userRegisterchema),
   });
 
-  const onSubmit = (data: userLoginData) => {
+  const onSubmit = (data: userRegisterData) => {
     console.log(data);
   };
   return (
@@ -69,8 +69,8 @@ export default function Cadastro() {
           className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-4"
         >
           <div className="flex w-2/3 flex-col gap-1">
-            <h3 className="text-2xl font-medium">Login</h3>
-            <p>Preencha os campos abaixo para acessar sua conta</p>
+            <h3 className="text-2xl font-medium">Cadastro</h3>
+            <p>Preencha os campos abaixo para criar a sua conta</p>
           </div>
           <div className="flex w-2/3 flex-col gap-2">
             <Input
@@ -126,19 +126,20 @@ export default function Cadastro() {
               />
             </div>
             <div className="mt-4 flex flex-col gap-2">
-              <Link className="text-sm text-blue-500" href={"/cadastro"}>
-                Não possui conta? Cadastre-se aqui
+              <Link className="text-sm text-blue-500" href={"/login"}>
+                Já possui conta? Faça login.
               </Link>
               <Button
                 className="rounded-2xl py-1"
                 variant="primary"
                 type="submit"
               >
-                Entrar
+                Cadastrar
               </Button>
               <Button className="rounded-4xl py-1" variant="outlined">
-                Entrar com Google
-              </Button>
+                Cadastrar com Google              
+                </Button>
+
             </div>
           </div>
         </form>
