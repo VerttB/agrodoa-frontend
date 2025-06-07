@@ -67,13 +67,13 @@ export default function Cadastro() {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-4"
+          className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-5 "
         >
-          <div className="flex w-2/3 flex-col gap-1">
+          <div className="flex md:w-2/3 flex-col gap-1">
             <h3 className="text-2xl font-medium">Cadastro</h3>
             <p>Preencha os campos abaixo para criar a sua conta</p>
           </div>
-          <div className="flex w-2/3 flex-col gap-2">
+          <div className="flex  md:w-2/3 flex-col gap-2">
             <Input
               label="Email"
               type="text"
@@ -129,18 +129,18 @@ export default function Cadastro() {
                 className="w-full bg-white py-2"
               />
             </div>
-            <div className="mt-4 flex flex-col gap-2">
-              <Link className="text-sm text-blue-500" href={"/login"}>
+            <div className="mt-4 items-center flex flex-col gap-2">
+              <Link className="text-sm text-blue-500 self-start" href={"/login"}>
                 Já possui conta? Faça login.
               </Link>
               <Button
-                className="rounded-2xl py-1"
+                className="rounded-2xl w-full py-1 max-sm:w-4/5"
                 variant="primary"
                 type="submit"
               >
                 Cadastrar
               </Button>
-              <Button className="rounded-4xl py-1" variant="outlined">
+              <Button className="rounded-4xl py-1 max-sm:w-4/5" variant="outlined">
                 Cadastrar com Google              
                 </Button>
 
