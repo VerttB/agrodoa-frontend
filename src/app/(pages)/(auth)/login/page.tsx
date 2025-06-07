@@ -30,7 +30,7 @@ export default function Login() {
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
-      <div className="flex m-2 md:m-0 md:h-3/4 md:w-2/5 flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60">
+      <div className="flex m-2 lg:m-0 lg:w-2/5 flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60">
         <div className="flex h-1/5 w-full items-center justify-center gap-2 self-center border-b-1">
           <Image
             src="/logo.png"
@@ -44,11 +44,11 @@ export default function Login() {
           onSubmit={handleSubmit(onSubmit)}
           className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-4"
         >
-          <div className="flex w-2/3 flex-col gap-1">
+          <div className="flex lg:w-2/3 flex-col gap-1">
             <h3 className="text-2xl font-medium">Login</h3>
             <p>Preencha os campos abaixo para acessar sua conta</p>
           </div>
-          <div className="w-2/3">
+          <div className="w-full lg:w-2/3">
             <Input
               label="Email"
               type="text"
@@ -68,18 +68,18 @@ export default function Login() {
               className="bg-white py-2"
             />
 
-            <div className="mt-4 flex flex-col gap-2">
+            <div className="mt-4 max-lg:items-center flex flex-col gap-2">
               <Link className="text-sm text-blue-500" href={"/cadastro"}>
                 Não possui conta? Cadastre-se aqui
               </Link>
               <Button
-                className="rounded-2xl py-1"
+                className="rounded-2xl py-1 max-lg:w-4/5"
                 variant="primary"
                 type="submit"
               >
                 Entrar
               </Button>
-              <Button className="rounded-4xl py-1" variant="outlined">
+              <Button className="rounded-4xl py-1 max-lg:w-4/5" variant="outlined">
                 Entrar com Google
               </Button>
             </div>
