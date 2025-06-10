@@ -7,5 +7,5 @@ export interface IUser {
   voluntario: boolean,
   telefone: string,
   cidade: string,
-  foto: URL,
+  foto?: URL,
 }
