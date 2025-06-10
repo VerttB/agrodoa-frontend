@@ -3,9 +3,10 @@ import Input from "@/components/input";
 import Button from "@/components/button";
 import { Search, Heart, Plus } from "lucide-react";
 import { Card } from "@/components/Card";
+import { useUserContext } from "@/providers/UserProvider";
 export default function Page() {
   const provisorio = [1, 2, 3, 4, 5, 6];
-
+  const { user} = useUserContext();
   return (
     <div className="bg-primary min-h-screen flex flex-col items-center gap-8 p-2">
       <div className="flex w-3/4 self-center">
@@ -14,9 +15,10 @@ export default function Page() {
           <Button className="px-2 md:px-4">
             <Search className="w-4" />
           </Button>
+          {user?.tipo === "fornecedor" &&
           <Button className="px-1" variant="outlined">
             <Plus></Plus>
-          </Button>
+          </Button>}
         </div>
       </div>
 
