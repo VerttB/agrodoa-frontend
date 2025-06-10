@@ -5,6 +5,8 @@ export function useFetch<T = unknown>(url: string) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
 
+
+  console.log(`url do fetch ${url}`)
  useEffect(() => {
 
   const fetchedData = async () => {
