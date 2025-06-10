@@ -6,7 +6,6 @@ export async function POST(req: Request) {
 
     const { email, password, confirmPassword, cpfCnpj, phone } = body;
 
-    // Regra básica (você já valida com Zod no client, mas repetimos no server)
     if (password !== confirmPassword) {
       return NextResponse.json({ error: "Senhas não coincidem" }, { status: 400 });
     }
