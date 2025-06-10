@@ -1,0 +1,36 @@
+[
+  {
+    "id": "causa1",
+    "titulo": "Doação para famílias afetadas pela seca",
+    "descricao": "Ajude a fornecer alimentos para famílias que estão enfrentando uma severa seca no interior.",
+    "metaDoacao": 10000,         
+    "valorArrecadado": 3500,    
+    "dataInicio": "2025-06-01T00:00:00Z",
+    "dataFim": "2025-07-01T23:59:59Z",
+    "responsavel": {
+      "id": "usuario123",
+      "nome": "Maria Silva"
+    },
+    "status": "ativa",           
+    "categoria": "fome",
+    "quantidadeBeneficiarios": 150,
+    "imagemUrl": "/imagens/causa-seca.jpg"
+  },
+  {
+    "id": "causa2",
+    "titulo": "Campanha de arrecadação para crianças carentes",
+    "descricao": "Ajude a garantir alimentos e produtos básicos para crianças em situação vulnerável.",
+    "metaDoacao": 5000,
+    "valorArrecadado": 5000,
+    "dataInicio": "2025-05-15T00:00:00Z",
+    "dataFim": "2025-06-15T23:59:59Z",
+    "responsavel": {
+      "id": "usuario456",
+      "nome": "João Pereira"
+    },
+    "status": "concluida",
+    "categoria": "infância",
+    "quantidadeBeneficiarios": 200,
+    "imagemUrl": "/imagens/causa-criancas.jpg"
+  }
+]
