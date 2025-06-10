@@ -4,6 +4,4 @@ export interface IProduto{
     quantidade: number,
     data_validade : Date,
     preco_unidade: number,
-
-
 }

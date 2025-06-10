@@ -1,9 +1,15 @@
-export interface IAnuncio{
-    id: number,
-    titulo:string,
-    acao: "Doação" | "Venda",
-    entrega_pelo_fornecedor:boolean,
-    cidade_idcidade:number,
-    anunciante_conta_idconta:number,
-    produto_idproduto:number,
+import { IProduto } from "./IProduto";
+
+export interface IAnuncio {
+  id: number;
+  titulo: string;
+  acao: "Doação" | "Venda";
+  entrega_pelo_fornecedor: boolean;
+  cidadeId: number;
+  cidadeNome?: string;
+  anuncianteId: number;
+  anuncianteNome: string;
+  produto: IProduto;
+  dataExpiracao: Date;
+  foto: string; 
 }
