@@ -9,12 +9,14 @@ import { useRouter } from "next/navigation";
 import Image from "next/image";
 import Button from "@/components/button";
 import Input from "@/components/input";
+import { useUserContext } from "@/providers/UserProvider";
 
 export default function CausaUnica() {
   const { id } = useParams();
   const router = useRouter();
   const causa = causas.find((c) => c.id === id);
   const [donationValue, setDonationValue] = useState(0);
+  const { user} = useUserContext();
 
   if (!causa)
     return <p className="mt-10 text-center text-xl">Causa não encontrada.</p>;
@@ -78,7 +80,10 @@ export default function CausaUnica() {
 
             <Button
               className="w-full py-2 text-3xl"
-              onClick={() => router.push(`/pagamento?id=${causa.id}&valor=${donationValue} `)}
+              onClick={() => { 
+                if(!user) router.push('/login')
+                router.push(`/pagamento?id=${causa.id}&valor=${donationValue}
+                   `)}}
             >
               Apoiar Causa
             </Button>
