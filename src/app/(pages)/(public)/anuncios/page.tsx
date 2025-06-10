@@ -4,9 +4,26 @@ import Button from "@/components/button";
 import { Search, Heart, Plus } from "lucide-react";
 import { Card } from "@/components/Card";
 import { useUserContext } from "@/providers/UserProvider";
+import { IAnuncio } from "@/core/interfaces/IAnuncio";
+import { useEffect, useState } from "react";
+import { useAnuncio } from "@/hooks/useAnuncio";
+import { Tailspin } from "ldrs/react";
+import 'ldrs/react/Tailspin.css'
+import { useRouter } from "next/navigation";
 export default function Page() {
-  const provisorio = [1, 2, 3, 4, 5, 6];
   const { user} = useUserContext();
+  const {data : anuncios, loading} = useAnuncio<IAnuncio[]>();
+  const router = useRouter();
+  if(loading) return(<div className="min-h-screen w-full flex justify-center items-center">
+
+      <Tailspin
+        size="40"
+        stroke="5"
+        speed="0.9"
+        color="orange" 
+      />
+  
+  </div>)
   return (
     <div className="bg-primary min-h-screen flex flex-col items-center gap-8 p-2">
       <div className="flex w-3/4 self-center">
@@ -22,23 +39,26 @@ export default function Page() {
         </div>
       </div>
 
-      {/* Anuncios */}
       <div className="grid w-3/4 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5 gap-2">
-        {provisorio.map((p) => (
-          <Card.Root key={p}>
+        {anuncios?.map((a) => (
+          <Card.Root key={a.titulo} className="flex flex-col justify-around">
             <Card.Image
               imageUrl="/mato.jpg"
               alt="imagem do anuncio"
             ></Card.Image>
             <Card.Content>
-              <h1 className="text-xl">Nome do Produto</h1>
-              <p className="text-sm">Nome do fornecedor</p>
-              <p className="text-sm">Negociantes: 0/5</p>
-              <p className="text-sm">Preço:10,00</p>
-              <p className="text-sm">Quantidade:52</p>
+              <div className="h-full">
+                <h1 className="text-xl font-medium mb-4">{a.titulo}</h1>
+             
+              <p className="text-sm">{a.anuncianteNome}</p>
+              <p className="text-sm">Negociantes:{a.anuncianteNome}</p>
+              <p className="text-sm">Preço:{a.produto.preco_unidade}</p>
+              <p className="text-sm">Quantidade:{a.produto.quantidade}</p>
+               </div>
             </Card.Content>
-            <Card.Actions className="flex text-sm 2xl:text-lg justify-around p-2">
-              <Button className=" w-full px-2 py-1">Ver Detalhes</Button>
+            <Card.Actions className="flex text-sm 2xl:text-lg justify-around p-2 h-1/7">
+              <Button className=" w-full px-2 py-1"
+                      onClick={() => router.push(`/anuncios/${a.id}`)}>Ver Detalhes</Button>
               <Button className=" w-full flex justify-center gap-1 px-2 py-1" variant="outlined">
                 Salvar<Heart ></Heart>
               </Button>
