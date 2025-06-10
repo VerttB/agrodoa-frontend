@@ -10,6 +10,7 @@ import { z } from "zod";
 import { formatCpfCnpj } from "@/utils/formatCpfCnpj";
 import { formatTel } from "@/utils/formatTel";
 export default function Cadastro() {
+  
   const userRegisterchema = z.object({
     email: z
       .string()
@@ -39,19 +40,25 @@ export default function Cadastro() {
         return !!Number(replacedDoc);
       }, "CPF/CNPJ deve conter apenas números"),
     phone: z.string(),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    message: "As senhas devem ser iguais",
+    path:[`confirmPassword`]
   });
+
 
   type userRegisterData = z.infer<typeof userRegisterchema>;
   const {
     register,
     handleSubmit,
+    
     formState: { errors },
   } = useForm<userRegisterData>({
     resolver: zodResolver(userRegisterchema),
   });
 
   const onSubmit = (data: userRegisterData) => {
-    console.log(data);
+    
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
