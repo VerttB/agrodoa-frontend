@@ -6,7 +6,6 @@ import Link from "next/link";
 export const Header = () => {
   const router = useRouter();
   const { user } = useUserContext();
-  console.log(user)
   const headerItens = user
     ? ["Anuncios", "Causas", "Perfil"] // logado
     : ["Anuncios", "Causas"];         // deslogado
