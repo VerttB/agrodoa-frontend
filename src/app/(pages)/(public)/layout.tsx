@@ -1,18 +1,11 @@
 "use client";
 import Image from "next/image";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { Header } from "@/components/header";
 export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const headerBen = ["", "causas", "Perfil"];
-  const router = useRouter();
-
-
-
 
   return (
     <>

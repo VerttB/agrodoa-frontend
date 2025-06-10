@@ -1,7 +1,7 @@
 "use client";
 import { useParams } from "next/navigation";
 import { User, CalendarDays } from "lucide-react";
-import { causas } from "@/constants/Causas";
+import { causas } from "@/core/constants/Causas";
 import { useState } from "react";
 import { ItemPage } from "@/components/ItemPage";
 import { useRouter } from "next/navigation";
@@ -17,7 +17,7 @@ export default function CausaUnica() {
   const causa = causas.find((c) => c.id === id);
   const [donationValue, setDonationValue] = useState(0);
   const { user} = useUserContext();
-
+  
   if (!causa)
     return <p className="mt-10 text-center text-xl">Causa não encontrada.</p>;
 
@@ -82,7 +82,7 @@ export default function CausaUnica() {
               className="w-full py-2 text-3xl"
               onClick={() => { 
                 if(!user) router.push('/login')
-                router.push(`/pagamento?id=${causa.id}&valor=${donationValue}
+                router.push(`/pagamento?id=${causa.id}&valor=${donationValue}&name=${causa.nome}
                    `)}}
             >
               Apoiar Causa

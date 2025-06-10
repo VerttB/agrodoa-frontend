@@ -3,8 +3,7 @@ import Button from "@/components/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/Card";
-import { useUserContext } from "@/providers/UserProvider";
-import { IUser } from "@/core/interfaces/IUser";
+
 
 export default function Home() {
   const router = useRouter();

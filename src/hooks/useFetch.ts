@@ -17,7 +17,8 @@ export function useFetch<T = unknown>(url: string) {
 
     setData(jsonData);
     
-    }catch(err:any){
+    // eslint-disable-next-line
+    }catch(err: any){
       setError(err.message || "erro desconhecido")
     }finally{
       setLoading(false)

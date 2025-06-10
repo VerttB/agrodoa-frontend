@@ -1,8 +1,7 @@
-import { NextApiRequest, NextApiResponse } from "next";
 import fs from "fs";
 import path from "path";
 
-export  async function GET(req: Request, res: Response) {
+export  async function GET() {
   const filePath = path.join(process.cwd(), "public", "mocks", "anuncios.json");
 
   try {

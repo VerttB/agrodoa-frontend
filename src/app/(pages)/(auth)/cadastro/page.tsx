@@ -7,8 +7,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { formatCpfCnpj } from "@/utils/formatCpfCnpj";
-import { formatTel } from "@/utils/formatTel";
+import { formatCpfCnpj } from "@/core/utils/formatCpfCnpj";
+import { formatTel } from "@/core/utils/formatTel";
 export default function Cadastro() {
 
   const userRegisterchema = z.object({
@@ -58,7 +58,7 @@ export default function Cadastro() {
   });
 
   const onSubmit = (data: userRegisterData) => {
-    
+    console.log(data)
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">

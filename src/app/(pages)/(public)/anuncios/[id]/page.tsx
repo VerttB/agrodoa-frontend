@@ -52,7 +52,7 @@ export default function AnuncioUnico() {
               type="number"
               className="border-accent w-full rounded-3xl border-2 px-4 py-2"
               placeholder="Digite um valor"
-              onChange={(e) => {}}
+              onChange={(e) => {console.log(e.target.value)}}
              
             />
             <Button
