@@ -8,12 +8,19 @@ import { ItemPage } from "@/components/ItemPage";
 import { useRouter } from "next/navigation";
 import { useAnuncio } from "@/hooks/useAnuncio";
 import { IAnuncio } from "@/core/interfaces/IAnuncio";
+import { LoadingSpin } from "@/components/loadingComponent";
+
 export default function AnuncioUnico() {
   const { id } = useParams();
   console.log(id)
   const { data: anuncio, loading} = useAnuncio<IAnuncio>(String(id))
   const router = useRouter();
 
+
+   if(loading) return(
+    <LoadingSpin/>
+  )
+  
   if (!anuncio)
     return <p className="mt-10 text-center text-xl">Anuncio não encontrado.</p>;
 

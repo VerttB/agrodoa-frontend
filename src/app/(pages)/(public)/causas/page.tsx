@@ -1,12 +1,21 @@
 "use client";
 import Button from "@/components/button";
 import { Card } from "@/components/Card";
-import { causas } from "@/constants/Causas";
+import { causas } from "@/core/constants/Causas";
 import { useRouter } from "next/navigation";
 import Input from "@/components/input";
+import { useCausa } from "@/hooks/useCausa";
+import { LoadingSpin } from "@/components/loadingComponent";
+import { ICausas } from "@/core/interfaces/ICausas";
 
 export default function Causas() {
   const router = useRouter();
+  const { data: causas, loading} = useCausa<ICausas[]>();
+
+
+   if(loading) return(
+    <LoadingSpin/>
+  )
 
   return (
     <div className="flex flex-col items-center p-8">
@@ -21,7 +30,7 @@ export default function Causas() {
           </Button>
         </div>
 
-        {causas.map((c) => (
+        {causas?.map((c) => (
           <Card.Root
             key={c.nome}
             className="flex w-full flex-col overflow-hidden rounded bg-white lg:w-3/4 md:flex-row md:justify-center 2xl:justify-start"

@@ -1,29 +1,23 @@
 "use client";
 import Input from "@/components/input";
 import Button from "@/components/button";
-import { Search, Heart, Plus } from "lucide-react";
+import { LoadingSpin } from "@/components/loadingComponent";
 import { Card } from "@/components/Card";
+
+import { Search, Heart, Plus } from "lucide-react";
 import { useUserContext } from "@/providers/UserProvider";
 import { IAnuncio } from "@/core/interfaces/IAnuncio";
-import { useEffect, useState } from "react";
 import { useAnuncio } from "@/hooks/useAnuncio";
-import { Tailspin } from "ldrs/react";
-import 'ldrs/react/Tailspin.css'
 import { useRouter } from "next/navigation";
+
+
 export default function Page() {
   const { user} = useUserContext();
   const {data : anuncios, loading} = useAnuncio<IAnuncio[]>();
   const router = useRouter();
-  if(loading) return(<div className="min-h-screen w-full flex justify-center items-center">
-
-      <Tailspin
-        size="40"
-        stroke="5"
-        speed="0.9"
-        color="orange" 
-      />
-  
-  </div>)
+  if(loading) return(
+  <LoadingSpin/>
+)
   return (
     <div className="bg-primary min-h-screen flex flex-col items-center gap-8 p-2">
       <div className="flex w-3/4 self-center">
