@@ -10,7 +10,7 @@ import { z } from "zod";
 import { formatCpfCnpj } from "@/utils/formatCpfCnpj";
 import { formatTel } from "@/utils/formatTel";
 export default function Cadastro() {
-  
+
   const userRegisterchema = z.object({
     email: z
       .string()
@@ -92,6 +92,7 @@ export default function Cadastro() {
             />
             <div className="flex gap-2">
               <Input
+                maxLength={18}
                 type="text"
                 id="cpfCnpj"
                 {...register("cpfCnpj")}
@@ -104,6 +105,7 @@ export default function Cadastro() {
                 }}
               />
               <Input
+                maxLength={14}
                 type="text"
                 id="confirmarSenha"
                 {...register("phone")}
