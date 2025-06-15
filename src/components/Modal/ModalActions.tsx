@@ -3,9 +3,9 @@ interface ModalActionsProps{
     children: React.ReactNode
 }
 
-export default function ModalActions({className,children} : ModalActionsProps){
+export const  ModalActions = ({className,children} : ModalActionsProps) => {
     return(
-        <div className={`flex ${className}`}>
+        <div className={`flex gap-4 w-full p-2 ${className}`}>
             {children}
         </div>
     )

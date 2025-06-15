@@ -3,9 +3,9 @@ interface ModalContentProps{
     children: React.ReactNode
 }
 
-export default function ModalContent({children} : ModalContentProps){
+export const ModalContent = ({children} : ModalContentProps) => {
     return(
-        <div className="p-2">
+        <div className="flex flex-col p-4 gap-4">
             {children}
         </div>
     )

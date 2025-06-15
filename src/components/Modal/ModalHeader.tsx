@@ -1,14 +1,18 @@
+import { XIcon } from "lucide-react"
+
 interface ModalHeaderProps{
-    title:string,
-    children: React.ReactNode
+    title?:string,
+    onClose?:() => void,
 }
 
 
-export default function ModalHeader({title, children} : ModalHeaderProps){
+export const ModalHeader = ({title,onClose} : ModalHeaderProps) => {
     return(
-        <div className="border-b-1">
+        <div className="border-b-1 flex justify-between px-2 py-2">
             <h2>{title}</h2>
-            {children}
+            {onClose &&  <XIcon className="cursor-pointer" color="red" onClick={() => onClose()}/>}
+            
+           
         </div>
     )
 }
