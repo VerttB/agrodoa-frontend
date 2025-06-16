@@ -2,13 +2,13 @@
 import { useParams } from "next/navigation";
 import { User, CalendarDays } from "lucide-react";
 import Image from "next/image";
-import {Button} from "@/components/button";
-import Input from "@/components/input";
-import { ItemPage } from "@/components/ItemPage";
+import {Button} from "@/components/ui/button";
+import Input from "@/components/ui/input";
+import { ItemPage } from "@/components/ui/ItemPage";
 import { useRouter } from "next/navigation";
 import { useAnuncio } from "@/hooks/useAnuncio";
 import { IAnuncio } from "@/core/interfaces/IAnuncio";
-import { LoadingSpin } from "@/components/loadingComponent";
+import { LoadingSpin } from "@/components/ui/loadingComponent";
 
 export default function AnuncioUnico() {
   const { id } = useParams();
