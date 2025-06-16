@@ -19,12 +19,12 @@ export default function ModalPage() {
             title="Criar Anúncio"
             onClose={() => setOpen(false)}
           />
-          <Modal.Content>
-            <Input label="Nome do Anúncio" placeholder="Insira o nome do seu anúncio"/>
-            <Input label="Nome do Produto" placeholder="Insira o nome do produto"/>
-            <Input label="Quantidade" placeholder="Insira a quantidade do produto"/>
-            <Input label="Preço da Unidade" placeholder="Insira o preço da unidade do produto"></Input>
-            <Input></Input>
+          <Modal.Content className="min-w-[640px]">
+            <Input label="Nome do Anúncio" placeholder="Insira o nome do seu anúncio"  className="bg-white"/>
+            <Input label="Nome do Produto" placeholder="Insira o nome do produto"  className="bg-white"/>
+            <Input label="Quantidade" placeholder="Insira a quantidade do produto "  className="bg-white"/>
+            <Input label="Preço da Unidade" placeholder="Insira o preço da unidade do produto" className="bg-white"></Input>
+            <Input type="file" accept="image/*" className="h-32 bg-white" ></Input>
 
           </Modal.Content>
           <Modal.Actions>

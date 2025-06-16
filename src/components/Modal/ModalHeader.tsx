@@ -9,7 +9,7 @@ interface ModalHeaderProps{
 export const ModalHeader = ({title,onClose} : ModalHeaderProps) => {
     return(
         <div className="border-b-1 flex justify-between px-2 py-2">
-            <h2>{title}</h2>
+            <h2 className="text-2xl font-semibold">{title}</h2>
             {onClose &&  <XIcon className="cursor-pointer" color="red" onClick={() => onClose()}/>}
             
            

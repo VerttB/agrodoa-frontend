@@ -1,5 +1,7 @@
+'use client'
+
 import { useEffect } from "react";
-import ReactDOM from "react-dom";
+import { createPortal } from "react-dom";
 
 interface ModalRootProps{
     open:boolean,
@@ -23,9 +25,9 @@ export const ModalRoot = ({open,onOpenChange, children}: ModalRootProps ) => {
         return(() => {
             window.removeEventListener("keydown", escEvent);
         })
-    })
+    }, [open, onOpenChange])
 
-    return ReactDOM.createPortal(
+    return createPortal(
         
         <div className="fixed z-10 right-0 left-0 bottom-0 top-0 bg-black/60">
             <div className="bg-neutral rounded-2xl z-10  transition fixed top-1/2 left-1/2 -translate-1/2 ">
