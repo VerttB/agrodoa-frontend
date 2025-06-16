@@ -1,10 +1,10 @@
 "use client";
-import {Button} from "@/components/button";
-import { Card } from "@/components/Card";
+import {Button} from "@/components/ui/button";
+import { Card } from "@/components/ui/Card";
 import { useRouter } from "next/navigation";
-import Input from "@/components/input";
+import Input from "@/components/ui/input";
 import { useCausa } from "@/hooks/useCausa";
-import { LoadingSpin } from "@/components/loadingComponent";
+import { LoadingSpin } from "@/components/ui/loadingComponent";
 import { ICausas } from "@/core/interfaces/ICausas";
 
 export default function Causas() {

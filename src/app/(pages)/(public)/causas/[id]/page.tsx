@@ -3,12 +3,12 @@ import { useParams } from "next/navigation";
 import { User, CalendarDays } from "lucide-react";
 import { causas } from "@/core/constants/Causas";
 import { useState } from "react";
-import { ItemPage } from "@/components/ItemPage";
+import { ItemPage } from "@/components/ui/ItemPage";
 import { useRouter } from "next/navigation";
 
 import Image from "next/image";
-import {Button} from "@/components/button";
-import Input from "@/components/input";
+import {Button} from "@/components/ui/button";
+import Input from "@/components/ui/input";
 import { useUserContext } from "@/providers/UserProvider";
 
 export default function CausaUnica() {
