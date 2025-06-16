@@ -2,7 +2,7 @@
 import { useParams } from "next/navigation";
 import { User, CalendarDays } from "lucide-react";
 import Image from "next/image";
-import Button from "@/components/button";
+import {Button} from "@/components/button";
 import Input from "@/components/input";
 import { ItemPage } from "@/components/ItemPage";
 import { useRouter } from "next/navigation";

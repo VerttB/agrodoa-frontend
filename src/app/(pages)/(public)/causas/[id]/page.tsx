@@ -7,7 +7,7 @@ import { ItemPage } from "@/components/ItemPage";
 import { useRouter } from "next/navigation";
 
 import Image from "next/image";
-import Button from "@/components/button";
+import {Button} from "@/components/button";
 import Input from "@/components/input";
 import { useUserContext } from "@/providers/UserProvider";
 

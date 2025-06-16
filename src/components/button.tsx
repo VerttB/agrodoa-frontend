@@ -7,13 +7,13 @@ interface ButtonProps {
   type?: "button" | "submit";
 }
 
-export default function Button({
+export const Button = ({
   variant = "primary",
   children,
   onClick,
   className,
   type = "button",
-}: ButtonProps) {
+}: ButtonProps) => {
   const variants = {
     primary: "bg-accent text-white hover:bg-accent-hover",
     outlined: "bg-white border-2 border-accent border-solid hover:bg-primary",

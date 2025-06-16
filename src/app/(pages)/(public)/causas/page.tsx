@@ -1,5 +1,5 @@
 "use client";
-import Button from "@/components/button";
+import {Button} from "@/components/button";
 import { Card } from "@/components/Card";
 import { useRouter } from "next/navigation";
 import Input from "@/components/input";

@@ -1,17 +1,19 @@
 "use client";
 import Input from "@/components/input";
-import Button from "@/components/button";
+import {Button} from "@/components/button";
 import { LoadingSpin } from "@/components/loadingComponent";
 import { Card } from "@/components/Card";
-
+import { Modal } from "@/components/Modal";
 import { Search, Heart, Plus } from "lucide-react";
 import { useUserContext } from "@/providers/UserProvider";
 import { IAnuncio } from "@/core/interfaces/IAnuncio";
 import { useAnuncio } from "@/hooks/useAnuncio";
 import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 
 export default function Page() {
+  const [open,setOpen] = useState(false);
   const { user} = useUserContext();
   const {data : anuncios, loading} = useAnuncio<IAnuncio[]>();
   const router = useRouter();
@@ -19,6 +21,7 @@ export default function Page() {
   <LoadingSpin/>
 )
   return (
+    <>
     <div className="bg-primary min-h-screen flex flex-col items-center gap-8 p-2">
       <div className="flex w-3/4 self-center">
         <Input className="py-1" />
@@ -26,10 +29,10 @@ export default function Page() {
           <Button className="px-2 md:px-4">
             <Search className="w-4" />
           </Button>
-          {user?.tipo === "fornecedor" &&
-          <Button className="px-1" variant="outlined">
+        
+          <Button className="px-1" variant="outlined" onClick={() => setOpen(true)}>
             <Plus></Plus>
-          </Button>}
+          </Button>
         </div>
       </div>
 
@@ -61,5 +64,25 @@ export default function Page() {
         ))}
       </div>
     </div>
+
+    <Modal.Root onOpenChange={() => setOpen(false)} open={open}>
+          <Modal.Header
+            title="Criar Anúncio"
+            onClose={() => setOpen(false)}
+          />
+          <Modal.Content className="min-w-[640px]">
+            <Input label="Nome do Anúncio" placeholder="Insira o nome do seu anúncio"  className="bg-white"/>
+            <Input label="Nome do Produto" placeholder="Insira o nome do produto"  className="bg-white"/>
+            <Input label="Quantidade" placeholder="Insira a quantidade do produto "  className="bg-white"/>
+            <Input label="Preço da Unidade" placeholder="Insira o preço da unidade do produto" className="bg-white"></Input>
+            <Input type="file" accept="image/*" className="h-32 bg-white" ></Input>
+
+          </Modal.Content>
+          <Modal.Actions>
+            <Button className="px-4 py-1" onClick={() => {}}>Criar</Button>
+            <Button className="px-4 py-1" variant="outlined" onClick={() => setOpen(false)}>Fechar</Button>
+          </Modal.Actions>
+        </Modal.Root>
+        </>
   );
 }

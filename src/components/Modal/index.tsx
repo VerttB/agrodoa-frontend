@@ -1,4 +1,4 @@
-import { ModalRoot } from "../Modal/ModalRoot"
+import { ModalRoot } from "./ModalRoot"
 import { ModalActions } from "./ModalActions"
 import { ModalContent } from "./ModalContent"
 import { ModalHeader } from "./ModalHeader"
