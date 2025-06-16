@@ -12,7 +12,7 @@ interface ModalRootProps{
 
 export const ModalRoot = ({open,onOpenChange, children}: ModalRootProps ) => {
 
-    if(!open) return null;
+  
 
     useEffect(() => {
         const escEvent = (e:KeyboardEvent) => {
@@ -27,6 +27,7 @@ export const ModalRoot = ({open,onOpenChange, children}: ModalRootProps ) => {
         })
     }, [open, onOpenChange])
 
+      if(!open) return null;
     return createPortal(
         
         <div className="fixed z-10 right-0 left-0 bottom-0 top-0 bg-black/60">
