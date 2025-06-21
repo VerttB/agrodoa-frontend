@@ -7,6 +7,7 @@ import { LoadingSpin } from "@/components/ui/loadingComponent";
 import { TabsContent } from "@/components/ui/tabs";
 import { useUserContext } from "@/providers/UserProvider";
 import { IAnuncio } from "@/core/interfaces/IAnuncio";
+import { CriarAnuncio } from "@/components/anuncio/CriarAnuncioModal";
 
 export default function Page() {
   const { user } = useUserContext();
@@ -24,6 +25,7 @@ export default function Page() {
 
   return (
     <div className="bg-primary w-full min-h-screen flex justify-center p-2">
+      <CriarAnuncio/>
     <div className="w-4/5">
       <AnuncioTabs>
         {isFornecedor ? (
