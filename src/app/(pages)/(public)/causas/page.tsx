@@ -1,7 +1,5 @@
 "use client";
 import {Button} from "@/components/ui/button";
-import { Card } from "@/components/ui/Card";
-import { useRouter } from "next/navigation";
 import Input from "@/components/ui/input";
 import { useCausa } from "@/hooks/useCausa";
 import { LoadingSpin } from "@/components/ui/loadingComponent";
@@ -9,7 +7,6 @@ import { ICausas } from "@/core/interfaces/ICausas";
 import { CausaLista } from "@/components/causa/CausaList";
 
 export default function Causas() {
-  const router = useRouter();
   const { data: causas, loading} = useCausa<ICausas[]>();
 
 
