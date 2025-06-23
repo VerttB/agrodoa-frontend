@@ -7,6 +7,7 @@ import { Input } from "../ui/input";
 import { ACCEPTED_IMAGE_TYPE, MAX_FILE_SIZE } from "@/core/constants/values";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { FileImageUpload } from "../fileImageUpload";
 export const CriarAnuncio = () => {
   const [open, setOpen] = useState(false);
 
@@ -103,16 +104,10 @@ export const CriarAnuncio = () => {
               {...register("price")}
               errors={errors.price?.message}
             />
-            <Input
-              type="file"
-              accept="image/*"
-              className="h-32 w-full bg-white"
-              onChange={(e) => {
-                const file = e.target.files?.[0];
-                setValue("image", file as File, { shouldValidate: true });
-              }}
-            />
-
+            <div className="">
+              <label htmlFor="">Imagem do produto</label>
+            <FileImageUpload/>
+              </div>
             <Modal.Actions>
               <Button className="px-4 py-1" type="submit">
                 Criar
