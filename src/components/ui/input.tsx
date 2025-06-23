@@ -1,6 +1,7 @@
 import { forwardRef } from "react";
 import { twMerge } from "tailwind-merge";
 import { LucideIcon } from "lucide-react";
+
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   errors?: string;
@@ -9,7 +10,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   rightIcon?: LucideIcon
 }
 
-const Input = forwardRef<HTMLInputElement, InputProps>(
+export const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ label, errors, className,rightIcon:RightIcon, leftIcon:LeftIcon, ...rest }, ref) => {
     return (
       <div className="flex w-full flex-col gap-1">
@@ -39,4 +40,3 @@ const Input = forwardRef<HTMLInputElement, InputProps>(
 
 Input.displayName = "Input";
 
-export default Input;

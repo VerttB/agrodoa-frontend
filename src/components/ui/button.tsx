@@ -1,34 +1,30 @@
 import { twMerge } from "tailwind-merge";
-interface ButtonProps {
-  children: React.ReactNode;
-  onClick?: () => void;
-  variant?: "primary" | "outlined";
-  className?: string;
-  type?: "button" | "submit";
+import React from "react";
+
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: "primary" | "outlined" | "ghost";
 }
 
-export const Button = ({
-  variant = "primary",
-  children,
-  onClick,
-  className,
-  type = "button",
-}: ButtonProps) => {
-  const variants = {
-    primary: "bg-accent text-white hover:bg-accent-hover",
-    outlined: "bg-white border-2 border-accent border-solid hover:bg-primary",
-  };
-  return (
-    <button
-      type={type}
-      className={twMerge(
-        "cursor-pointer rounded-md",
-        variants[variant],
-        className,
-      )}
-      onClick={onClick}
-    >
-      {children}
-    </button>
-  );
-}
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ variant = "primary", className, ...props }, ref) => {
+    const variants = {
+      primary: "bg-accent text-white hover:bg-accent-hover",
+      outlined: "bg-white border-2 border-accent hover:bg-primary",
+      ghost: "bg-none"
+    };
+
+    return (
+      <button
+        ref={ref}
+        className={twMerge(
+          "cursor-pointer rounded-md px-4 py-2",
+          variants[variant],
+          className
+        )}
+        {...props}
+      />
+    );
+  }
+);
+
+Button.displayName = "Button";
