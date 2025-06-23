@@ -1,7 +1,8 @@
 "use client"
+
 import {Input} from "@/components/ui/input"
 import { useSearchParams } from "next/navigation"
-
+import { Suspense } from "react";
 export default function Pagamento() {
   const params = useSearchParams();
   const itemValues = {
@@ -13,6 +14,7 @@ export default function Pagamento() {
  
 
   return( 
+    <Suspense>
     <div className="min-h-screen flex flex-col md:flex-row w-full p-8 gap-8">
         <div className="flex flex-col w-full gap-8">
         <h2 className="text-2xl">Dados da Compra</h2>
@@ -33,5 +35,6 @@ export default function Pagamento() {
             </div>
         </div>
     </div>
+    </Suspense>
   )
 }
