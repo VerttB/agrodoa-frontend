@@ -4,21 +4,20 @@ import { Button } from "@/components/ui/button"
 import {
   DropdownMenu,
   DropdownMenuContent,
-  DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
 import { EllipsisIcon } from "lucide-react"
+import { CancelarAnuncioModal } from "./CancelarAnuncioModal"
+import { IAnuncio } from "@/core/interfaces/IAnuncio"
+import { useState } from "react"
 
-export const AnuncioDropdownMenu = () => {
+interface AnuncioDropdownProps extends IAnuncio{}
+
+export const AnuncioDropdownMenu = ({ anuncio } :{anuncio: AnuncioDropdownProps}) => {
+  const [openDelete, setOpenDelete] = useState(false)
   return (
+    <>
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
         <Button
@@ -32,8 +31,18 @@ export const AnuncioDropdownMenu = () => {
       <DropdownMenuContent className="bg-white">
         <DropdownMenuItem>Ver Negociantes</DropdownMenuItem>
         <DropdownMenuItem>Editar</DropdownMenuItem>
-        <DropdownMenuItem>Cancelar Anúncio</DropdownMenuItem>
+        <DropdownMenuItem onClick={() => setOpenDelete(true)}>
+            B
+        </DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
+    <CancelarAnuncioModal
+    id={anuncio.id}
+    titulo={anuncio.titulo}
+    open={openDelete}
+    onOpenChange={setOpenDelete}/>
+    
+    
+    </>
   )
 }
