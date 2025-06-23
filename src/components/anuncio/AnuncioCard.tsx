@@ -1,16 +1,19 @@
-import { useAnuncio } from "@/hooks/useAnuncio";
 import { Card } from "../ui/Card"
 import { IAnuncio } from "@/core/interfaces/IAnuncio";
 import {useRouter} from "next/navigation";
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
+import { AnuncioDropdownMenu } from "./AnuncioDropdown";
 
 interface AnuncioCardProps extends IAnuncio{}
 
 export const AnuncioCard = ({ anuncio } :{anuncio: AnuncioCardProps}) => {
     const router = useRouter();
     return(
-        <Card.Root key={anuncio.titulo} className="flex flex-col justify-around">
+        <Card.Root key={anuncio.titulo} className="flex flex-col justify-around relative">
+          <div className="absolute top-2 right-2 z-10">
+             <AnuncioDropdownMenu />
+          </div>
             <Card.Image
               imageUrl="/mato.jpg"
               alt="imagem do anuncio"
