@@ -1,16 +1,22 @@
 "use client"
 
 import {Input} from "@/components/ui/input"
-import { useSearchParams } from "next/navigation"
 import { Suspense } from "react";
-export default function Pagamento() {
-  const params = useSearchParams();
+
+interface PagamentoProps {
+  searchParams: {
+    id?: string;
+    valor?: string;
+    name?: string;
+  };
+}
+
+export default function Pagamento({searchParams}: PagamentoProps) {
   const itemValues = {
-    
-    itemId: String(params.get("id")),
-    value: Number(params.get("valor")),
-    name: String(params.get("name"))
-  }
+    itemId: searchParams.id ?? "",
+    value: Number(searchParams.valor) || 0,
+    name: searchParams.name ?? "",
+  };
  
 
   return( 
