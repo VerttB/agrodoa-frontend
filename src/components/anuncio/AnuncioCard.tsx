@@ -12,7 +12,7 @@ export const AnuncioCard = ({ anuncio } :{anuncio: AnuncioCardProps}) => {
     return(
         <Card.Root key={anuncio.titulo} className="flex flex-col justify-around relative">
           <div className="absolute top-2 right-2 z-10">
-             <AnuncioDropdownMenu />
+             <AnuncioDropdownMenu anuncio={anuncio} />
           </div>
             <Card.Image
               imageUrl="/mato.jpg"
