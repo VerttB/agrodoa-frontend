@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Button } from "../ui/button"
 import { Modal } from "../ui/Modal"
 
@@ -21,11 +20,11 @@ export const CancelarAnuncioModal = ({id,titulo, open, onOpenChange}: CancelarAn
                 </h2>
                 <p>Essa ação não poderá ser desfeita</p>
                 <p className="font-bold">{titulo}</p>
-                
+
                 </div>
                 <Modal.Actions className="justify-end">
 
-                    <Button>
+                    <Button onClick={() => console.log(id)}>
                         Confirmar
                     </Button>
                     <Button

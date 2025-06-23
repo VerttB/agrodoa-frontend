@@ -12,9 +12,8 @@ import { CancelarAnuncioModal } from "./CancelarAnuncioModal"
 import { IAnuncio } from "@/core/interfaces/IAnuncio"
 import { useState } from "react"
 
-interface AnuncioDropdownProps extends IAnuncio{}
 
-export const AnuncioDropdownMenu = ({ anuncio } :{anuncio: AnuncioDropdownProps}) => {
+export const AnuncioDropdownMenu = ({ anuncio } :{anuncio: IAnuncio}) => {
   const [openDelete, setOpenDelete] = useState(false)
   return (
     <>

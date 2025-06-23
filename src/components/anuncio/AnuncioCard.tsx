@@ -5,9 +5,8 @@ import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
 import { AnuncioDropdownMenu } from "./AnuncioDropdown";
 
-interface AnuncioCardProps extends IAnuncio{}
 
-export const AnuncioCard = ({ anuncio } :{anuncio: AnuncioCardProps}) => {
+export const AnuncioCard = ({ anuncio } :{anuncio: IAnuncio}) => {
     const router = useRouter();
     return(
         <Card.Root key={anuncio.titulo} className="flex flex-col justify-around relative">
