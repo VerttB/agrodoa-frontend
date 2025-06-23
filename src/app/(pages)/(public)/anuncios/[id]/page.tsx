@@ -2,8 +2,8 @@
 import { useParams } from "next/navigation";
 import { User, CalendarDays } from "lucide-react";
 import Image from "next/image";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { ItemPage } from "@/components/ui/ItemPage";
 import { useRouter } from "next/navigation";
 import { useAnuncio } from "@/hooks/useAnuncio";
@@ -12,15 +12,12 @@ import { LoadingSpin } from "@/components/ui/loadingComponent";
 
 export default function AnuncioUnico() {
   const { id } = useParams();
-  console.log(id)
-  const { data: anuncio, loading} = useAnuncio<IAnuncio>(String(id))
+  console.log(id);
+  const { data: anuncio, loading } = useAnuncio<IAnuncio>(String(id));
   const router = useRouter();
 
+  if (loading) return <LoadingSpin />;
 
-   if(loading) return(
-    <LoadingSpin/>
-  )
-  
   if (!anuncio)
     return <p className="mt-10 text-center text-xl">Anuncio não encontrado.</p>;
 
@@ -40,10 +37,8 @@ export default function AnuncioUnico() {
               <User aria-hidden="true" /> Responsável: {anuncio.anuncianteNome}
             </p>
             <p className="flex items-center gap-2 text-xl">
-              <CalendarDays aria-hidden="true" /> Prazo: 
+              <CalendarDays aria-hidden="true" /> Prazo:
             </p>
-
-            
           </ItemPage.description>
         </ItemPage.content>
         <ItemPage.content>
@@ -52,12 +47,15 @@ export default function AnuncioUnico() {
               type="number"
               className="border-accent w-full rounded-3xl border-2 px-4 py-2"
               placeholder="Digite um valor"
-              onChange={(e) => {console.log(e.target.value)}}
-             
+              onChange={(e) => {
+                console.log(e.target.value);
+              }}
             />
             <Button
               className="w-full py-2 text-3xl"
-              onClick={() => router.push("/pagamento?id=${anuncio.id}&amount=${quantidade}")}
+              onClick={() =>
+                router.push("/pagamento?id=${anuncio.id}&amount=${quantidade}")
+              }
             >
               Apoiar Causa
             </Button>
@@ -65,8 +63,7 @@ export default function AnuncioUnico() {
 
           <ItemPage.description title="Descrição">
             <p className="px-6 text-justify leading-relaxed">
-              {
-                `Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quam,
+              {`Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quam,
               culpa eum corrupti perspiciatis voluptatum, eius qui voluptatem quas nisi
               quia dolore repellendus. Tenetur rem culpa illum voluptatibus! Sapiente,
               aspernatur.`}

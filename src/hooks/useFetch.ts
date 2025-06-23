@@ -4,30 +4,25 @@ export function useFetch<T = unknown>(url: string) {
   const [data, setData] = useState<T | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | null>(null);
+  useEffect(() => {
+    const fetchedData = async () => {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("Erro ao buscar po dados");
+        const jsonData = await res.json();
 
+        setData(jsonData);
 
-  console.log(`url do fetch ${url}`)
- useEffect(() => {
+        // eslint-disable-next-line
+      } catch (err: any) {
+        setError(err.message || "erro desconhecido");
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const fetchedData = async () => {
-    try{
-    const res = await fetch(url);
-    if(!res.ok) throw new Error("Erro ao buscar po dados");
-    const jsonData = await res.json();
+    fetchedData();
+  }, [url]);
 
-    setData(jsonData);
-    
-    // eslint-disable-next-line
-    }catch(err: any){
-      setError(err.message || "erro desconhecido")
-    }finally{
-      setLoading(false)
-    }
-  }
-  
-  fetchedData()
-
- },[url])
-
- return {data, loading ,error}
+  return { data, loading, error };
 }

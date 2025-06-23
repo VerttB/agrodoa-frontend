@@ -1,5 +1,5 @@
-export enum DenunciaMotivo{
-    "Desrespeito",
-    "Propaganda Enganosa",
-    "Não recebimento do produto"
+export enum DenunciaMotivo {
+  "Desrespeito",
+  "Propaganda Enganosa",
+  "Não recebimento do produto",
 }

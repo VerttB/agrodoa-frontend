@@ -13,17 +13,25 @@ export const AnuncioTabs = ({ children }: AnuncioTabsProps) => {
   const isFornecedor = user?.tipo === "fornecedor";
 
   return (
-    <Tabs defaultValue={isFornecedor ? "abertos" : "disponiveis"} className="w-full flex justify-center">
-      <TabsList className="bg-background h-auto -space-x-px p-0 shadow-xs rtl:space-x-reverse ">
+    <Tabs
+      defaultValue={isFornecedor ? "abertos" : "disponiveis"}
+      className="flex w-full justify-center"
+    >
+      <TabsList className="bg-background h-auto -space-x-px p-0 shadow-xs rtl:space-x-reverse">
         {isFornecedor ? (
           <>
-            <TabsTrigger 
-                value="abertos"
-                className="data-[state=active]:bg-muted data-[state=active]:after:bg-primary relative overflow-hidden rounded-none border py-2 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 first:rounded-s last:rounded-e">Abertos</TabsTrigger>
-            <TabsTrigger 
-                value="negociacao"
-                 className="data-[state=active]:bg-muted data-[state=active]:after:bg-primary relative overflow-hidden rounded-none border py-2 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 first:rounded-s last:rounded-e"
-                 >Em Negociação</TabsTrigger>
+            <TabsTrigger
+              value="abertos"
+              className="data-[state=active]:bg-muted data-[state=active]:after:bg-primary relative overflow-hidden rounded-none border py-2 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 first:rounded-s last:rounded-e"
+            >
+              Abertos
+            </TabsTrigger>
+            <TabsTrigger
+              value="negociacao"
+              className="data-[state=active]:bg-muted data-[state=active]:after:bg-primary relative overflow-hidden rounded-none border py-2 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 first:rounded-s last:rounded-e"
+            >
+              Em Negociação
+            </TabsTrigger>
             <TabsTrigger value="finalizados">Finalizados</TabsTrigger>
           </>
         ) : (

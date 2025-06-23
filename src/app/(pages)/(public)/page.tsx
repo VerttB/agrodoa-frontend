@@ -1,14 +1,13 @@
 "use client";
-import {Button} from "@/components/ui/button";
+import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { Card } from "@/components/ui/Card";
 
-
 export default function Home() {
   const router = useRouter();
   const provisorio = [1, 2, 3];
-  
+
   return (
     <div className="flex flex-col">
       <div className="flex h-full flex-col justify-between gap-24 p-2 md:p-6">
@@ -93,34 +92,34 @@ export default function Home() {
               solidariedade!
             </h2>
           </div>
-          <div className="overflow-x-auto  w-full scroll-pl-4 scroll-smooth px-2">
-            <div className="flex flex-nowrap gap-4 snap-x snap-mandatory md:flex-wrap md:justify-evenly">
-            {provisorio.map((i) => (
-              <Card.Root
-                key={i}
-                className="min-w-[250px] max-w-[280px] snap-start shrink-0 bg-primary flex flex-col rounded-lg text-black sm:w-full md:min-w-[280px] lg:w-full"
-              >
-                <Card.Image
-                  alt="Imagem do Produto"
-                  imageUrl="/fruits.jpg"
-                  className="w-full"
-                />
-                <Card.Content>
-                  <h2 className="text-xl font-bold">Titulo</h2>
-                  <p className="text-md">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Eum, distinctio, molestias qui tenetur voluptas a excepturi
-                    cumque nemo sint, harum placeat porro?
-                  </p>
-                </Card.Content>
-                <Card.Actions className="p-2">
-                  <Button variant="primary" className="px-2 py-1 text-white">
-                    Ver Detalhes
-                  </Button>
-                </Card.Actions>
-              </Card.Root>
-            ))}
-          </div>
+          <div className="w-full scroll-pl-4 overflow-x-auto scroll-smooth px-2">
+            <div className="flex snap-x snap-mandatory flex-nowrap gap-4 md:flex-wrap md:justify-evenly">
+              {provisorio.map((i) => (
+                <Card.Root
+                  key={i}
+                  className="bg-primary flex max-w-[280px] min-w-[250px] shrink-0 snap-start flex-col rounded-lg text-black sm:w-full md:min-w-[280px] lg:w-full"
+                >
+                  <Card.Image
+                    alt="Imagem do Produto"
+                    imageUrl="/fruits.jpg"
+                    className="w-full"
+                  />
+                  <Card.Content>
+                    <h2 className="text-xl font-bold">Titulo</h2>
+                    <p className="text-md">
+                      Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                      Eum, distinctio, molestias qui tenetur voluptas a
+                      excepturi cumque nemo sint, harum placeat porro?
+                    </p>
+                  </Card.Content>
+                  <Card.Actions className="p-2">
+                    <Button variant="primary" className="px-2 py-1 text-white">
+                      Ver Detalhes
+                    </Button>
+                  </Card.Actions>
+                </Card.Root>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -143,41 +142,41 @@ export default function Home() {
             ></Image>
           </div>
 
-          <div className="overflow-x-auto  w-full scroll-pl-4 scroll-smooth px-2 shadow-2xl ">
-          <div className="flex flex-nowrap gap-4 snap-x snap-mandatory  md:flex-wrap md:justify-evenly"> 
-            {provisorio.map((i) => (
-              <Card.Root
-                key={i}
-                className="bg-secondary-darker text-neutral border-none min-w-[250px] max-w-[280px] snap-start shrink-0  flex flex-col rounded-lg sm:w-full md:min-w-[280px] lg:w-full"
-              >
-                <Card.Image
-                  alt="Imagem do Produto"
-                  imageUrl="/fruits.jpg"
-                  className="w-full border-none"
-                />
-                <Card.Content>
-                  <h2 className="text-xl font-bold">Titulo</h2>
-                  <p>Preço: 30,00</p>
-                  <p>Negociantes: 0/5</p>
-                  <p>Quantidade: 230</p>
-                </Card.Content>
-                <Card.Actions className="flex justify-between p-2">
-                  <Button
-                    variant="primary"
-                    className="w-full px-2 py-1 text-sm md:text-md text-white"
-                  >
-                    Ver Detalhes
-                  </Button>
-                  <Button
-                    variant="outlined"
-                    className="w-full px-4 py-1 text-black"
-                  >
-                    Salvar
-                  </Button>
-                </Card.Actions>
-              </Card.Root>
-            ))}
-          </div>
+          <div className="w-full scroll-pl-4 overflow-x-auto scroll-smooth px-2 shadow-2xl">
+            <div className="flex snap-x snap-mandatory flex-nowrap gap-4 md:flex-wrap md:justify-evenly">
+              {provisorio.map((i) => (
+                <Card.Root
+                  key={i}
+                  className="bg-secondary-darker text-neutral flex max-w-[280px] min-w-[250px] shrink-0 snap-start flex-col rounded-lg border-none sm:w-full md:min-w-[280px] lg:w-full"
+                >
+                  <Card.Image
+                    alt="Imagem do Produto"
+                    imageUrl="/fruits.jpg"
+                    className="w-full border-none"
+                  />
+                  <Card.Content>
+                    <h2 className="text-xl font-bold">Titulo</h2>
+                    <p>Preço: 30,00</p>
+                    <p>Negociantes: 0/5</p>
+                    <p>Quantidade: 230</p>
+                  </Card.Content>
+                  <Card.Actions className="flex justify-between p-2">
+                    <Button
+                      variant="primary"
+                      className="md:text-md w-full px-2 py-1 text-sm text-white"
+                    >
+                      Ver Detalhes
+                    </Button>
+                    <Button
+                      variant="outlined"
+                      className="w-full px-4 py-1 text-black"
+                    >
+                      Salvar
+                    </Button>
+                  </Card.Actions>
+                </Card.Root>
+              ))}
+            </div>
           </div>
         </div>
       </div>

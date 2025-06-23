@@ -1,7 +1,7 @@
 import fs from "fs";
 import path from "path";
 
-export  async function GET() {
+export async function GET() {
   const filePath = path.join(process.cwd(), "public", "mocks", "causas.json");
 
   try {
@@ -10,14 +10,13 @@ export  async function GET() {
 
     return new Response(JSON.stringify(causas), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    })
-    
+      headers: { "Content-Type": "application/json" },
+    });
   } catch (error) {
     console.error("Erro ao ler o arquivo de causas:", error);
-    return new Response(JSON.stringify({erros: "Could not fetch data"}), {
+    return new Response(JSON.stringify({ erros: "Could not fetch data" }), {
       status: 200,
-      headers: { 'Content-Type': 'application/json' }
-    })
+      headers: { "Content-Type": "application/json" },
+    });
   }
 }

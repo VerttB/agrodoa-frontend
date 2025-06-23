@@ -6,29 +6,43 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label?: string;
   errors?: string;
   className?: string;
-  leftIcon?: LucideIcon,
-  rightIcon?: LucideIcon
+  leftIcon?: LucideIcon;
+  rightIcon?: LucideIcon;
 }
 
 export const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ label, errors, className,rightIcon:RightIcon, leftIcon:LeftIcon, ...rest }, ref) => {
+  (
+    {
+      label,
+      errors,
+      className,
+      rightIcon: RightIcon,
+      leftIcon: LeftIcon,
+      ...rest
+    },
+    ref,
+  ) => {
     return (
       <div className="flex w-full flex-col gap-1">
         {label && <label htmlFor={rest.id}>{label}</label>}
 
-       <div className="relative w-full">
+        <div className="relative w-full">
           {LeftIcon && (
-            <LeftIcon className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4" />
+            <LeftIcon className="text-muted-foreground absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2" />
           )}
-        <input
-          name={label}
-          ref={ref}
-          className={ twMerge("border-2 border-solid px-2 py-1" ,errors ? "border-red-600" : "border-secondary-light",className)}
-          {...rest}
-        />
-         {RightIcon && (
-            <div className="absolute right-2 top-1/2 -translate-y-1/2">
-              <RightIcon className="absolute left-2 top-1/2 -translate-y-1/2 text-muted-foreground h-4 w-4"/>
+          <input
+            name={label}
+            ref={ref}
+            className={twMerge(
+              "border-2 border-solid px-2 py-1",
+              errors ? "border-red-600" : "border-secondary-light",
+              className,
+            )}
+            {...rest}
+          />
+          {RightIcon && (
+            <div className="absolute top-1/2 right-2 -translate-y-1/2">
+              <RightIcon className="text-muted-foreground absolute top-1/2 left-2 h-4 w-4 -translate-y-1/2" />
             </div>
           )}
         </div>
@@ -39,4 +53,3 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
 );
 
 Input.displayName = "Input";
-

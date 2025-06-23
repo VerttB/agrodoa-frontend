@@ -5,7 +5,7 @@ import { createContext, useState, useContext } from "react";
 
 type UserContextType = {
   user: IUser | null;
-  setUser:  React.Dispatch<React.SetStateAction<IUser | null>>;
+  setUser: React.Dispatch<React.SetStateAction<IUser | null>>;
 };
 
 export const userContext = createContext<UserContextType | null>(null);
@@ -23,8 +23,6 @@ export default function UserProvider({
   children: React.ReactNode;
 }) {
   const [user, setUser] = useState<IUser | null>(null);
-
-  
 
   return (
     <userContext.Provider value={{ user, setUser }}>

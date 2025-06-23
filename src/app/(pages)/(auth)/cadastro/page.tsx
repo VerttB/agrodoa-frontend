@@ -1,7 +1,7 @@
 "use client";
 
-import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
@@ -10,59 +10,58 @@ import { z } from "zod";
 import { formatCpfCnpj } from "@/core/utils/formatCpfCnpj";
 import { formatTel } from "@/core/utils/formatTel";
 export default function Cadastro() {
-
-  const userRegisterchema = z.object({
-    email: z
-      .string()
-      .nonempty("O campo de email não deve estar vazio")
-      .email("Deve estar no formato de email "),
-    password: z
-      .string()
-      .nonempty("O campo da senha não deve estar vazio")
-      .min(6, "A senha deve ter no mínimo 6 caracteres"),
-    confirmPassword: z
-      .string()
-      .nonempty("Preencha com a mesma senha que inseriu"),
-    cpfCnpj: z
-      .string({
-        required_error: "CPF/CNPJ é obrigatório",
-      })
-      .refine((doc) => {
-        const replacedDoc = doc.replace(/\D/g, "");
-        return replacedDoc.length >= 11 && replacedDoc.length <= 14;
-      }, "CPF/CNPJ deve ter no mínimo 11 caracteres")
-      .refine((doc) => {
-        const replacedDoc = doc.replace(/\D/g, "");
-        return replacedDoc.length <= 14;
-      }, "CPF/CNJP deve ter no máximo 14 caracteres")
-      .refine((doc) => {
-        const replacedDoc = doc.replace(/\D/g, "");
-        return !!Number(replacedDoc);
-      }, "CPF/CNPJ deve conter apenas números"),
-    phone: z.string(),
-  })
-  .refine((data) => data.password === data.confirmPassword, {
-    message: "As senhas devem ser iguais",
-    path:[`confirmPassword`]
-  });
-
+  const userRegisterchema = z
+    .object({
+      email: z
+        .string()
+        .nonempty("O campo de email não deve estar vazio")
+        .email("Deve estar no formato de email "),
+      password: z
+        .string()
+        .nonempty("O campo da senha não deve estar vazio")
+        .min(6, "A senha deve ter no mínimo 6 caracteres"),
+      confirmPassword: z
+        .string()
+        .nonempty("Preencha com a mesma senha que inseriu"),
+      cpfCnpj: z
+        .string({
+          required_error: "CPF/CNPJ é obrigatório",
+        })
+        .refine((doc) => {
+          const replacedDoc = doc.replace(/\D/g, "");
+          return replacedDoc.length >= 11 && replacedDoc.length <= 14;
+        }, "CPF/CNPJ deve ter no mínimo 11 caracteres")
+        .refine((doc) => {
+          const replacedDoc = doc.replace(/\D/g, "");
+          return replacedDoc.length <= 14;
+        }, "CPF/CNJP deve ter no máximo 14 caracteres")
+        .refine((doc) => {
+          const replacedDoc = doc.replace(/\D/g, "");
+          return !!Number(replacedDoc);
+        }, "CPF/CNPJ deve conter apenas números"),
+      phone: z.string(),
+    })
+    .refine((data) => data.password === data.confirmPassword, {
+      message: "As senhas devem ser iguais",
+      path: [`confirmPassword`],
+    });
 
   type userRegisterData = z.infer<typeof userRegisterchema>;
   const {
     register,
     handleSubmit,
-    
+
     formState: { errors },
   } = useForm<userRegisterData>({
     resolver: zodResolver(userRegisterchema),
   });
 
   const onSubmit = (data: userRegisterData) => {
-    console.log(data)
+    console.log(data);
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
-      <div className="flex m-2 lg:m-0 lg:w-2/5 flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60">
+      <div className="m-2 flex flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60 lg:m-0 lg:w-2/5">
         <div className="flex h-1/5 w-full items-center justify-center gap-2 self-center border-b-1">
           <Image
             src="/logo.png"
@@ -74,13 +73,13 @@ export default function Cadastro() {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-5 "
+          className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-5"
         >
-          <div className="flex lg:w-2/3 flex-col gap-1">
+          <div className="flex flex-col gap-1 lg:w-2/3">
             <h3 className="text-2xl font-medium">Cadastro</h3>
             <p>Preencha os campos abaixo para criar a sua conta</p>
           </div>
-          <div className="flex  lg:w-2/3 flex-col gap-2">
+          <div className="flex flex-col gap-2 lg:w-2/3">
             <Input
               label="Email"
               type="text"
@@ -114,7 +113,7 @@ export default function Cadastro() {
                 placeholder="Insira seu telefone"
                 className="w-full bg-white py-2"
                 onChange={(e) => {
-                  e.target.value = formatTel(e.target.value)
+                  e.target.value = formatTel(e.target.value);
                 }}
               />
             </div>
@@ -138,21 +137,26 @@ export default function Cadastro() {
                 className="w-full bg-white py-2"
               />
             </div>
-            <div className="mt-4 max-lg:items-center flex flex-col gap-2">
-              <Link className="text-sm text-blue-500 self-start" href={"/login"}>
+            <div className="mt-4 flex flex-col gap-2 max-lg:items-center">
+              <Link
+                className="self-start text-sm text-blue-500"
+                href={"/login"}
+              >
                 Já possui conta? Faça login.
               </Link>
               <Button
-                className="rounded-2xl w-full py-1 max-lg:w-4/5"
+                className="w-full rounded-2xl py-1 max-lg:w-4/5"
                 variant="primary"
                 type="submit"
               >
                 Cadastrar
               </Button>
-              <Button className="rounded-4xl py-1 max-lg:w-4/5" variant="outlined">
-                Cadastrar com Google              
-                </Button>
-
+              <Button
+                className="rounded-4xl py-1 max-lg:w-4/5"
+                variant="outlined"
+              >
+                Cadastrar com Google
+              </Button>
             </div>
           </div>
         </form>

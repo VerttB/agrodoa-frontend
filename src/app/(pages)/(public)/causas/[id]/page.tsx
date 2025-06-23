@@ -7,8 +7,8 @@ import { ItemPage } from "@/components/ui/ItemPage";
 import { useRouter } from "next/navigation";
 
 import Image from "next/image";
-import {Button} from "@/components/ui/button";
-import {Input} from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
 import { useUserContext } from "@/providers/UserProvider";
 
 export default function CausaUnica() {
@@ -16,8 +16,8 @@ export default function CausaUnica() {
   const router = useRouter();
   const causa = causas.find((c) => c.id === id);
   const [donationValue, setDonationValue] = useState(0);
-  const { user} = useUserContext();
-  
+  const { user } = useUserContext();
+
   if (!causa)
     return <p className="mt-10 text-center text-xl">Causa não encontrada.</p>;
 
@@ -80,10 +80,11 @@ export default function CausaUnica() {
 
             <Button
               className="w-full py-2 text-3xl"
-              onClick={() => { 
-                if(!user) router.push('/login')
+              onClick={() => {
+                if (!user) router.push("/login");
                 router.push(`/pagamento?id=${causa.id}&valor=${donationValue}&name=${causa.nome}
-                   `)}}
+                   `);
+              }}
             >
               Apoiar Causa
             </Button>

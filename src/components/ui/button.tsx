@@ -10,7 +10,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const variants = {
       primary: "bg-accent text-white hover:bg-accent-hover",
       outlined: "bg-white border-2 border-accent hover:bg-primary",
-      ghost: "bg-none"
+      ghost: "bg-none",
     };
 
     return (
@@ -19,12 +19,12 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         className={twMerge(
           "cursor-pointer rounded-md px-4 py-2",
           variants[variant],
-          className
+          className,
         )}
         {...props}
       />
     );
-  }
+  },
 );
 
 Button.displayName = "Button";

@@ -11,5 +11,5 @@ export interface IAnuncio {
   anuncianteNome: string;
   produto: IProduto;
   dataExpiracao: Date;
-  foto: string; 
+  foto: string;
 }

@@ -14,7 +14,7 @@ export default function Page() {
   const { data: anuncios, loading } = useAnuncio<IAnuncio[]>();
 
   if (loading) return <LoadingSpin />;
-  if(!anuncios) return <div>Anuncios não encontrados</div>
+  if (!anuncios) return <div>Anuncios não encontrados</div>;
   // Lógica de separação por status e tipo de usuário
   const isFornecedor = user?.tipo === "fornecedor";
   // const abertos = anuncios?.filter((a) => a.status === "aberto") || [];
@@ -24,40 +24,39 @@ export default function Page() {
   // const salvos = anuncios?.filter((a) => user?.salvos?.includes(a.id)) || [];
 
   return (
-    <div className="bg-primary w-full min-h-screen flex justify-center p-2">
-    <div className="w-4/5">
-      <AnuncioTabs>
-        <div className="flex flex-col">
-      <CriarAnuncio/>
-        {isFornecedor ? (
-          <>
-            <TabsContent  value="abertos">
-              <AnuncioList anuncios={anuncios} />
-            </TabsContent>
-            <TabsContent value="negociacao">
-              <AnuncioList anuncios={anuncios} />
-            </TabsContent>
-            <TabsContent value="finalizados">
-              <AnuncioList anuncios={anuncios} />
-            </TabsContent>
-          </>
-        ) : (
-          <>
-            <TabsContent value="disponiveis">
-              <AnuncioList anuncios={anuncios} />
-            </TabsContent>
-            <TabsContent value="negociacao">
-              <AnuncioList anuncios={anuncios} />
-            </TabsContent>
-            <TabsContent value="salvos">
-              <AnuncioList anuncios={anuncios} />
-            </TabsContent>
-          </>
-        )}
-        </div>
-      </AnuncioTabs>
-    </div>
-    
+    <div className="bg-primary flex min-h-screen w-full justify-center p-2">
+      <div className="w-4/5">
+        <AnuncioTabs>
+          <div className="flex flex-col">
+            <CriarAnuncio />
+            {isFornecedor ? (
+              <>
+                <TabsContent value="abertos">
+                  <AnuncioList anuncios={anuncios} />
+                </TabsContent>
+                <TabsContent value="negociacao">
+                  <AnuncioList anuncios={anuncios} />
+                </TabsContent>
+                <TabsContent value="finalizados">
+                  <AnuncioList anuncios={anuncios} />
+                </TabsContent>
+              </>
+            ) : (
+              <>
+                <TabsContent value="disponiveis">
+                  <AnuncioList anuncios={anuncios} />
+                </TabsContent>
+                <TabsContent value="negociacao">
+                  <AnuncioList anuncios={anuncios} />
+                </TabsContent>
+                <TabsContent value="salvos">
+                  <AnuncioList anuncios={anuncios} />
+                </TabsContent>
+              </>
+            )}
+          </div>
+        </AnuncioTabs>
+      </div>
     </div>
   );
 }

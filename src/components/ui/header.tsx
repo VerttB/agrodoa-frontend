@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { useUserContext } from "@/providers/UserProvider";
 import { useRouter } from "next/navigation";
@@ -9,7 +9,7 @@ export const Header = () => {
   const { user } = useUserContext();
   const headerItens = user
     ? ["Anuncios", "Causas", "Perfil"] // logado
-    : ["Anuncios", "Causas"];         // deslogado
+    : ["Anuncios", "Causas"]; // deslogado
 
   return (
     <header className="bg-secondary-darker flex h-16 w-full flex-row-reverse items-center justify-between text-white">
@@ -24,12 +24,7 @@ export const Header = () => {
         onClick={() => router.push("/")}
         className="flex cursor-pointer items-center px-4"
       >
-        <Image
-          src="/logo.png"
-          height={64}
-          width={64}
-          alt="Logo imagem"
-        />
+        <Image src="/logo.png" height={64} width={64} alt="Logo imagem" />
         <span className="font-sofia ml-2 text-xl">Agrodoa</span>
       </div>
     </header>
