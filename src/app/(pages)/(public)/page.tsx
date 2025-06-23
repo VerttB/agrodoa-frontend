@@ -1,8 +1,8 @@
 "use client";
-import Button from "@/components/button";
+import {Button} from "@/components/ui/button";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Card } from "@/components/Card";
+import { Card } from "@/components/ui/Card";
 
 
 export default function Home() {

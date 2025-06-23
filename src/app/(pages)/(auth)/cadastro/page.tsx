@@ -1,7 +1,7 @@
 "use client";
 
-import Input from "@/components/input";
-import Button from "@/components/button";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
