@@ -7,8 +7,9 @@ import { ICausas } from "@/core/interfaces/ICausas";
 import { CausaLista } from "@/components/causa/CausaList";
 
 export default function Causas() {
-  const { data: causas, loading} = useCausa<ICausas[]>();
+  const { data: causas, loading, error} = useCausa<ICausas[]>();
 
+  if(!causas) return <p>{error && 1}</p>
 
    if(loading) return(
     <LoadingSpin/>
