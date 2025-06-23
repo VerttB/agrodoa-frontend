@@ -25,9 +25,10 @@ export default function Page() {
 
   return (
     <div className="bg-primary w-full min-h-screen flex justify-center p-2">
-      <CriarAnuncio/>
     <div className="w-4/5">
       <AnuncioTabs>
+        <div className="flex flex-col">
+      <CriarAnuncio/>
         {isFornecedor ? (
           <>
             <TabsContent  value="abertos">
@@ -53,8 +54,10 @@ export default function Page() {
             </TabsContent>
           </>
         )}
+        </div>
       </AnuncioTabs>
     </div>
+    
     </div>
   );
 }
