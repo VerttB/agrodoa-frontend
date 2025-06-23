@@ -3,7 +3,7 @@ import { useParams } from "next/navigation";
 import { User, CalendarDays } from "lucide-react";
 import Image from "next/image";
 import {Button} from "@/components/ui/button";
-import Input from "@/components/ui/input";
+import {Input} from "@/components/ui/input";
 import { ItemPage } from "@/components/ui/ItemPage";
 import { useRouter } from "next/navigation";
 import { useAnuncio } from "@/hooks/useAnuncio";

@@ -1,6 +1,6 @@
 "use client";
 import {Button} from "@/components/ui/button";
-import Input from "@/components/ui/input";
+import {Input} from "@/components/ui/input";
 import { useCausa } from "@/hooks/useCausa";
 import { LoadingSpin } from "@/components/ui/loadingComponent";
 import { ICausas } from "@/core/interfaces/ICausas";
