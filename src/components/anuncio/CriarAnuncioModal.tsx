@@ -3,7 +3,7 @@ import { useState } from "react"
 import { Modal } from "../ui/Modal"
 import { Button } from "../ui/button"
 import { z } from "zod"
-import Input  from "../ui/input"
+import {Input}  from "../ui/input"
 import { ACCEPTED_IMAGE_TYPE, MAX_FILE_SIZE } from "@/core/constants/values"
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -53,14 +53,20 @@ export const CriarAnuncio = () => {
         resolver: zodResolver(createAdSchema),
       });
       
-      console.log(errors)
+
+      
     const onSubmit = (data: createAdData) => {
         console.log("Enviando....")
         console.log(data)
     }
     return(
     <>
-    <Button variant="outlined" onClick={() => setOpen(true)}>Criar Anúncio</Button>
+    <Button 
+        className="w-32"
+        variant="outlined" 
+        onClick={() => setOpen(true)}>
+        Criar
+        </Button>
       <Modal.Root onOpenChange={() => setOpen(false)} open={open}>
           <Modal.Header
             title="Criar Anúncio"
