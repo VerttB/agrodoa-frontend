@@ -5,9 +5,9 @@ import { Button } from "../ui/button";
 import { z } from "zod";
 import { Input } from "../ui/input";
 import { ACCEPTED_IMAGE_TYPE, MAX_FILE_SIZE } from "@/core/constants/values";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { FileImageUpload } from "../fileImageUpload";
+import { ImageUploadInput } from "../ui/imageInput";
 export const CriarAnuncio = () => {
   const [open, setOpen] = useState(false);
 
@@ -57,7 +57,7 @@ export const CriarAnuncio = () => {
   const {
     register,
     handleSubmit,
-    setValue,
+    control,
     formState: { errors },
   } = useForm<createAdData>({
     resolver: zodResolver(createAdSchema),
@@ -104,10 +104,18 @@ export const CriarAnuncio = () => {
               {...register("price")}
               errors={errors.price?.message}
             />
-            <div className="">
-              <label htmlFor="">Imagem do produto</label>
-            <FileImageUpload/>
-              </div>
+            <Controller
+                  control={control}
+                  name="image"
+                  render={({ field }) => (
+                    <ImageUploadInput
+                      label="Imagem do Produto"
+                      value={field.value}
+                      onChange={field.onChange}
+                      errors={errors.image?.message}
+                    />
+                  )}
+                />
             <Modal.Actions>
               <Button className="px-4 py-1" type="submit">
                 Criar

@@ -30,7 +30,7 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: IAnuncio }) => {
           <DropdownMenuItem>Ver Negociantes</DropdownMenuItem>
           <DropdownMenuItem>Editar</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenDelete(true)}>
-            B
+            Cancelar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
