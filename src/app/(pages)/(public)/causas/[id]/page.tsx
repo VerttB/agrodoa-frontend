@@ -32,7 +32,7 @@ export default function CausaUnica() {
             width={512}
             height={320}
           />
-          <ItemPage.description title={causa.nome}>
+          <ItemPage.description title={causa.titulo}>
             <p className="flex items-center gap-2 text-xl">
               <User aria-hidden="true" /> Responsável: {causa.responsavelId}
             </p>
@@ -82,7 +82,7 @@ export default function CausaUnica() {
               className="w-full py-2 text-3xl"
               onClick={() => {
                 if (!user) router.push("/login");
-                router.push(`/pagamento?id=${causa.id}&valor=${donationValue}&name=${causa.nome}
+                router.push(`/pagamento?id=${causa.id}&valor=${donationValue}&name=${causa.titulo}
                    `);
               }}
             >
