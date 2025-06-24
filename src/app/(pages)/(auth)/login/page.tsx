@@ -6,8 +6,13 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
+import { useUserContext } from "@/providers/UserProvider";
+import { IUser } from "@/core/interfaces/IUser";
+import { useRouter } from "next/navigation";
 
 export default function Login() {
+  const router = useRouter();
+  const { login } = useUserContext()
   const userLoginSchema = z.object({
     email: z
       .string()
@@ -26,7 +31,20 @@ export default function Login() {
   });
 
   const onSubmit = (data: userLoginData) => {
-    console.log(data);
+  const user:IUser = {
+    id: "1",
+    nome: "Ana Silva",
+    senha: "senha123",
+    cpf_ou_cnpj: "123.456.789-00",
+    tipo: data.senha === "123" ? "beneficiario" : "fornecedor",
+    voluntario: false,
+    telefone: "(71) 99999-1111",
+    cidade: "Salvador",
+    
+  }
+
+    login(user)
+    router.push("/anuncios")
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
@@ -56,7 +74,7 @@ export default function Login() {
               {...register("email")}
               placeholder="Insira seu email"
               errors={errors.email?.message}
-              className="bg-white py-2"
+              className="bg-white py-2 w-full rounded-lg"
             />
             <Input
               type="text"
@@ -65,7 +83,7 @@ export default function Login() {
               label="Senha"
               errors={errors.senha?.message}
               placeholder="Insira sua senha"
-              className="bg-white py-2"
+              className="bg-white py-2 w-full rounded-lg"
             />
 
             <div className="mt-4 flex flex-col gap-2 max-lg:items-center">

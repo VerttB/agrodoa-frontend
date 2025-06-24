@@ -87,7 +87,7 @@ export default function Cadastro() {
               {...register("email")}
               placeholder="Insira seu email"
               errors={errors.email?.message}
-              className="bg-white py-2"
+              className="bg-white py-2 w-full"
             />
             <div className="flex gap-2">
               <Input

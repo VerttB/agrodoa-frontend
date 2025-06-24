@@ -1,6 +1,6 @@
 [
   {
-    "id": "causa1",
+    "id": "1",
     "titulo": "Doação para famílias afetadas pela seca",
     "descricao": "Ajude a fornecer alimentos para famílias que estão enfrentando uma severa seca no interior.",
     "meta": 10000,         
@@ -17,7 +17,7 @@
     "imagemUrl": "/imagens/causa-seca.jpg"
   },
   {
-    "id": "causa2",
+    "id": "2",
     "titulo": "Campanha de arrecadação para crianças carentes",
     "descricao": "Ajude a garantir alimentos e produtos básicos para crianças em situação vulnerável.",
     "meta": 5000,

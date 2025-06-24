@@ -7,7 +7,7 @@ export const CausaCard = ({ causa }: { causa: ICausas }) => {
   const router = useRouter();
   return (
     <Card.Root
-      key={causa.nome}
+      key={causa.titulo}
       className="flex w-full flex-col overflow-hidden rounded bg-white md:flex-row md:justify-center lg:w-3/4 2xl:justify-start"
     >
       <Card.Image
@@ -17,8 +17,8 @@ export const CausaCard = ({ causa }: { causa: ICausas }) => {
       />
       <Card.Content className="flex flex-col md:w-3/5 md:justify-between md:gap-2 md:p-4 2xl:w-full">
         <div className="max-h-[100px] overflow-y-scroll">
-          <h1 className="text-center text-2xl max-md:mb-2 md:text-xl">
-            {causa.nome}
+          <h1 className="text-center text-3xl max-md:mb-2 md:text-xl font-bold">
+            {causa.titulo}
           </h1>
           <p className="mt-2 hidden md:block">{causa.descricao}</p>
         </div>

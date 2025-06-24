@@ -28,7 +28,7 @@ export default function Page() {
       <div className="w-4/5">
         <AnuncioTabs>
           <div className="flex flex-col">
-            <CriarAnuncio />
+            {user?.tipo === "fornecedor" && <CriarAnuncio />}
             {isFornecedor ? (
               <>
                 <TabsContent value="abertos">

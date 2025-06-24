@@ -1,6 +1,6 @@
 export interface ICausas {
   id: string;
-  nome: string;
+  titulo: string;
   arrecadado: number;
   meta: number;
   prazo: Date;
