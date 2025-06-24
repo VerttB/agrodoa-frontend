@@ -4,17 +4,22 @@ import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
 import { AnuncioDropdownMenu } from "./AnuncioDropdown";
+import { useUserContext } from "@/providers/UserProvider";
 
 export const AnuncioCard = ({ anuncio }: { anuncio: IAnuncio }) => {
   const router = useRouter();
+  const { user } = useUserContext();
+  
   return (
     <Card.Root
       key={anuncio.titulo}
       className="relative flex flex-col justify-around"
     >
-      <div className="absolute top-2 right-2 z-10">
-        <AnuncioDropdownMenu anuncio={anuncio} />
-      </div>
+       {user?.tipo === "fornecedor" && (
+        <div className="absolute top-2 right-2 z-10">
+          <AnuncioDropdownMenu anuncio={anuncio} />
+        </div>
+      )}
       <Card.Image imageUrl="/mato.jpg" alt="imagem do anuncio"></Card.Image>
       <Card.Content>
         <div className="h-full">
@@ -26,6 +31,7 @@ export const AnuncioCard = ({ anuncio }: { anuncio: IAnuncio }) => {
           <p className="text-sm">Quantidade:{anuncio.produto.quantidade}</p>
         </div>
       </Card.Content>
+      
       <Card.Actions className="flex h-1/7 justify-around p-2 text-sm 2xl:text-lg">
         <Button
           className="w-full px-2 py-1"
@@ -33,12 +39,14 @@ export const AnuncioCard = ({ anuncio }: { anuncio: IAnuncio }) => {
         >
           Ver Detalhes
         </Button>
+        {user?.tipo !== "fornecedor" &&
         <Button
           className="flex w-full justify-center gap-1 px-2 py-1"
           variant="outlined"
         >
           Salvar<Heart></Heart>
         </Button>
+}
       </Card.Actions>
     </Card.Root>
   );

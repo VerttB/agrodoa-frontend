@@ -22,13 +22,11 @@ export const AnuncioTabs = ({ children }: AnuncioTabsProps) => {
           <>
             <TabsTrigger
               value="abertos"
-              className="data-[state=active]:bg-muted data-[state=active]:after:bg-primary relative overflow-hidden rounded-none border py-2 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 first:rounded-s last:rounded-e"
             >
               Abertos
             </TabsTrigger>
             <TabsTrigger
               value="negociacao"
-              className="data-[state=active]:bg-muted data-[state=active]:after:bg-primary relative overflow-hidden rounded-none border py-2 after:pointer-events-none after:absolute after:inset-x-0 after:bottom-0 after:h-0.5 first:rounded-s last:rounded-e"
             >
               Em Negociação
             </TabsTrigger>

@@ -11,9 +11,11 @@ import { EllipsisIcon } from "lucide-react";
 import { CancelarAnuncioModal } from "./CancelarAnuncioModal";
 import { IAnuncio } from "@/core/interfaces/IAnuncio";
 import { useState } from "react";
+import { EditarAnuncio } from "./EditarAnuncioModal";
 
 export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: IAnuncio }) => {
   const [openDelete, setOpenDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   return (
     <>
       <DropdownMenu>
@@ -28,18 +30,26 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: IAnuncio }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white">
           <DropdownMenuItem>Ver Negociantes</DropdownMenuItem>
-          <DropdownMenuItem>Editar</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpenEdit(true)}>Editar</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenDelete(true)}>
             Cancelar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
+
+
       <CancelarAnuncioModal
         id={anuncio.id}
         titulo={anuncio.titulo}
         open={openDelete}
         onOpenChange={setOpenDelete}
       />
+
+      <EditarAnuncio 
+        anuncio={anuncio}
+        open={openEdit}
+        onOpenChange={setOpenEdit}/>
+        
     </>
   );
 };
