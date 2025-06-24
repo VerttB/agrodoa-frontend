@@ -34,8 +34,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             name={label}
             ref={ref}
             className={twMerge(
-              "border-2 border-solid px-2 py-1",
-              errors ? "border-red-600" : "border-secondary-light",
+              "border-2 border-solid px-2 py-1 rounded-lg",
+              errors ? "border-red-600" : "border-black",
               className,
             )}
             {...rest}
