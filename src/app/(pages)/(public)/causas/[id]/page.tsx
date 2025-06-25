@@ -82,8 +82,7 @@ export default function CausaUnica() {
               className="w-full py-2 text-3xl"
               onClick={() => {
                 if (!user) router.push("/login");
-                router.push(`/pagamento?id=${causa.id}&valor=${donationValue}&name=${causa.titulo}
-                   `);
+                router.push(`/pagamento?id=${causa.id}&value=${donationValue}&name=${causa.titulo}&type=causa`);
               }}
             >
               Apoiar Causa
