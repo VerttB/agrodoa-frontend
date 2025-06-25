@@ -61,7 +61,7 @@ export default function Cadastro() {
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
-      <div className="m-2 flex flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60 lg:m-0 lg:w-2/5">
+      <div className="m-2 flex flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60 lg:m-0 lg:w-2/6">
         <div className="flex h-1/5 w-full items-center justify-center gap-2 self-center border-b-1">
           <Image
             src="/logo.png"
@@ -73,7 +73,7 @@ export default function Cadastro() {
         </div>
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-5"
+          className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-5 min-h-[480px]"
         >
           <div className="flex flex-col gap-1 lg:w-2/3">
             <h3 className="text-2xl font-medium">Cadastro</h3>
