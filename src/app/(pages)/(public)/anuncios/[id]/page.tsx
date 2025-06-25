@@ -54,7 +54,7 @@ export default function AnuncioUnico() {
             <Button
               className="w-full py-2 text-3xl"
               onClick={() =>
-                router.push("/pagamento?id=${anuncio.id}&amount=${quantidade}")
+                router.push(`/pagamento?id=${anuncio.id}&amount=${anuncio.produto.quantidade}&type=anuncio`)
               }
             >
               Apoiar Causa
