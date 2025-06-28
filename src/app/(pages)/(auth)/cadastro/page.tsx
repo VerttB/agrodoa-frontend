@@ -145,14 +145,14 @@ export default function Cadastro() {
                 Já possui conta? Faça login.
               </Link>
               <Button
-                className="w-full rounded-2xl py-1 max-lg:w-4/5"
+                className="py-1 max-lg:w-4/5"
                 variant="primary"
                 type="submit"
               >
                 Cadastrar
               </Button>
               <Button
-                className="rounded-4xl py-1 max-lg:w-4/5"
+                className="py-1 max-lg:w-4/5"
                 variant="outlined"
               >
                 Cadastrar com Google
