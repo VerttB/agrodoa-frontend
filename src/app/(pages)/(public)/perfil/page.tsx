@@ -1,4 +1,5 @@
 "use client"
+import { capitalize } from "@/core/utils/capitalize";
 import { useUserContext } from "@/providers/UserProvider";
 import { UserCircle2Icon, Star } from "lucide-react";
 
@@ -12,7 +13,7 @@ export default function Perfil() {
           <UserCircle2Icon className="h-32 w-fit" />
           <div className="text-2xl">
             <p className="">{user?.nome}</p>
-            <p>{(user?.tipo.charAt(0).toUpperCase() + user?.tipo.slice(1))}</p>
+            <p>{capitalize(user.tipo)}</p>
             <div className="flex">
               <Star color="yellow" />
               <Star color="yellow" />
