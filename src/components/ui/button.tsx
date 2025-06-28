@@ -9,7 +9,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = "primary", className, ...props }, ref) => {
     const variants = {
       primary: "bg-accent text-white hover:bg-accent-hover",
-      outlined: "bg-white border-2 border-accent hover:bg-primary",
+      outlined: "bg-transparent border-2 border-accent hover:bg-primary",
       ghost: "bg-none",
     };
 
@@ -17,7 +17,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={twMerge(
-          "cursor-pointer rounded-md hover:scale-95 transition-transform duration-200 px-4 py-2",
+          "cursor-pointer rounded-md hover:scale-95 active:scale-[98%] transition-transform duration-200 px-4 py-2  shadow-md shadow-gray-500/50",
           variants[variant],
           className,
         )}

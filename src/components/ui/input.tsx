@@ -24,7 +24,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
   ) => {
     return (
       <div className="flex w-full flex-col gap-1">
-        {label && <label htmlFor={rest.id}>{label}</label>}
+        {label && <label className="text-gray-700 font-medium" htmlFor={rest.id}>{label}</label>}
 
         <div className="relative w-full">
           {LeftIcon && (
@@ -34,8 +34,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             name={label}
             ref={ref}
             className={twMerge(
-              "border-2 border-solid px-2 py-1 rounded-lg",
-              errors ? "border-red-600" : "border-black",
+              "border-2 border-solid px-2 py-1 rounded-lg shadow-md shadow-gray-500/50",
+              errors ? "border-red-600" : "border-gray-400",
               className,
             )}
             {...rest}
