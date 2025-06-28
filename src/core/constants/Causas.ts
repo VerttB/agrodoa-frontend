@@ -3,7 +3,7 @@ import { ICausas } from "@/core/interfaces/ICausas";
 export const causas: ICausas[] = [
   {
     id: "1",
-    nome: "Cesta Solidária",
+    titulo: "Cesta Solidária",
     descricao:
       "Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos. Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.Ajude famílias em situação de vulnerabilidade com alimentos básicos.",
     meta: 1000,
@@ -13,7 +13,7 @@ export const causas: ICausas[] = [
   },
   {
     id: "2",
-    nome: "Refeitório Popular",
+    titulo: "Refeitório Popular",
     descricao: "Construa um refeitório para pessoas em situação de rua.",
     meta: 5000,
     arrecadado: 4200,
@@ -22,7 +22,7 @@ export const causas: ICausas[] = [
   },
   {
     id: "3",
-    nome: "Combate à Fome Infantil",
+    titulo: "Combate à Fome Infantil",
     descricao: "Distribuição de refeições nutritivas para crianças carentes.",
     meta: 20000,
     arrecadado: 20000,
@@ -31,7 +31,7 @@ export const causas: ICausas[] = [
   },
   {
     id: "4",
-    nome: "Apoio a Agricultores",
+    titulo: "Apoio a Agricultores",
     descricao: "Fortaleça pequenos produtores em regiões afetadas pela seca.",
     meta: 8000,
     arrecadado: 1800,
@@ -40,7 +40,7 @@ export const causas: ICausas[] = [
   },
   {
     id: "5",
-    nome: "Merenda Escolar Rural",
+    titulo: "Merenda Escolar Rural",
     descricao: "Melhore a alimentação escolar em comunidades do campo.",
     meta: 12000,
     arrecadado: 6500,
