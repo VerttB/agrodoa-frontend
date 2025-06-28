@@ -9,7 +9,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   ({ variant = "primary", className, ...props }, ref) => {
     const variants = {
       primary: "bg-accent text-white hover:bg-accent-hover",
-      outlined: "bg-transparent border-2 border-accent hover:bg-primary",
+      outlined: "bg-neutral border-2 border-accent hover:bg-primary",
       ghost: "bg-none",
     };
 
