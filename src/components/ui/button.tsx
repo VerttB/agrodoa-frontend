@@ -17,7 +17,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       <button
         ref={ref}
         className={twMerge(
-          "cursor-pointer rounded-md px-4 py-2",
+          "cursor-pointer rounded-md hover:scale-95 transition-transform duration-200 px-4 py-2",
           variants[variant],
           className,
         )}

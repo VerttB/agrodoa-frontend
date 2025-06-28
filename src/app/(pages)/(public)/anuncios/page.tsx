@@ -24,7 +24,7 @@ export default function Page() {
   // const salvos = anuncios?.filter((a) => user?.salvos?.includes(a.id)) || [];
 
   return (
-    <div className="bg-primary flex min-h-screen w-full justify-center p-2">
+    <div className=" flex min-h-screen w-full justify-center p-2 bg-radial">
       <div className="w-4/5">
         <AnuncioTabs>
           <div className="flex flex-col">

@@ -17,7 +17,7 @@ export const AnuncioTabs = ({ children }: AnuncioTabsProps) => {
       defaultValue={isFornecedor ? "abertos" : "disponiveis"}
       className="flex w-full justify-center"
     >
-      <TabsList className="bg-background h-auto -space-x-px p-0 shadow-xs rtl:space-x-reverse">
+      <TabsList className="bg-background h-auto -space-x-px p-0 shadow-xs rtl:space-x-reverse max-md:text-sm">
         {isFornecedor ? (
           <>
             <TabsTrigger

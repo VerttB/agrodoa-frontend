@@ -13,7 +13,7 @@ export const AnuncioCard = ({ anuncio }: { anuncio: IAnuncio }) => {
   return (
     <Card.Root
       key={anuncio.titulo}
-      className="relative flex flex-col justify-around"
+      className="relative flex flex-col justify-around hover:scale-105 transition-transform duration-200 shadow-[0px_6px_21px_-6px_rgba(249,_115,_22,_0.5)]"
     >
        {user?.tipo === "fornecedor" && (
         <div className="absolute top-2 right-2 z-10">
@@ -23,12 +23,12 @@ export const AnuncioCard = ({ anuncio }: { anuncio: IAnuncio }) => {
       <Card.Image imageUrl="/mato.jpg" alt="imagem do anuncio"></Card.Image>
       <Card.Content>
         <div className="h-full">
-          <h1 className="mb-4 text-xl font-medium">{anuncio.titulo}</h1>
+          <h1 className="mb-4 text-xl font-bold">{anuncio.titulo}</h1>
 
           <p className="text-sm">{anuncio.anuncianteNome}</p>
           <p className="text-sm">Negociantes:{anuncio.anuncianteNome}</p>
-          <p className="text-sm">Preço:{anuncio.produto.preco_unidade}</p>
-          <p className="text-sm">Quantidade:{anuncio.produto.quantidade}</p>
+          <p className="text-sm">Preço: {anuncio.produto.preco_unidade.toLocaleString("pt-BR", { style: "currency", currency:"BRL"})}</p>
+          <p className="text-sm">Quantidade: {anuncio.produto.quantidade}</p>
         </div>
       </Card.Content>
       
