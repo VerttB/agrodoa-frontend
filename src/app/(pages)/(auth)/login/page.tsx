@@ -25,12 +25,21 @@ export default function Login() {
   const {
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors },
   } = useForm<userLoginData>({
     resolver: zodResolver(userLoginSchema),
   });
 
+  const onInvalid = () => {
+
+      console.log(errors)
+      setTimeout(() => clearErrors(), 3000)
+    
+  }
+
   const onSubmit = (data: userLoginData) => {
+   
   const user:IUser = {
     id: "1",
     nome: "Ana Silva",
@@ -49,7 +58,7 @@ export default function Login() {
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
-      <div className="m-2 flex flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60 lg:m-0 lg:w-2/5">
+      <div className="m-2 xl:w-2/6 xl:min-h-[520px] flex flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60 lg:m-0 lg:w-2/5">
         <div className="flex h-1/5 w-full items-center justify-center gap-2 self-center border-b-1">
           <Image
             src="/logo.png"
@@ -60,7 +69,7 @@ export default function Login() {
           <h1 className="font-sofia"> Agrodoa</h1>
         </div>
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          onSubmit={handleSubmit(onSubmit, onInvalid)}
           className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-4"
         >
           <div className="flex flex-col gap-1 lg:w-2/3">
@@ -92,14 +101,14 @@ export default function Login() {
                 Não possui conta? Cadastre-se aqui
               </Link>
               <Button
-                className="rounded-2xl py-1 max-lg:w-4/5"
+                className="py-1 max-lg:w-4/5"
                 variant="primary"
                 type="submit"
               >
                 Entrar
               </Button>
               <Button
-                className="rounded-4xl py-1 max-lg:w-4/5"
+                className=" py-1 max-lg:w-4/5"
                 variant="outlined"
               >
                 Entrar com Google
