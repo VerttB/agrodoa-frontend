@@ -2,6 +2,7 @@ export interface IUser {
   id: string;
   nome: string;
   senha: string;
+  email:string;
   cpf_ou_cnpj?: string;
   tipo: "beneficiario" | "fornecedor" | "hibrido";
   voluntario: boolean;
