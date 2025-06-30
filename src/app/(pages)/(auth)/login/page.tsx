@@ -38,7 +38,7 @@ export default function Login() {
     
   }
 
-  const onSubmit = (data: userLoginData) => {
+  const onSubmit = async (data: userLoginData) => {
    
   const user:IUser = {
     id: "1",
@@ -53,8 +53,9 @@ export default function Login() {
     
   }
 
-    login(user)
-    router.push("/anuncios")
+    const res = await fetch('/api/user', { method: 'POST' });
+    if(res.ok)
+        router.push("/anuncios")
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
