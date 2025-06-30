@@ -2,23 +2,24 @@
 import { AnuncioTabs } from "@/components/anuncio/AnuncioTabs";
 import { AnuncioList } from "@/components/anuncio/AnuncioList";
 import { TabsContent } from "@/components/ui/tabs";
-import { useUserContext } from "@/providers/UserProvider";
-import { CriarAnuncio } from "@/components/anuncio/CriarAnuncioModal";
 import AnuncioSearch from "@/components/anuncio/AnuncioSearch";
 import { getAnuncios } from "@/core/services/AnuncioService";
+import { getMockUserFromCookies } from "@/lib/auth";
 
 interface AnuncioProps{
-  searchParams: Promise<{
-    nome: string,
-  }>
+  searchParams: {
+    nome: string
+  }
+  
 }
 
 export default async function Page({searchParams}: AnuncioProps) {
-  const nome = searchParams.nome || ''
-  const anuncios = await getAnuncios(nome);
+  const nome = await searchParams.nome || ''
+  const anuncios = await getAnuncios({nome});
+  const user = getMockUserFromCookies();
+  console.log(user)
   if (!anuncios) return <div>Anuncios não encontrados</div>;
-  // Lógica de separação por status e tipo de usuário
-  const isFornecedor = false;
+  const isFornecedor = false
   // const abertos = anuncios?.filter((a) => a.status === "aberto") || [];
   // const negociacao = anuncios?.filter((a) => a.status === "negociacao") || [];
   // const finalizados = anuncios?.filter((a) => a.status === "finalizado") || [];
