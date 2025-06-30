@@ -3,7 +3,7 @@ export async function getAnuncios(params: { nome?: string }) {
   
     if (params.nome) query.set("nome", params.nome);
   
-    const res = await fetch(`http://localhost:8080/api/anuncios}`, {
+    const res = await fetch(`http://localhost:3000/api/anuncios`, {
       cache: "no-store",
     });
   

@@ -1,22 +1,24 @@
-"use client";
 
 import { AnuncioTabs } from "@/components/anuncio/AnuncioTabs";
 import { AnuncioList } from "@/components/anuncio/AnuncioList";
-import { useAnuncio } from "@/hooks/useAnuncio";
-import { LoadingSpin } from "@/components/ui/loadingComponent";
 import { TabsContent } from "@/components/ui/tabs";
 import { useUserContext } from "@/providers/UserProvider";
-import { IAnuncio } from "@/core/interfaces/IAnuncio";
 import { CriarAnuncio } from "@/components/anuncio/CriarAnuncioModal";
+import AnuncioSearch from "@/components/anuncio/AnuncioSearch";
+import { getAnuncios } from "@/core/services/AnuncioService";
 
-export default function Page() {
-  const { user } = useUserContext();
-  const { data: anuncios, loading } = useAnuncio<IAnuncio[]>();
+interface AnuncioProps{
+  searchParams: Promise<{
+    nome: string,
+  }>
+}
 
-  if (loading) return <LoadingSpin />;
+export default async function Page({searchParams}: AnuncioProps) {
+  const nome = searchParams.nome || ''
+  const anuncios = await getAnuncios(nome);
   if (!anuncios) return <div>Anuncios não encontrados</div>;
   // Lógica de separação por status e tipo de usuário
-  const isFornecedor = user?.tipo === "fornecedor";
+  const isFornecedor = false;
   // const abertos = anuncios?.filter((a) => a.status === "aberto") || [];
   // const negociacao = anuncios?.filter((a) => a.status === "negociacao") || [];
   // const finalizados = anuncios?.filter((a) => a.status === "finalizado") || [];
@@ -28,7 +30,8 @@ export default function Page() {
       <div className="w-4/5">
         <AnuncioTabs>
           <div className="flex flex-col">
-            {user?.tipo === "fornecedor" && <CriarAnuncio />}
+            <AnuncioSearch/>
+            {/* {user?.tipo === "fornecedor" && <CriarAnuncio />} */}
             {isFornecedor ? (
               <>
                 <TabsContent value="abertos">
