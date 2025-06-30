@@ -13,7 +13,7 @@ export const CausaLista = ({ causas }: CausaProps) => {
       {causas.map((c) => (
         <CausaCard key={c.id} causa={c} />
       ))}
-      /
+      
     </div>
   );
 };
