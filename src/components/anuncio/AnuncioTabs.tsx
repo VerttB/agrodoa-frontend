@@ -1,35 +1,24 @@
-"use client";
+'use client';
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { useUserContext } from "@/providers/UserProvider";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 
 interface AnuncioTabsProps {
   children: ReactNode;
+  tipoUsuario: string | null;
 }
 
-export const AnuncioTabs = ({ children }: AnuncioTabsProps) => {
-  const { user } = useUserContext();
-  const isFornecedor = user?.tipo === "fornecedor";
+export const AnuncioTabs = ({ children, tipoUsuario }: AnuncioTabsProps) => {
+  const isFornecedor = tipoUsuario === "fornecedor";
+  const [value, setValue] = useState(isFornecedor ? "abertos" : "disponiveis");
 
   return (
-    <Tabs
-      defaultValue={isFornecedor ? "abertos" : "disponiveis"}
-      className="flex w-full justify-center"
-    >
+    <Tabs value={value} onValueChange={setValue} className="flex w-full justify-center">
       <TabsList className="bg-background h-auto -space-x-px p-0 shadow-xs rtl:space-x-reverse max-md:text-sm">
         {isFornecedor ? (
           <>
-            <TabsTrigger
-              value="abertos"
-            >
-              Abertos
-            </TabsTrigger>
-            <TabsTrigger
-              value="negociacao"
-            >
-              Em Negociação
-            </TabsTrigger>
+            <TabsTrigger value="abertos">Abertos</TabsTrigger>
+            <TabsTrigger value="negociacao">Em Negociação</TabsTrigger>
             <TabsTrigger value="finalizados">Finalizados</TabsTrigger>
           </>
         ) : (
@@ -40,7 +29,6 @@ export const AnuncioTabs = ({ children }: AnuncioTabsProps) => {
           </>
         )}
       </TabsList>
-
       {children}
     </Tabs>
   );
