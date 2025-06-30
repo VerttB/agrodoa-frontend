@@ -1,3 +1,4 @@
+"use client"
 import { Card } from "../ui/Card";
 import { IAnuncio } from "@/core/interfaces/IAnuncio";
 import { useRouter } from "next/navigation";
