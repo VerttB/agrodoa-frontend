@@ -54,8 +54,11 @@ export default function Login() {
   }
 
     const res = await fetch('/api/user', { method: 'POST' });
-    if(res.ok)
+    if(res.ok){
+       login(user)
         router.push("/anuncios")
+
+    }
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
