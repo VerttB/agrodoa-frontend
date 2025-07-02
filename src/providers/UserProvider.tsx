@@ -1,6 +1,6 @@
 "use client";
 
-import { IUser } from "@/core/interfaces/IUser";
+import { IUser } from "@/core/interfaces/Usuario";
 import { createContext, useState, useContext, useEffect } from "react";
 
 type UserContextType = {

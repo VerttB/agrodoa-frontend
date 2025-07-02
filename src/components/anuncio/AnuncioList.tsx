@@ -1,8 +1,8 @@
-import { IAnuncio } from "@/core/interfaces/IAnuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio";
 import { AnuncioCard } from "./AnuncioCard";
 
 interface AnuncioListProps {
-  anuncios: IAnuncio[];
+  anuncios: Anuncio[];
 }
 
 export const AnuncioList = ({ anuncios }: AnuncioListProps) => {
@@ -11,7 +11,7 @@ export const AnuncioList = ({ anuncios }: AnuncioListProps) => {
   return (
     <div className="grid w-4/4 gap-2 md:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-5">
       {anuncios.map((a) => (
-        <AnuncioCard key={a.id} anuncio={a} />
+        <AnuncioCard key={a.anuncioId} anuncio={a} />
       ))}
     </div>
   );

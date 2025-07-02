@@ -1,6 +1,6 @@
-import { ICausas } from "@/core/interfaces/ICausas";
+import { Causas } from "@/core/interfaces/Causas";
 
-export const causas: ICausas[] = [
+export const causas: Causas[] = [
   {
     id: "1",
     titulo: "Cesta Solidária",

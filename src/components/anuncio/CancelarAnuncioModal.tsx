@@ -2,7 +2,7 @@ import { Button } from "../ui/button";
 import { Modal } from "../ui/Modal";
 
 interface CancelarAnuncioProps {
-  id: number;
+  id: string;
   titulo: string;
   open: boolean;
   onOpenChange: (open: boolean) => void;

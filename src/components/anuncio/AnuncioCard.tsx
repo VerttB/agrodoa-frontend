@@ -1,13 +1,13 @@
 "use client"
 import { Card } from "../ui/Card";
-import { IAnuncio } from "@/core/interfaces/IAnuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
 import { AnuncioDropdownMenu } from "./AnuncioDropdown";
 import { useUserContext } from "@/providers/UserProvider";
 
-export const AnuncioCard = ({ anuncio }: { anuncio: IAnuncio }) => {
+export const AnuncioCard = ({ anuncio }: { anuncio: Anuncio }) => {
   const router = useRouter();
   const { user } = useUserContext();
   
@@ -26,9 +26,9 @@ export const AnuncioCard = ({ anuncio }: { anuncio: IAnuncio }) => {
         <div className="h-full">
           <h1 className="mb-4 text-xl font-bold">{anuncio.titulo}</h1>
 
-          <p className="text-sm">{anuncio.anuncianteNome}</p>
-          <p className="text-sm">Negociantes:{anuncio.anuncianteNome}</p>
-          <p className="text-sm">Preço: {anuncio.produto.preco_unidade.toLocaleString("pt-BR", { style: "currency", currency:"BRL"})}</p>
+          <p className="text-sm">{anuncio.anunciante.nome}</p>
+          <p className="text-sm">Negociantes:{anuncio.anunciante.nome}</p>
+          <p className="text-sm">Preço: {anuncio.produto.precoUnidade.toLocaleString("pt-BR", { style: "currency", currency:"BRL"})}</p>
           <p className="text-sm">Quantidade: {anuncio.produto.quantidade}</p>
         </div>
       </Card.Content>
@@ -36,7 +36,7 @@ export const AnuncioCard = ({ anuncio }: { anuncio: IAnuncio }) => {
       <Card.Actions className="flex h-1/7 justify-around p-2 text-sm 2xl:text-lg">
         <Button
           className="w-full px-2 py-1"
-          onClick={() => router.push(`/anuncios/${anuncio.id}`)}
+          onClick={() => router.push(`/anuncios/${anuncio.anuncioId}`)}
         >
           Ver Detalhes
         </Button>

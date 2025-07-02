@@ -7,13 +7,13 @@ import { Input } from "@/components/ui/input";
 import { ItemPage } from "@/components/ui/ItemPage";
 import { useRouter } from "next/navigation";
 import { useAnuncio } from "@/hooks/useAnuncio";
-import { IAnuncio } from "@/core/interfaces/IAnuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio";
 import { LoadingSpin } from "@/components/ui/loadingComponent";
 
 export default function AnuncioUnico() {
   const { id } = useParams();
   console.log(id);
-  const { data: anuncio, loading } = useAnuncio<IAnuncio>(String(id));
+  const { data: anuncio, loading } = useAnuncio<Anuncio>(String(id));
   const router = useRouter();
 
   if (loading) return <LoadingSpin />;
@@ -34,7 +34,7 @@ export default function AnuncioUnico() {
           />
           <ItemPage.description title={anuncio.titulo}>
             <p className="flex items-center gap-2 text-xl">
-              <User aria-hidden="true" /> Responsável: {anuncio.anuncianteNome}
+              <User aria-hidden="true" /> Responsável: {anuncio.anunciante.nome}
             </p>
             <p className="flex items-center gap-2 text-xl">
               <CalendarDays aria-hidden="true" /> Prazo:
@@ -54,7 +54,7 @@ export default function AnuncioUnico() {
             <Button
               className="w-full py-2 text-3xl"
               onClick={() =>
-                router.push(`/pagamento?id=${anuncio.id}&amount=${anuncio.produto.quantidade}&type=anuncio`)
+                router.push(`/pagamento?id=${anuncio.anuncioId}&amount=${anuncio.produto.quantidade}&type=anuncio`)
               }
             >
               Apoiar Causa

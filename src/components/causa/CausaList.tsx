@@ -1,4 +1,4 @@
-import { ICausas } from "@/core/interfaces/ICausas";
+import { ICausas } from "@/core/interfaces/Causas";
 import { CausaCard } from "./CausaCard";
 
 interface CausaProps {

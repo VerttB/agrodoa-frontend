@@ -3,11 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useCausa } from "@/hooks/useCausa";
 import { LoadingSpin } from "@/components/ui/loadingComponent";
-import { ICausas } from "@/core/interfaces/ICausas";
+import { Causas } from "@/core/interfaces/Causas";
 import { CausaLista } from "@/components/causa/CausaList";
 
-export default function Causas() {
-  const { data: causas, loading, error } = useCausa<ICausas[]>();
+export default function CausasPage() {
+  const { data: causas, loading, error } = useCausa<Causas[]>();
 
   if (!causas) return <p>{error && 1}</p>;
 

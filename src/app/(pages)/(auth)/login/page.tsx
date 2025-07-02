@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useUserContext } from "@/providers/UserProvider";
-import { IUser } from "@/core/interfaces/IUser";
+import { IUser } from "@/core/interfaces/Usuario";
 import { useRouter } from "next/navigation";
 
 export default function Login() {

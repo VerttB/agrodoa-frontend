@@ -1,5 +1,5 @@
 "use client";
-import { ICausas } from "@/core/interfaces/ICausas";
+import { ICausas } from "@/core/interfaces/Causas";
 import { Card } from "../ui/Card";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";

@@ -9,11 +9,11 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { EllipsisIcon } from "lucide-react";
 import { CancelarAnuncioModal } from "./CancelarAnuncioModal";
-import { IAnuncio } from "@/core/interfaces/IAnuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio";
 import { useState } from "react";
 import { EditarAnuncio } from "./EditarAnuncioModal";
 
-export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: IAnuncio }) => {
+export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   return (
@@ -39,7 +39,7 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: IAnuncio }) => {
 
 
       <CancelarAnuncioModal
-        id={anuncio.id}
+        id={anuncio.anuncioId}
         titulo={anuncio.titulo}
         open={openDelete}
         onOpenChange={setOpenDelete}
