@@ -1,7 +1,5 @@
 
 import { AnuncioTabs } from "@/components/anuncio/AnuncioTabs";
-import { AnuncioList } from "@/components/anuncio/AnuncioList";
-import { TabsContent } from "@/components/ui/tabs";
 import AnuncioSearch from "@/components/anuncio/AnuncioSearch";
 import { getAnuncios } from "@/core/services/AnuncioService";
 import { getMockUserFromCookies } from "@/lib/auth";
