@@ -1,7 +1,7 @@
 import { useFetch } from "./useFetch";
 
 export function useAnuncio<T = unknown>(id?: string) {
-  const url = id ? `/api/anuncios/${id}` : `/api/anuncios`;
+  const url = id ? `http://localhost:8080/anuncios/${id}` : `/api/anuncios`;
   console.log(url);
   return useFetch<T>(url);
 }

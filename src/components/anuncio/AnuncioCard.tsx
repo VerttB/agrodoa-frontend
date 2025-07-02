@@ -28,7 +28,7 @@ export const AnuncioCard = ({ anuncio }: { anuncio: Anuncio }) => {
 
           <p className="text-sm">{anuncio.anunciante.nome}</p>
           <p className="text-sm">Negociantes:{anuncio.anunciante.nome}</p>
-          <p className="text-sm">Preço: {anuncio.produto.precoUnidade.toLocaleString("pt-BR", { style: "currency", currency:"BRL"})}</p>
+          <p className="text-sm">Preço: {anuncio.produto.precoUnidade ? anuncio.produto.precoUnidade.toLocaleString("pt-BR", { style: "currency", currency:"BRL"}) : "Grátis"}</p>
           <p className="text-sm">Quantidade: {anuncio.produto.quantidade}</p>
         </div>
       </Card.Content>
@@ -36,7 +36,7 @@ export const AnuncioCard = ({ anuncio }: { anuncio: Anuncio }) => {
       <Card.Actions className="flex h-1/7 justify-around p-2 text-sm 2xl:text-lg">
         <Button
           className="w-full px-2 py-1"
-          onClick={() => router.push(`/anuncios/${anuncio.anuncioId}`)}
+          onClick={() => router.push(`/anuncios/${anuncio.idAnuncio}`)}
         >
           Ver Detalhes
         </Button>

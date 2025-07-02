@@ -5,17 +5,17 @@ import { getAnuncios } from "@/core/services/AnuncioService";
 import { getMockUserFromCookies } from "@/lib/auth";
 import { CriarAnuncio } from "@/components/anuncio/CriarAnuncioModal";
 import { AnuncioTabsContent } from "@/components/anuncio/AnuncioTabsContent";
+import { AnuncioQueryParams } from "@/core/interfaces/AnuncioQueryParams";
 
 interface AnuncioProps{
-  searchParams: Promise<{
-    nome: string
-  }>
+  searchParams: Promise<AnuncioQueryParams>
   
 }
 
 export default async function Page({searchParams}: AnuncioProps) {
+  const resolvedParams = await searchParams;
   const nome = (await searchParams).nome || ''
-  const anuncios = await getAnuncios({nome});
+  const anuncios = await getAnuncios(resolvedParams);
   const user = await getMockUserFromCookies();
   
   if (!anuncios) return <div>Anuncios não encontrados</div>;

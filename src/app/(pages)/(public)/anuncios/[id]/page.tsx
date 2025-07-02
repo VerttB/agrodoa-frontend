@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import { User, CalendarDays } from "lucide-react";
+import { User, CalendarDays, MapPinCheck, Banknote } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -37,8 +37,16 @@ export default function AnuncioUnico() {
               <User aria-hidden="true" /> Responsável: {anuncio.anunciante.nome}
             </p>
             <p className="flex items-center gap-2 text-xl">
-              <CalendarDays aria-hidden="true" /> Prazo:
+              <CalendarDays aria-hidden="true" /> Prazo: {anuncio.dataExpiracao}
             </p>
+            <p  className="flex items-center gap-2 text-xl">
+              <MapPinCheck/>
+              Local:{`${anuncio.local.cidade} - ${anuncio.local.estado}`}
+            </p>
+            {anuncio.tipo === "VENDA" && <p className="flex items-center gap-2 text-xl">
+              <Banknote/>
+              Preço por Unidade: {anuncio.produto.precoUnidade.toLocaleString("pt-BR", { style: "currency", currency:"BRL"})}
+            </p>}
           </ItemPage.description>
         </ItemPage.content>
         <ItemPage.content>
@@ -54,7 +62,7 @@ export default function AnuncioUnico() {
             <Button
               className="w-full py-2 text-3xl"
               onClick={() =>
-                router.push(`/pagamento?id=${anuncio.anuncioId}&amount=${anuncio.produto.quantidade}&type=anuncio`)
+                router.push(`/pagamento?id=${anuncio.idAnuncio}&amount=${anuncio.produto.quantidade}&type=anuncio`)
               }
             >
               Apoiar Causa
