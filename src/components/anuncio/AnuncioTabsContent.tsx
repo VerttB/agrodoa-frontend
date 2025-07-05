@@ -1,17 +1,15 @@
 'use client';
 
 import { TabsContent } from "@/components/ui/tabs";
-import { useUserContext } from "@/providers/UserProvider";
 import { AnuncioList } from "@/components/anuncio/AnuncioList";
-import { IAnuncio } from "@/core/interfaces/IAnuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio";
 
 interface Props {
-  anuncios: IAnuncio[],
+  anuncios: Anuncio[],
   tipoUsuario: string | null
 }
 
 export function AnuncioTabsContent({ anuncios,tipoUsuario }: Props) {
-  const { user } = useUserContext();
   const isFornecedor = tipoUsuario === "fornecedor";
 
   return (

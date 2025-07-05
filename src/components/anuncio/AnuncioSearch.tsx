@@ -19,14 +19,13 @@ export default function AnuncioSearch() {
   }, [searchParams]);
 
   function handleSearch() {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(searchParams);
     if (search) {
       params.set('nome', search);
     } else {
       params.delete('nome');
     }
-    console.log(params.toString());
-    console.log(pathname)
+
     replace(`${pathname}?${params.toString()}`)
   }
  
@@ -36,7 +35,7 @@ export default function AnuncioSearch() {
     className='w-full'
     placeholder='Insira o nome do anúncio'
     onChange={(e) => {
-      setSearch(s => e.target.value)
+      setSearch(e.target.value)
     }}
     value={search}
    
