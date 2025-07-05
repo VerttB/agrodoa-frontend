@@ -2,7 +2,7 @@ import { twMerge } from "tailwind-merge";
 import React from "react";
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "outlined" | "ghost";
+  variant?: "primary" | "outlined" | "ghost" | "danger";
 }
 
 export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
@@ -11,6 +11,7 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
       primary: "bg-accent text-white hover:bg-accent-hover",
       outlined: "bg-neutral border-2 border-accent hover:bg-primary",
       ghost: "bg-none",
+      danger: "border-red-600 border-2"
     };
 
     return (
