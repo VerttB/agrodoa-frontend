@@ -1,15 +1,11 @@
 "use client";
 
+import { ComponenteInterativo } from "@/core/interfaces/ComponenteInterativo";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-interface ModalRootProps {
-  open: boolean;
-  onOpenChange: (open: boolean) => void;
-  children: React.ReactNode;
-}
 
-export const ModalRoot = ({ open, onOpenChange, children }: ModalRootProps) => {
+export const ModalRoot = ({ open, onOpenChange, children }: ComponenteInterativo) => {
   useEffect(() => {
     const escEvent = (e: KeyboardEvent) => {
       if (e.key === "Escape") onOpenChange(false);
