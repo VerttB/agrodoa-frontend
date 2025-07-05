@@ -6,6 +6,7 @@ import { getMockUserFromCookies } from "@/lib/auth";
 import { CriarAnuncio } from "@/components/anuncio/CriarAnuncioModal";
 import { AnuncioTabsContent } from "@/components/anuncio/AnuncioTabsContent";
 import { AnuncioQueryParams } from "@/core/interfaces/AnuncioQueryParams";
+import { AnuncioFiltros } from "@/components/anuncio/AnuncioFiltros";
 
 interface AnuncioProps{
   searchParams: Promise<AnuncioQueryParams>
@@ -33,7 +34,10 @@ export default async function Page({searchParams}: AnuncioProps) {
       <div className="w-4/5">
         <AnuncioTabs tipoUsuario={user?.tipo || null}>
           <div className="flex flex-col">
+            <div className="flex">
+            <AnuncioFiltros/>
             <AnuncioSearch/>
+            </div>
             {user?.tipo === "fornecedor" && <CriarAnuncio />}
            <AnuncioTabsContent anuncios={anuncios} tipoUsuario={user?.tipo || null}/>
           </div>
