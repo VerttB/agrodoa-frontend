@@ -56,6 +56,7 @@ export const AnuncioFiltros = () => {
   }
   const aplicarFiltros = () => {
     const params = new URLSearchParams(searchParams)
+    /* eslint-disable @typescript-eslint/no-unused-expressions */
     tipoAnuncio ? params.set("tipo", tipoAnuncio) : params.delete("tipo")
     precoRange[0] > 0 ? params.set("precoMin", precoRange[0].toString()) : params.delete("precoMin")
     precoRange[1] < 1000 ? params.set("precoMax", precoRange[1].toString()) : params.delete("precoMax")

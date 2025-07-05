@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 
-export async function POST(req: Request) {
+export async function POST() {
   const mockUser = {
     id: "1",
     nome: "Ana Silva",

@@ -15,7 +15,6 @@ interface AnuncioProps{
 
 export default async function Page({searchParams}: AnuncioProps) {
   const resolvedParams = await searchParams;
-  const nome = (await searchParams).nome || ''
   const anuncios = await getAnuncios(resolvedParams);
   const user = await getMockUserFromCookies();
   
