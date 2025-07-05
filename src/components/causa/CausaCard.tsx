@@ -1,9 +1,9 @@
 "use client";
-import { ICausas } from "@/core/interfaces/Causas";
+import { Causas } from "@/core/interfaces/Causas";
 import { Card } from "../ui/Card";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
-export const CausaCard = ({ causa }: { causa: ICausas }) => {
+export const CausaCard = ({ causa }: { causa: Causas }) => {
   const router = useRouter();
   return (
     <Card.Root

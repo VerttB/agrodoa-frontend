@@ -2,7 +2,7 @@ import { AnuncioQueryParams } from "@/core/interfaces/AnuncioQueryParams";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
-function buildQueryString(params: Record<string, any>): string {
+function buildQueryString(params: object): string {
   const query = new URLSearchParams();
 
   for (const [key, value] of Object.entries(params)) {
@@ -15,6 +15,8 @@ function buildQueryString(params: Record<string, any>): string {
 }
 
 export async function getAnuncios(params: AnuncioQueryParams = {}) {
+  console.log(typeof(params))
+  
   const queryString = buildQueryString(params);
   const url = `${BASE_URL}/anuncios${queryString ? `?${queryString}` : ''}`;
 

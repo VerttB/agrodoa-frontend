@@ -1,11 +1,11 @@
 "use client";
 
-import { IUser } from "@/core/interfaces/Usuario";
+import { Usuario } from "@/core/interfaces/Usuario";
 import { createContext, useState, useContext, useEffect } from "react";
 
 type UserContextType = {
-  user: IUser | null;
-  login: (user:IUser) => void
+  user: Usuario | null;
+  login: (user:Usuario) => void
   logout: () => void
 };
 
@@ -23,14 +23,14 @@ export default function UserProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [user, setUser] = useState<IUser | null>(null);
+  const [user, setUser] = useState<Usuario | null>(null);
   
   useEffect(() => {
     const storedUser = localStorage.getItem("user");
     if (storedUser) setUser(JSON.parse(storedUser));
   }, []);
 
-  const login = (data: IUser) => {
+  const login = (data: Usuario) => {
     setUser(data);
     localStorage.setItem("user", JSON.stringify(data));
   };

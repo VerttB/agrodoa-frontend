@@ -7,7 +7,7 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useUserContext } from "@/providers/UserProvider";
-import { IUser } from "@/core/interfaces/Usuario";
+import { Usuario } from "@/core/interfaces/Usuario";
 import { useRouter } from "next/navigation";
 
 export default function Login() {
@@ -40,17 +40,16 @@ export default function Login() {
 
   const onSubmit = async (data: userLoginData) => {
    
-  const user:IUser = {
+  const user:Usuario = {
     id: "1",
     nome: "Ana Silva",
-    senha: "senha123",
-    email:"ana@gmail.com",
-    cpf_ou_cnpj: "123.456.789-00",
+    email: "ana@gmail.com",
+    cpfOuCnpj: "123.456.789-00",
     tipo: data.senha === "123" ? "beneficiario" : "fornecedor",
-    voluntario: false,
     telefone: "(71) 99999-1111",
-    cidade: "Salvador",
-    
+    local: { estado: "Bahia", cidade: "Salvador" },
+    nomeArquivoFoto: "",
+    tipoUsuario: "fornecedor"
   }
 
     const res = await fetch('/api/user', { method: 'POST' });

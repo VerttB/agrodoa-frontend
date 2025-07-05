@@ -1,8 +1,8 @@
-import { ICausas } from "@/core/interfaces/Causas";
+import { Causas } from "@/core/interfaces/Causas";
 import { CausaCard } from "./CausaCard";
 
 interface CausaProps {
-  causas: ICausas[];
+  causas: Causas[];
 }
 
 export const CausaLista = ({ causas }: CausaProps) => {
