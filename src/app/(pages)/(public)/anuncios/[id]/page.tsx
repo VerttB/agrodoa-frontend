@@ -9,12 +9,14 @@ import { useRouter } from "next/navigation";
 import { useAnuncio } from "@/hooks/useAnuncio";
 import { Anuncio } from "@/core/interfaces/Anuncio";
 import { LoadingSpin } from "@/components/ui/loadingComponent";
+import { useState } from "react";
 
 export default function AnuncioUnico() {
   const { id } = useParams();
   console.log(id);
   const { data: anuncio, loading } = useAnuncio<Anuncio>(String(id));
   const router = useRouter();
+  const [amount, setAmount] = useState(0);
 
   if (loading) return <LoadingSpin />;
 
@@ -52,20 +54,28 @@ export default function AnuncioUnico() {
         <ItemPage.content>
           <ItemPage.actions>
             <Input
+              label="Quantidade"
               type="number"
               className="border-accent w-full rounded-3xl border-2 px-4 py-2"
-              placeholder="Digite um valor"
+              placeholder="Diga a quantidade que deseja comprar"
               onChange={(e) => {
-                console.log(e.target.value);
+                setAmount(_ => Number(e.target.value));
               }}
             />
             <Button
               className="w-full py-2 text-3xl"
               onClick={() =>
-                router.push(`/pagamento?id=${anuncio.idAnuncio}&amount=${anuncio.produto.quantidade}&type=anuncio`)
+                router.push(`/pagamento?id=${anuncio.idAnuncio}&amount=${amount}&type=anuncio`)
               }
             >
-              Apoiar Causa
+              Negociar
+            </Button>
+            <Button
+              className="w-full py-2 text-3xl"
+              variant="outlined"
+            
+            >
+              Salvar
             </Button>
           </ItemPage.actions>
 
