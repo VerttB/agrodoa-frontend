@@ -11,7 +11,7 @@ export const CausaLista = ({ causas }: CausaProps) => {
   return (
     <div className="flex flex-col items-center gap-8 w-full">
       {causas.map((c) => (
-        <CausaCard key={c.id} causa={c} />
+        <CausaCard key={c.idCausa} causa={c} />
       ))}
       
     </div>
