@@ -7,13 +7,11 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { EllipsisIcon } from "lucide-react";
-import { CancelarAnuncioModal } from "./CancelarAnuncioModal";
-import { Anuncio } from "@/core/interfaces/Anuncio";
+import { EllipsisVertical } from "lucide-react";
 import { useState } from "react";
-import { EditarAnuncio } from "./EditarAnuncioModal";
+import { Usuario } from "@/core/interfaces/Usuario";
 
-export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
+export const UsuarioDropdown = ({usuario} : { usuario: Usuario }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   return (
@@ -24,12 +22,13 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
             variant="ghost"
             className="rounded-full shadow-none"
             aria-label="Open edit menu"
+            
           >
-            <EllipsisIcon size={16} aria-hidden="true" />
+            <EllipsisVertical size={16} aria-hidden="true" />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white">
-          <DropdownMenuItem>Ver Negociantes</DropdownMenuItem>
+          <DropdownMenuItem>{`Olá, ${usuario.nome}`}</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenEdit(true)}>Editar</DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenDelete(true)}>
             Cancelar
@@ -37,18 +36,6 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
         </DropdownMenuContent>
       </DropdownMenu>
 
-
-      <CancelarAnuncioModal
-        id={anuncio.idAnuncio}
-        titulo={anuncio.titulo}
-        open={openDelete}
-        onOpenChange={setOpenDelete}
-      />
-
-      <EditarAnuncio 
-        anuncio={anuncio}
-        open={openEdit}
-        onOpenChange={setOpenEdit}/>
         
     </>
   );

@@ -5,10 +5,10 @@ const nextConfig: NextConfig = {
   images: {
     remotePatterns: [
       {
-        protocol: "https",
-        hostname: "placehold.co",
-        pathname: "/**",
+        hostname:'images.unsplash.com',
+        
       },
+      
     ],
   },
   webpack(config){
