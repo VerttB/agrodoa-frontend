@@ -5,7 +5,7 @@ import { getAnuncios } from "@/core/services/AnuncioService";
 import { getMockUserFromCookies } from "@/lib/auth";
 import { CriarAnuncio } from "@/components/anuncio/CriarAnuncioModal";
 import { AnuncioTabsContent } from "@/components/anuncio/AnuncioTabsContent";
-import { AnuncioQueryParams } from "@/core/interfaces/AnuncioQueryParams";
+import { AnuncioQueryParams } from "@/core/interfaces/QueryParams/AnuncioQueryParams";
 import { AnuncioFiltros } from "@/components/anuncio/AnuncioFiltros";
 
 interface AnuncioProps{
