@@ -1,9 +1,8 @@
 export interface Causas {
-  id: string;
-  titulo: string;
-  arrecadado: number;
+  idCausa: string;
+  nome: string;
+  valor_arrecadado: number;
   meta: number;
   prazo: Date;
-  responsavelId: string;
   descricao: string;
 }
