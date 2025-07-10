@@ -66,7 +66,7 @@ export const ImageUploadInput = forwardRef<HTMLInputElement, ImageUploadInputPro
 
           {preview ? (
             <>
-              <Image src={preview} alt="Preview" className="absolute inset-0 size-full object-cover rounded-xl" />
+              <Image fill src={preview} alt="Preview" className="absolute inset-0 size-full object-contain rounded-xl bg-black" />
               <button
                 type="button"
                 onClick={handleRemove}

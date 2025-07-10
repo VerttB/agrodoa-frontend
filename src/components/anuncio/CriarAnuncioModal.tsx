@@ -8,65 +8,60 @@ import { ACCEPTED_IMAGE_TYPE, MAX_FILE_SIZE } from "@/core/constants/values";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ImageUploadInput } from "../ui/imageInput";
+
+const createAdSchema = z.object({
+  titulo: z.string().min(3, "Título muito curto").max(100),
+  nome: z.string().min(3, "Nome do produto muito curto").max(100),
+  quantidade: z.coerce.number()
+    .int().gte(1, "Quantidade mínima 1").lte(10000, "Quantidade máxima 10000"),
+  preco_unidade: z.coerce.number()
+    .gte(0.05, "Preço mínimo R$0,05"),
+
+  data_validade: z.string().refine((val) => {
+    const date = new Date(val);
+    return date > new Date();
+  }, {
+    message: "A data de validade deve ser futura",
+  }),
+
+  data_expiracao: z.string().refine((val) => {
+    const date = new Date(val);
+    return date > new Date();
+  }, {
+    message: "A data de expiração deve ser futura",
+  }),
+
+  entrega_pelo_fornecedor: z.enum(["true", "false"], {
+    required_error: "Informe se o fornecedor entrega",
+  }),
+
+  cidade: z.string().min(1, "Informe a cidade"),
+
+  image: z.instanceof(File, { message: "Deve ser uma imagem" })
+    .refine(file => file?.size <= MAX_FILE_SIZE, "Máximo 5MB")
+    .refine(file => ACCEPTED_IMAGE_TYPE.includes(file?.type), "Extensão inválida"),
+});
+
+type CreateAdData = z.infer<typeof createAdSchema>;
+
 export const CriarAnuncio = () => {
   const [open, setOpen] = useState(false);
 
-  const createAdSchema = z.object({
-    name: z.string({
-      required_error: "O campo de nome de anúncio não deve estar vazio",
-    }),
-    productName: z.string({
-      required_error: "O campo do nome do produto não deve estar vazio",
-    }),
-    amount: z.coerce
-      .number({
-        required_error: "O campo de quantidade não pode estar vazio",
-        invalid_type_error: "O campo deve ser um número",
-      })
-      .int()
-      .gte(1, {
-        message: "A quantidade deve ser maior que 1",
-      })
-      .lte(10000, {
-        message: "A quantidade deve ser menor que 10000",
-      }),
-    price: z.coerce
-      .number({
-        required_error: "O campo do preço não pode estar vazio",
-        invalid_type_error: "O campo deve ser um número",
-      })
-      .gte(0.05, {
-        message: "O preço deve ser maior que R$0,05",
-      }),
-    image: z
-      .instanceof(File, {
-        message: "Deve ser uma imagem",
-      })
-
-      .refine(
-        (file) => file?.size <= MAX_FILE_SIZE,
-        `Tamanho máximo de imagem 5MB.`,
-      )
-      .refine(
-        (file) => ACCEPTED_IMAGE_TYPE.includes(file?.type),
-        "Apenas .jpg, .jpeg, .png and .webp são aceitos.",
-      ),
-  });
-
-  type createAdData = z.infer<typeof createAdSchema>;
   const {
     register,
     handleSubmit,
     control,
     formState: { errors },
-  } = useForm<createAdData>({
+    reset,
+  } = useForm<CreateAdData>({
     resolver: zodResolver(createAdSchema),
   });
 
-  const onSubmit = (data: createAdData) => {
-    console.log("Enviando....");
-    console.log(data);
+  const onSubmit = (data: CreateAdData) => {
+    console.log("Dados prontos para envio:", data);
+    // você faz o fetch depois
   };
+
   return (
     <>
       <Button className="w-32" variant="outlined" onClick={() => setOpen(true)}>
@@ -75,47 +70,82 @@ export const CriarAnuncio = () => {
       <Modal.Root onOpenChange={() => setOpen(false)} open={open}>
         <Modal.Header title="Criar Anúncio" onClose={() => setOpen(false)} />
         <Modal.Content className="min-w-[640px]">
-          <form className="w-full" onSubmit={handleSubmit(onSubmit)}>
+          <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
             <Input
-              label="Nome do Anúncio"
-              placeholder="Insira o nome do seu anúncio"
+              label="Título do Anúncio"
+              placeholder="Ex: Oferta de Tomate"
               className="w-full bg-white"
-              {...register("name")}
-              errors={errors.name?.message}
+              {...register("titulo")}
+              errors={errors.titulo?.message}
             />
             <Input
               label="Nome do Produto"
-              placeholder="Insira o nome do produto"
+              placeholder="Ex: Tomate"
               className="w-full bg-white"
-              {...register("productName")}
-              errors={errors.productName?.message}
+              {...register("nome")}
+              errors={errors.nome?.message}
             />
             <Input
               label="Quantidade"
-              placeholder="Insira a quantidade do produto "
+              type="number"
               className="w-full bg-white"
-              {...register("amount")}
-              errors={errors.amount?.message}
+              {...register("quantidade")}
+              errors={errors.quantidade?.message}
             />
             <Input
-              label="Preço da Unidade"
-              placeholder="Insira o preço da unidade do produto"
+              label="Preço por Unidade"
+              type="number"
               className="w-full bg-white"
-              {...register("price")}
-              errors={errors.price?.message}
+              {...register("preco_unidade")}
+              errors={errors.preco_unidade?.message}
+            />
+            <Input
+              label="Data de Validade"
+              type="date"
+              className="w-full bg-white"
+              {...register("data_validade")}
+              errors={errors.data_validade?.message}
+            />
+            <Input
+              label="Data de Expiração"
+              type="date"
+              className="w-full bg-white"
+              {...register("data_expiracao")}
+              errors={errors.data_expiracao?.message}
+            />
+            <div>
+              <label className="text-sm font-medium">Entrega pelo Fornecedor</label>
+              <select
+                className="w-full bg-white border border-gray-300 rounded p-2 mt-1"
+                {...register("entrega_pelo_fornecedor")}
+              >
+                <option value="">Selecione</option>
+                <option value="true">Sim</option>
+                <option value="false">Não</option>
+              </select>
+              {errors.entrega_pelo_fornecedor && (
+                <p className="text-red-500 text-sm">{errors.entrega_pelo_fornecedor.message}</p>
+              )}
+            </div>
+            <Input
+              label="Cidade"
+              placeholder="Ex: Salvador"
+              className="w-full bg-white"
+              {...register("cidade")}
+              errors={errors.cidade?.message}
             />
             <Controller
-                  control={control}
-                  name="image"
-                  render={({ field }) => (
-                    <ImageUploadInput
-                      label="Imagem do Produto"
-                      value={field.value}
-                      onChange={field.onChange}
-                      errors={errors.image?.message}
-                    />
-                  )}
+              control={control}
+              name="image"
+              render={({ field }) => (
+                <ImageUploadInput
+                  label="Imagem do Produto"
+                  value={field.value}
+                  onChange={field.onChange}
+                  errors={errors.image?.message}
                 />
+              )}
+            />
             <Modal.Actions>
               <Button className="px-4 py-1" type="submit">
                 Criar
