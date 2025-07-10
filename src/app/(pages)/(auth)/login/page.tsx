@@ -9,6 +9,8 @@ import { z } from "zod";
 import { useUserContext } from "@/providers/UserProvider";
 import { Usuario } from "@/core/interfaces/Usuario";
 import { useRouter } from "next/navigation";
+import { useFetch } from "@/hooks/useFetch";
+import { loginUsuario } from "@/core/services/UserService";
 
 export default function Login() {
   const router = useRouter();
@@ -40,24 +42,7 @@ export default function Login() {
 
   const onSubmit = async (data: userLoginData) => {
    
-  const user:Usuario = {
-    id: "1",
-    nome: "Ana Silva",
-    email: "ana@gmail.com",
-    cpfOuCnpj: "123.456.789-00",
-    tipo: data.senha === "123" ? "beneficiario" : "fornecedor",
-    telefone: "(71) 99999-1111",
-    local: { estado: "Bahia", cidade: "Salvador" },
-    nomeArquivoFoto: "",
-    tipoUsuario: "fornecedor"
-  }
-
-    const res = await fetch('/api/user', { method: 'POST' });
-    if(res.ok){
-       login(user)
-        router.push("/anuncios")
-
-    }
+   loginUsuario(data.email,data.senha)
   };
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
