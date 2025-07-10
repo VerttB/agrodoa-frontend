@@ -1,18 +1,22 @@
-"use client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { useCausa } from "@/hooks/useCausa";
-import { LoadingSpin } from "@/components/ui/loadingComponent";
-import { Causas } from "@/core/interfaces/Causas";
+
 import { CausaLista } from "@/components/causa/CausaList";
 import { SolicitarCausa } from "@/components/causa/SolicitarCausaModal";
+import { CausaQueryParams } from "@/core/interfaces/QueryParams/CausaQueryParams";
+import { getCausas } from "@/core/services/CausaService";
 
-export default function CausasPage() {
-  const { data: causas, loading, error } = useCausa<Causas[]>();
+interface CausaProps{
+  searchParams: Promise<CausaQueryParams>
+  
+}
 
-  if (!causas) return <p>{error && 1}</p>;
-
-  if (loading) return <LoadingSpin />;
+export default async function CausasPage({searchParams}: CausaProps) {
+  const params = await searchParams;
+  
+  // const { data: causas, loading, error } = useCausa<Causas[]>();
+  const causas = await getCausas(params);
+ 
 
   return (
     <div className="flex flex-col items-center p-8 min-h-screen">
