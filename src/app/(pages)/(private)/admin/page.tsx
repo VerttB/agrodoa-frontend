@@ -1,6 +1,8 @@
+import { UserTable } from "@/components/usuario/userTable";
+
 export default function Admin(){
 
     return(
-        <p>Admin page</p>
+        <UserTable/>
     )
 }
