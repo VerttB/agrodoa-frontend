@@ -8,7 +8,7 @@ export const CausaCard = ({ causa }: { causa: Causas }) => {
   return (
     <Card.Root
       key={causa.titulo}
-      className="flex w-full flex-col overflow-hidden rounded bg-white md:flex-row md:justify-center lg:w-3/4 2xl:justify-start"
+      className="flex w-full flex-col overflow-hidden rounded bg-white md:flex-row md:justify-center lg:w-3/5 2xl:justify-start"
     >
       <Card.Image
         alt="Imagem da causa"
@@ -34,11 +34,11 @@ export const CausaCard = ({ causa }: { causa: Causas }) => {
             <p>Meta: R${causa.meta.toLocaleString("pt-br")}</p>
           </div>
         </div>
-        <Card.Actions className="flex-col gap-2 border-none p-0">
-          <Button onClick={() => router.push(`/causas/${causa.id}`)}>
+        <Card.Actions className="flex w-4/5 justify-center self-center gap-2 border-none p-0">
+          <Button className="flex-1" onClick={() => router.push(`/causas/${causa.id}`)}>
             Doar
           </Button>
-          <Button variant="outlined">Salvar</Button>
+          <Button  className="flex-1" variant="outlined">Salvar</Button>
         </Card.Actions>
       </Card.Content>
     </Card.Root>

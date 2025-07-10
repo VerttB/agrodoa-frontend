@@ -5,6 +5,7 @@ import { useCausa } from "@/hooks/useCausa";
 import { LoadingSpin } from "@/components/ui/loadingComponent";
 import { Causas } from "@/core/interfaces/Causas";
 import { CausaLista } from "@/components/causa/CausaList";
+import { SolicitarCausa } from "@/components/causa/SolicitarCausaModal";
 
 export default function CausasPage() {
   const { data: causas, loading, error } = useCausa<Causas[]>();
@@ -27,6 +28,7 @@ export default function CausasPage() {
         </div>
 
         <CausaLista causas={causas} />
+      <SolicitarCausa/>
       </div>
     </div>
   );
