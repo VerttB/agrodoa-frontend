@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 export default function Perfil() {
   const { user } = useUserContext();
+  console.log(user)
   if(!user) return(<p>e</p>)
   return (
     <div className="flex min-h-screen w-full items-center justify-center">
@@ -16,7 +17,7 @@ export default function Perfil() {
           <div className="flex flex-col items-center">
           <UserCircle2Icon className="h-48 w-fit" />
             <h1 className="font-bold text-2xl">{user?.nome}</h1>
-            <p className="font-medium text-xl text-gray-700">{capitalize(user.tipo)}</p>
+            <p className="font-medium text-xl text-gray-700">{capitalize(user.tipoUsuario)}</p>
            <div className="flex items-center gap-1 mt-2">
                 {[...Array(5)].map((_, i) => (
                   <Star key={i} strokeWidth={1} fill="yellow" color="black" size={32} />

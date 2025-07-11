@@ -2,16 +2,9 @@ import { UserAvaliacao } from "@/components/usuario/userAvaliacao";
 import { Anuncio } from "@/core/interfaces/Anuncio";
 import { Usuario } from "@/core/interfaces/Usuario";
 import { getAnunciosUsuario } from "@/core/services/AnuncioService";
-import { verPerfil } from "@/core/services/UserService";
-import { Card } from "@/components/ui/Card";
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { AnuncioCard } from "@/components/anuncio/AnuncioCard";
+import { verOutroPerfil } from "@/core/services/UserService";
 import { AnuncioList } from "@/components/anuncio/AnuncioList";
 import { capitalize } from "@/core/utils/capitalize";
-interface PerfilProps{
-    id: string,
-}
 
 export default async function Perfil({
   params,
@@ -21,7 +14,7 @@ export default async function Perfil({
   const { id } = await params;
   
   const avaliacoes = Array(4).fill(0);
-  const usuario:Usuario = await verPerfil(String(id))
+  const usuario:Usuario = await verOutroPerfil(String(id))
   let anuncios: Anuncio[] = [];
   if(usuario.tipoUsuario !== "beneficiário") anuncios = await getAnunciosUsuario(String(id))
   return (
