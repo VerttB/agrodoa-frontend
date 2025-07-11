@@ -29,4 +29,17 @@ export async function loginUsuario(email: string, senha: string) {
     })
 
     if(res.ok) console.log(await res.json())
+      
+}
+
+export async function cadastroUsuario(data: any) {
+    const res = await fetch(`${BASE_URL}/usuarios/cadastrar_usuario`,{
+      method: "POST",
+      headers:{
+        'Content-Type' : 'application/json',
+      },
+      body: JSON.stringify(data)
+    })
+
+    if(res.ok) console.log(await res.json())
 }
