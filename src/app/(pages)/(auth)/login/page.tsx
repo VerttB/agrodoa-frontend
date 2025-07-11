@@ -7,7 +7,6 @@ import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { useRouter } from "next/navigation";
-import { loginUsuario } from "@/core/services/UserService";
 import { useState } from "react";
 import { useUserContext } from "@/providers/UserProvider";
 

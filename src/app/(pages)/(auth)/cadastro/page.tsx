@@ -10,7 +10,6 @@ import { z } from "zod";
 import { formatCpfCnpj } from "@/core/utils/formatCpfCnpj";
 import { formatTel } from "@/core/utils/formatTel";
 import { SelectInput } from "@/components/ui/selectInput";
-import { cadastroUsuario } from "@/core/services/UserService";
 import { useEstadosECidades } from "@/hooks/useEstadosECidades";
 import { useUserContext } from "@/providers/UserProvider";
 import { useState } from "react";
@@ -78,9 +77,6 @@ export default function Cadastro() {
   });
 
  
-const estado = watch("estado")
-
-
 
   const onSubmit = async (data: UserRegisterData) => {
     const dadoUsuario = {

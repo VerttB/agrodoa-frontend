@@ -15,7 +15,7 @@ import { Causas } from "@/core/interfaces/Causas";
 export default function CausaUnica() {
   const { id } = useParams();
   const router = useRouter();
-  const {data: causa, loading} = useCausa<Causas>(String(id))
+  const {data: causa} = useCausa<Causas>(String(id))
   const [donationValue, setDonationValue] = useState(0);
   const { user } = useUserContext();
 

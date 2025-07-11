@@ -1,7 +1,6 @@
 "use client"
 
 import { Button } from "@/components/ui/button"
-import { useRouter } from "next/navigation"
 
 export default function Error({
     
@@ -12,7 +11,6 @@ export default function Error({
   reset: () => void
 
 }){
-    const router = useRouter();
     return(
         <div className="min-h-screen w-full bg-primary flex justify-center items-center">
 
