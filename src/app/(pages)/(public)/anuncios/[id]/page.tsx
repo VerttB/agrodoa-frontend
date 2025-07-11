@@ -13,7 +13,6 @@ import { useState } from "react";
 
 export default function AnuncioUnico() {
   const { id } = useParams();
-  console.log(id);
   const { data: anuncio, loading } = useAnuncio<Anuncio>(String(id));
   const router = useRouter();
   const [amount, setAmount] = useState(0);
