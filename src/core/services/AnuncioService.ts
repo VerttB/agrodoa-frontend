@@ -1,4 +1,4 @@
-import { AnuncioQueryParams } from "@/core/interfaces/AnuncioQueryParams";
+import { AnuncioQueryParams } from "@/core/interfaces/QueryParams/AnuncioQueryParams";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
