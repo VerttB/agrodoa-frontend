@@ -43,3 +43,18 @@ export async function cadastroUsuario(data: any) {
 
     if(res.ok) console.log(await res.json())
 }
+
+
+export async function verPerfil(id: string) {
+    console.log(id)
+    const res = await fetch(`${BASE_URL}/usuarios/ver_perfil/${id}`,{
+      method: "GET",
+      headers:{
+        'Content-Type' : 'application/json',
+      },
+    })
+
+    if(!res.ok) throw new Error("Não foi possível encontrar o usuário")
+
+      return res.json()
+}
