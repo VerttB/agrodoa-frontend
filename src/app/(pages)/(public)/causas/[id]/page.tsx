@@ -1,7 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
 import { User, CalendarDays } from "lucide-react";
-import { causas } from "@/core/constants/Causas";
 import { useState } from "react";
 import { ItemPage } from "@/components/ui/ItemPage";
 import { useRouter } from "next/navigation";
@@ -10,11 +9,13 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { useUserContext } from "@/providers/UserProvider";
+import { useCausa } from "@/hooks/useCausa";
+import { Causas } from "@/core/interfaces/Causas";
 
 export default function CausaUnica() {
   const { id } = useParams();
   const router = useRouter();
-  const causa = causas.find((c) => c.id === id);
+  const {data: causa, loading} = useCausa<Causas>(String(id))
   const [donationValue, setDonationValue] = useState(0);
   const { user } = useUserContext();
 
@@ -32,24 +33,24 @@ export default function CausaUnica() {
             width={512}
             height={320}
           />
-          <ItemPage.description title={causa.titulo}>
+          <ItemPage.description title={causa.nome}>
             <p className="flex items-center gap-2 text-xl">
-              <User aria-hidden="true" /> Responsável: {causa.responsavelId}
+              <User aria-hidden="true" /> Responsável: Vazio
             </p>
             <p className="flex items-center gap-2 text-xl">
-              <CalendarDays aria-hidden="true" /> Prazo:
+              <CalendarDays aria-hidden="true" /> Prazo: {causa.prazo.toString()}
             </p>
 
             <div className="mt-4">
               <div className="h-2 w-full overflow-hidden rounded bg-gray-200">
                 <div
                   className="bg-accent h-full rounded"
-                  style={{ width: `${(causa.arrecadado / causa.meta) * 100}%` }}
+                  style={{ width: `${(causa.valor_arrecadado / causa.meta) * 100}%` }}
                 />
               </div>
 
               <div className="mt-2 flex justify-between text-xl">
-                <p>Arrecadado: R$ {causa.arrecadado}</p>
+                <p>Arrecadado: R$ {causa.valor_arrecadado}</p>
                 <p>Meta: R$ {causa.meta}</p>
               </div>
             </div>
@@ -82,7 +83,7 @@ export default function CausaUnica() {
               className="w-full py-2 text-3xl"
               onClick={() => {
                 if (!user) router.push("/login");
-                router.push(`/pagamento?id=${causa.id}&value=${donationValue}&name=${causa.titulo}&type=causa`);
+                router.push(`/pagamento?id=${causa.idCausa}&value=${donationValue}&name=${causa.nome}&type=causa`);
               }}
             >
               Apoiar Causa
