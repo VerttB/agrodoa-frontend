@@ -6,15 +6,16 @@ import Image from "next/image";
 import Link from "next/link";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-import { useUserContext } from "@/providers/UserProvider";
-import { Usuario } from "@/core/interfaces/Usuario";
 import { useRouter } from "next/navigation";
-import { useFetch } from "@/hooks/useFetch";
 import { loginUsuario } from "@/core/services/UserService";
+import { useState } from "react";
+import { useUserContext } from "@/providers/UserProvider";
 
 export default function Login() {
+  const { login} = useUserContext();
   const router = useRouter();
-  const { login } = useUserContext()
+  const [loginError, setLoginError] = useState<string | null>(null);
+
   const userLoginSchema = z.object({
     email: z
       .string()
@@ -41,9 +42,17 @@ export default function Login() {
   }
 
   const onSubmit = async (data: userLoginData) => {
-   
-   loginUsuario(data.email,data.senha)
-  };
+  try {
+    setLoginError(null); 
+    const sucess = await login(data.email, data.senha);
+    if(sucess)
+      router.push("/anuncios"); 
+    else setLoginError("Credencias inválidas ou erro de servidor")
+  } catch (error: any) {
+    setLoginError(error.message || "Erro ao realizar login");
+  }
+};
+
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
       <div className="m-2 xl:w-2/6 xl:min-h-[520px] flex flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60 lg:m-0 lg:w-2/5">
@@ -101,6 +110,9 @@ export default function Login() {
               >
                 Entrar com Google
               </Button>
+              {loginError && (
+                  <p className="text-red-600 text-sm mt-2 text-center">{loginError}</p>
+)}
             </div>
           </div>
         </form>

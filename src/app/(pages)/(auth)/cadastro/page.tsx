@@ -11,6 +11,9 @@ import { formatCpfCnpj } from "@/core/utils/formatCpfCnpj";
 import { formatTel } from "@/core/utils/formatTel";
 import { SelectInput } from "@/components/ui/selectInput";
 import { cadastroUsuario } from "@/core/services/UserService";
+import { useEstadosECidades } from "@/hooks/useEstadosECidades";
+import { useUserContext } from "@/providers/UserProvider";
+import { useState } from "react";
 
 const userRegisterSchema = z
   .object({
@@ -48,20 +51,39 @@ const userRegisterSchema = z
 type UserRegisterData = z.infer<typeof userRegisterSchema>;
 
 export default function Cadastro() {
+
+  const [registerError, setRegisterError] = useState<string | null>(null); // Estado para erros do cadastro
+
+  const {
+      estados,
+      cidades,
+      estadoSelecionado,
+      setEstadoSelecionado
+} = useEstadosECidades();
+
   const tiposUsuario = [
     {value: "fornecedor", text: "Fornecedor"},
     {value: "beneficiario",text: "Beneficiário"}
   ]
+
+  const { cadastro } = useUserContext();
   const {
     register,
     handleSubmit,
+    setValue,
     formState: { errors },
+    watch,
   } = useForm<UserRegisterData>({
     resolver: zodResolver(userRegisterSchema),
   });
 
-  const onSubmit = (data: UserRegisterData) => {
-    const payload = {
+ 
+const estado = watch("estado")
+
+
+
+  const onSubmit = async (data: UserRegisterData) => {
+    const dadoUsuario = {
       nome: data.nome,
       email: data.email,
       senha: data.senha,
@@ -73,13 +95,13 @@ export default function Cadastro() {
       tipoUsuario: data.tipoUsuario,
     };
 
-    cadastroUsuario(payload)
-
-    // fetch("/api/usuario", {
-    //   method: "POST",
-    //   headers: { "Content-Type": "application/json" },
-    //   body: JSON.stringify(payload),
-    // });
+    try{
+        const sucess = await cadastro(dadoUsuario);
+        if(sucess) console.log("Usuário logado");
+        else setRegisterError("Erro ao cadastrar usuário")
+    }catch(e:any){
+       setRegisterError(e.message || "Erro desconhecido ao cadastrar.");
+    }
   };
 
   return (
@@ -171,25 +193,36 @@ export default function Cadastro() {
                 className="w-full bg-white py-2"
               />
             </div>
-            <div className="flex gap-2">
-            <Input
+            <div className="flex gap-2 w-full">
+            <SelectInput
               type="text"
               id="estado"
+              data={estados.map((e) => ({ value: e.id, text: e.nome }))}
               {...register("estado")}
+                  onChange={(e) => {
+                setEstadoSelecionado(e.target.value);
+                setValue("estado", e.target.value);
+              }}
               label="Estado"
               errors={errors.estado?.message}
               placeholder="Ex: Bahia"
-              className="bg-white py-2 w-full"
+              className="bg-white py-2 flex-1"
             />
 
-            <Input
-              type="text"
+            <SelectInput
               id="idCidade"
+               data={
+                  cidades?.map((c) => ({
+                    value: c.id,
+                    text: c.nome,
+                  })) ?? []
+                }
+              disabled={!estadoSelecionado}
               {...register("idCidade")}
               label="ID da Cidade"
               errors={errors.idCidade?.message}
               placeholder="Insira o ID da cidade"
-              className="bg-white py-2 w-full"
+              className="bg-white py-2 flex-1"
             />
             </div>
             <SelectInput
@@ -229,6 +262,11 @@ export default function Cadastro() {
               <Button className="py-1 max-lg:w-4/5" variant="outlined">
                 Cadastrar com Google
               </Button>
+               {registerError && (
+                <p className="mt-2 text-center text-sm text-red-600">
+                  {registerError}
+                </p>
+              )}
             </div>
           </div>
         </form>
