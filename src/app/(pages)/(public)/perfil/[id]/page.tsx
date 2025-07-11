@@ -5,6 +5,7 @@ import { getAnunciosUsuario } from "@/core/services/AnuncioService";
 import { verOutroPerfil } from "@/core/services/UserService";
 import { AnuncioList } from "@/components/anuncio/AnuncioList";
 import { capitalize } from "@/core/utils/capitalize";
+import { DenunciarUsuario } from "@/components/usuario/denunciarUsuario";
 
 export default async function Perfil({
   params,
@@ -24,9 +25,9 @@ export default async function Perfil({
         <div className="w-32 h-32 rounded-full bg-black flex items-center justify-center text-white text-4xl">
           <span>👤</span>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center justify-center gap-1">
           <h2 className="text-xl font-semibold">{usuario.nome}</h2>
-          <span className="text-orange-500 font-bold text-lg">!</span>
+          <span className="text-orange-500 font-bold h-[28px]"><DenunciarUsuario nomeUsuario={usuario.nome}/></span>
         </div>
         <p className="text-sm">Negociações finalizadas</p>
         <p className="text-sm">{capitalize(usuario.tipoUsuario)}</p>
