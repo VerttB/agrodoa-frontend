@@ -11,52 +11,9 @@ import { Usuario } from "@/core/interfaces/Usuario"
 import { useFetch } from "@/hooks/useFetch"
 import { useRouter } from "next/navigation";
 import { UsuarioDropdown } from "./usuarioDropdown";
-const usuario: Usuario[] = [
-  {
-    id: "123e4567-e89b-12d3-a456-426614174000",
-    tipo: "Fornecedor",
-    nome: "João da Silva",
-    email: "joao.silva@email.com",
-    cpfOuCnpj: "123.456.789-00",
-    telefone: "(11) 91234-5678",
-    nomeArquivoFoto: "joao-foto.jpg",
-    tipoUsuario: "Fornecedor",
-    local: {
-      cidade: "São Paulo",
-      estado: "SP",
-    },
-  },
-  {
-    id: "223e4567-e89b-12d3-a456-426614174001",
-    tipo: "Beneficiario",
-    nome: "Maria Oliveira",
-    email: "maria.oliveira@email.com",
-    cpfOuCnpj: "987.654.321-00",
-    telefone: "(71) 99876-5432",
-    nomeArquivoFoto: "maria-foto.png",
-    tipoUsuario: "Beneficiario",
-    local: {
-      cidade: "Salvador",
-      estado: "BA",
-    },
-  },
-  {
-    id: "323e4567-e89b-12d3-a456-426614174002",
-    tipo: "Administrador",
-    nome: "Carlos Pereira",
-    email: "carlos.pereira@email.com",
-    cpfOuCnpj: "321.654.987-00",
-    telefone: "(31) 98765-4321",
-    nomeArquivoFoto: "carlos.jpg",
-    tipoUsuario: "Administrador",
-    local: {
-      cidade: "Belo Horizonte",
-      estado: "MG",
-    },
-  },
-];
 
-export const UserTable = () => {
+
+export const UserTable = ({usuario}: {usuario: Usuario[]}) => {
 //  const {data: usuario, loading} = useFetch<Usuario[]>("http://localhost:8080/usuarios")
 
   const router = useRouter()
