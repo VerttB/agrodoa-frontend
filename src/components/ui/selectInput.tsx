@@ -12,7 +12,7 @@ interface SelectInputProps extends React.InputHTMLAttributes<HTMLSelectElement> 
 export const SelectInput = forwardRef<HTMLSelectElement, SelectInputProps>((
     {data,label,errors, ...rest}, ref) => {
     return(
-    <div className="flex flex-col gap-1">
+    <div className="flex w-full flex-col gap-1">
         {label &&
       <label  htmlFor={label.trim()} className="text-gray-700 font-medium">
         {label}
