@@ -3,10 +3,11 @@ import Image from "next/image";
 import { useUserContext } from "@/providers/UserProvider";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
+import { Button } from "./button";
 
 export const Header = () => {
   const router = useRouter();
-  const { user } = useUserContext();
+  const { user, logout } = useUserContext();
   const headerItens = user
     ? ["Anuncios", "Causas", "Perfil"] // logado
     : ["Anuncios", "Causas"]; // deslogado
@@ -14,6 +15,7 @@ export const Header = () => {
   return (
     <header className="bg-secondary-darker flex h-16 w-full flex-row-reverse items-center justify-between text-white">
       <ul className="flex gap-4 px-4 text-2xl">
+        {user && <Button className="text-sm" onClick={() => logout()}>Deslogar</Button>}
         {headerItens.map((item) => (
           <li key={item}>
             <Link href={`/${item.toLowerCase()}`}>{item}</Link>
