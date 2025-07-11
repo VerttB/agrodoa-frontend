@@ -11,7 +11,7 @@ export const AnuncioList = ({ anuncios }: AnuncioListProps) => {
   return (
     <div className="grid w-4/4 gap-2 md:grid-cols-2 lg:grid-cols-4 ">
       {anuncios.map((a) => (
-        <AnuncioCard key={a.idAnuncio} anuncio={a} />
+        <AnuncioCard key={a.titulo} anuncio={a} />
       ))}
     </div>
   );

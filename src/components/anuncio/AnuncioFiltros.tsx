@@ -16,7 +16,8 @@ import { useEffect, useState } from "react"
 import { usePathname, useRouter, useSearchParams } from "next/navigation"
 import { sidebar } from "@/components/ui/sidebar"
 import { useIsMobile } from "@/hooks/use-mobile"
-
+import { SelectInput } from "../ui/selectInput"
+import { Input } from "../ui/input"
 export const AnuncioFiltros = () => {
   const searchParams = useSearchParams();
   const [tipoAnuncio, setTipoAnuncio] = useState("");
@@ -25,10 +26,15 @@ export const AnuncioFiltros = () => {
   const [dataExpiracao, setDataExpiracao] = useState("");
   const { replace } = useRouter();
   const pathname = usePathname();
-  
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
 
+  const selectInputData = [
+    {value:"doacao", text:"Doação"},
+    {value:"venda", text:"Venda"},
+  ]
+
+  
 
   const handleOpen = () => {
     setOpen(o => !o)
@@ -67,19 +73,12 @@ export const AnuncioFiltros = () => {
 
   const FiltroForm = (
     <div className="flex flex-col gap-4">
-      <label htmlFor="tipoAnuncio" className="flex flex-col text-sm font-medium">
-        Tipo do Anúncio
-        <select
-          value={tipoAnuncio}
-          onChange={(e) => setTipoAnuncio(e.target.value)}
-          className="border p-2 rounded mt-1"
-        >
-          <option value="">Selecione...</option>
-          <option value="doacao">Doação</option>
-          <option value="venda">Venda</option>
-        </select>
-      </label>
-
+      
+      <SelectInput 
+                label="Tipo do Anuncio"
+                value={tipoAnuncio}
+                onChange={(e) => setTipoAnuncio(e.target.value)}
+                data={selectInputData}/>
       <div>
         <label className="text-sm font-medium">
           Preço: de {precoRange[0]} até {precoRange[1]}
@@ -92,27 +91,22 @@ export const AnuncioFiltros = () => {
           className="mt-2"
         />
       </div>
-
-      <label htmlFor="cidade" className="flex flex-col text-sm font-medium">
-        Cidade
-        <input
+        <Input
+          label="Cidade"
           type="text"
           value={cidade}
           onChange={(e) => setCidade(e.target.value)}
           placeholder="Insira a cidade que deseja procurar"
           className="border p-2 rounded mt-1"
         />
-      </label>
-
-      <label htmlFor="dataExpiracao" className="flex flex-col text-sm font-medium">
-        Data de Expiração
-        <input
+        <Input
+          label="Data de Expiração"
           type="date"
           value={dataExpiracao}
           onChange={(e) => setDataExpiracao(e.target.value)}
           className="border p-2 rounded mt-1"
         />
-      </label>
+
     </div>
   )
 
