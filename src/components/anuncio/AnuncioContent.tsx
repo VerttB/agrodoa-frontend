@@ -11,14 +11,14 @@ import { Anuncio } from "@/core/interfaces/Anuncio"
 export const AnuncioContent = ({anuncios}:{anuncios: Anuncio[]}) => {
     const { user } = useUserContext();
     return(
-         <AnuncioTabs tipoUsuario={user?.tipo || null}>
+         <AnuncioTabs tipoUsuario={user?.tipoUsuario || null}>
           <div className="flex flex-col">
             <div className="flex">
             <AnuncioFiltros/>
             <AnuncioSearch/>
             </div>
-            {user?.tipo === "fornecedor" && <CriarAnuncio />}
-           <AnuncioTabsContent anuncios={anuncios} tipoUsuario={user?.tipo || null}/>
+            {user?.tipoUsuario === "fornecedor" && <CriarAnuncio />}
+           <AnuncioTabsContent anuncios={anuncios} tipoUsuario={user?.tipoUsuario || null}/>
           </div>
         </AnuncioTabs>
     )
