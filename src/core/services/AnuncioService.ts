@@ -33,3 +33,24 @@ export async function getAnuncios(params: AnuncioQueryParams = {}) {
 
   return res.json();
 }
+
+
+export async function getAnunciosUsuario(id:string,params: AnuncioQueryParams = {}) {
+  console.log(typeof(params))
+  
+  const queryString = buildQueryString(params);
+  const url = `${BASE_URL}/anuncios/usuario/${id}${queryString ? `?${queryString}` : ''}`;
+
+  const res = await fetch(url, {
+    cache: "no-store", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+  });
+
+  if (!res.ok) {
+    throw new Error("Erro ao buscar anúncios");
+  }
+
+  return res.json();
+}
