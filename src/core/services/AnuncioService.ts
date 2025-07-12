@@ -31,7 +31,7 @@ export async function getAnuncios(params: AnuncioQueryParams = {}) {
     throw new Error("Erro ao buscar anúncios");
   }
 
-  return res.json();
+  return await res.json();
 }
 
 
@@ -52,5 +52,22 @@ export async function getAnunciosUsuario(id:string,params: AnuncioQueryParams = 
     throw new Error("Erro ao buscar anúncios");
   }
 
-  return res.json();
+  return await res.json();
+}
+
+export async function criarAnuncio(anuncio: any){
+
+      const res = await fetch("http://localhost:8080/anuncios/criar_anuncio", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(anuncio),
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        throw new Error("Erro ao criar Anúncio");
+  }
+     return await res.json();
+
+
 }
