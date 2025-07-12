@@ -83,7 +83,7 @@ export default function UserProvider({
     setIsLoading(true);
     try{
       const userData = await cadastroUsuario(data)
-      setUser(userData)
+      setUser(data)
       return true;
     }catch(e){
       console.error("Erro no cadastro", e);
