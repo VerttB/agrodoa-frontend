@@ -26,11 +26,11 @@ export const CausaCard = ({ causa }: { causa: Causas }) => {
           <div className="h-2 w-full rounded bg-gray-200">
             <div
               className="bg-accent h-full rounded"
-              style={{ width: `${(causa.valor_arrecadado / causa.meta) * 100}%` }}
+              style={{ width: `${(causa.valorArrecadado / causa.meta) * 100}%` }}
             />
           </div>
           <div className="flex w-full justify-between text-sm xl:text-lg">
-            <p>Arrecadado: {causa.valor_arrecadado.toLocaleString("pt-br")}</p>
+            <p>Arrecadado: {causa.valorArrecadado.toLocaleString("pt-br")}</p>
             <p>Meta: R${causa.meta.toLocaleString("pt-br")}</p>
           </div>
         </div>

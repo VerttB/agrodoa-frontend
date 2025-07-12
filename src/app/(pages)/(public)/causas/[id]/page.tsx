@@ -45,12 +45,12 @@ export default function CausaUnica() {
               <div className="h-2 w-full overflow-hidden rounded bg-gray-200">
                 <div
                   className="bg-accent h-full rounded"
-                  style={{ width: `${(causa.valor_arrecadado / causa.meta) * 100}%` }}
+                  style={{ width: `${(causa.valorArrecadado / causa.meta) * 100}%` }}
                 />
               </div>
 
               <div className="mt-2 flex justify-between text-xl">
-                <p>Arrecadado: R$ {causa.valor_arrecadado}</p>
+                <p>Arrecadado: R$ {causa.valorArrecadado}</p>
                 <p>Meta: R$ {causa.meta}</p>
               </div>
             </div>

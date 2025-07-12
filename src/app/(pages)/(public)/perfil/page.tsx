@@ -27,7 +27,7 @@ export default function Perfil() {
           <div className="w-full flex flex-col gap-2">
             <Input className="w-full py-2" label="Email" readOnly value={user.email}/>
             <Input className="w-full py-2" label="Telefone" readOnly value={user.telefone}/>
-            <Input className="w-full py-2" label="Cidade" readOnly value={user.local.cidade}/>
+            <Input className="w-full py-2" label="Cidade" readOnly value={user.cidade}/>
             <Input className="w-full py-2" label="CPF_CNPJ" readOnly value={user.cpfOuCnpj}/>
             <Input className="w-full py-2" label="Senha"readOnly type="password" value={user.tipoUsuario}/>
           </div>

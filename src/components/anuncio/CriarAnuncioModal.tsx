@@ -46,6 +46,7 @@ type CreateAdData = z.infer<typeof createAdSchema>;
 
 export const CriarAnuncio = () => {
   const [open, setOpen] = useState(false);
+  const [etapa, setEtapa] = useState(1)
 
   const {
     register,
@@ -57,8 +58,56 @@ export const CriarAnuncio = () => {
     resolver: zodResolver(createAdSchema),
   });
 
-  const onSubmit = (data: CreateAdData) => {
-    console.log("Dados prontos para envio:", data);
+  const onSubmit = async (data: CreateAdData) => {
+    let idAnuncio = 0
+    const produto = {
+      nome: 'Tomate',
+      quantidade: 319201,
+      dataValidade: "2025-12-12",
+      precoUnidade: 3
+    }
+    try{
+    const res = await fetch("http://localhost:8080/anuncios/criar_anuncio/criar_produto"
+      ,{method: "POST",
+        headers: {
+            'Content-Type': 'application/json', 
+  },
+        body: JSON.stringify(produto),
+        credentials: "include",
+      
+      },
+    )
+    const data = await res.json()
+    if(data.idProduto) idAnuncio = data.idProduto
+  }catch(e){ 
+    console.log(e);
+  }
+
+    const anuncio = {
+      titulo: "Tomates azedos",
+      nomeArquivoFoto: "fotoVelha" ,
+      entregaPeloFOrnecedor: 0,
+      tipoAnuncio: "Venda",
+      cidadeId: "CID0001",
+      produtoId: idAnuncio,
+      dataExpiracao: "2024-12-12"
+    }
+
+    try{
+    const res = await fetch("http://localhost:8080/anuncios/criar_anuncio"
+      ,{method: "POST",
+         headers: {
+            'Content-Type': 'application/json', 
+  },
+        body: JSON.stringify(anuncio),
+        credentials: "include"
+      },
+    )
+    const data = await res.json()
+    console.log(data)
+  }catch(e){ 
+    console.log(e);
+  }
     // você faz o fetch depois
   };
 
