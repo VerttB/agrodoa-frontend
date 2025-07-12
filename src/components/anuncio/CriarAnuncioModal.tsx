@@ -8,14 +8,16 @@ import { ACCEPTED_IMAGE_TYPE, MAX_FILE_SIZE } from "@/core/constants/values";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { ImageUploadInput } from "../ui/imageInput";
+import { SelectInput } from "../ui/selectInput";
+import { criarProduto } from "@/core/services/ProdutoService";
+import { criarAnuncio } from "@/core/services/AnuncioService";
 
 const createAdSchema = z.object({
   titulo: z.string().min(3, "Título muito curto").max(100),
   nome: z.string().min(3, "Nome do produto muito curto").max(100),
   quantidade: z.coerce.number()
     .int().gte(1, "Quantidade mínima 1").lte(10000, "Quantidade máxima 10000"),
-  preco_unidade: z.coerce.number()
-    .gte(0.05, "Preço mínimo R$0,05"),
+  preco_unidade: z.coerce.number().gte(0.05, "Preço mínimo R$0,05"),
 
   data_validade: z.string().refine((val) => {
     const date = new Date(val);
@@ -46,7 +48,7 @@ type CreateAdData = z.infer<typeof createAdSchema>;
 
 export const CriarAnuncio = () => {
   const [open, setOpen] = useState(false);
-  const [etapa, setEtapa] = useState(1)
+  const [etapa, setEtapa] = useState(1);
 
   const {
     register,
@@ -54,61 +56,50 @@ export const CriarAnuncio = () => {
     control,
     formState: { errors },
     reset,
+    trigger,
   } = useForm<CreateAdData>({
     resolver: zodResolver(createAdSchema),
   });
 
   const onSubmit = async (data: CreateAdData) => {
-    let idAnuncio = 0
+    let idAnuncio = 0;
     const produto = {
-      nome: 'Tomate',
-      quantidade: 319201,
-      dataValidade: "2025-12-12",
-      precoUnidade: 3
+      nome: data.nome,
+      quantidade: data.quantidade,
+      dataValidade: data.data_validade,
+      precoUnidade: data.preco_unidade,
+    };
+    try {
+      const res = await criarProduto(produto)
+      if (res.idProduto) idAnuncio = res.idProduto;
+    } catch (e) {
+      console.error("Erro ao criar produto:", e);
     }
-    try{
-    const res = await fetch("http://localhost:8080/anuncios/criar_anuncio/criar_produto"
-      ,{method: "POST",
-        headers: {
-            'Content-Type': 'application/json', 
-  },
-        body: JSON.stringify(produto),
-        credentials: "include",
-      
-      },
-    )
-    const data = await res.json()
-    if(data.idProduto) idAnuncio = data.idProduto
-  }catch(e){ 
-    console.log(e);
-  }
 
     const anuncio = {
-      titulo: "Tomates azedos",
-      nomeArquivoFoto: "fotoVelha" ,
-      entregaPeloFOrnecedor: 0,
+      titulo: data.titulo,
+      nomeArquivoFoto: data.image.name,
+      entregaPeloFOrnecedor: data.entrega_pelo_fornecedor === "true" ? 1 : 0,
       tipoAnuncio: "Venda",
-      cidadeId: "CID0001",
+      cidadeId: "CID0001", // pode ser alterado se tiver cidade dinâmica
       produtoId: idAnuncio,
-      dataExpiracao: "2024-12-12"
-    }
+      dataExpiracao: data.data_expiracao,
+    };
 
-    try{
-    const res = await fetch("http://localhost:8080/anuncios/criar_anuncio"
-      ,{method: "POST",
-         headers: {
-            'Content-Type': 'application/json', 
-  },
-        body: JSON.stringify(anuncio),
-        credentials: "include"
-      },
-    )
-    const data = await res.json()
-    console.log(data)
-  }catch(e){ 
-    console.log(e);
-  }
-    // você faz o fetch depois
+    try {
+      const res = await criarAnuncio(anuncio);
+      console.log(res);
+      setOpen(false);
+      reset();
+      setEtapa(1);
+      }catch (e) {
+      console.error("Erro ao criar anúncio:", e);
+    }
+  };
+
+  const handleNext = async () => {
+    const valid = await trigger(["titulo", "cidade", "entrega_pelo_fornecedor", "data_expiracao"]);
+    if (valid) setEtapa(2);
   };
 
   return (
@@ -120,90 +111,114 @@ export const CriarAnuncio = () => {
         <Modal.Header title="Criar Anúncio" onClose={() => setOpen(false)} />
         <Modal.Content className="min-w-[640px]">
           <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
-            <Input
-              label="Título do Anúncio"
-              placeholder="Ex: Oferta de Tomate"
-              className="w-full bg-white"
-              {...register("titulo")}
-              errors={errors.titulo?.message}
-            />
-            <Input
-              label="Nome do Produto"
-              placeholder="Ex: Tomate"
-              className="w-full bg-white"
-              {...register("nome")}
-              errors={errors.nome?.message}
-            />
-            <Input
-              label="Quantidade"
-              type="number"
-              className="w-full bg-white"
-              {...register("quantidade")}
-              errors={errors.quantidade?.message}
-            />
-            <Input
-              label="Preço por Unidade"
-              type="number"
-              className="w-full bg-white"
-              {...register("preco_unidade")}
-              errors={errors.preco_unidade?.message}
-            />
-            <Input
-              label="Data de Validade"
-              type="date"
-              className="w-full bg-white"
-              {...register("data_validade")}
-              errors={errors.data_validade?.message}
-            />
-            <Input
-              label="Data de Expiração"
-              type="date"
-              className="w-full bg-white"
-              {...register("data_expiracao")}
-              errors={errors.data_expiracao?.message}
-            />
-            <div>
-              <label className="text-sm font-medium">Entrega pelo Fornecedor</label>
-              <select
-                className="w-full bg-white border border-gray-300 rounded p-2 mt-1"
-                {...register("entrega_pelo_fornecedor")}
-              >
-                <option value="">Selecione</option>
-                <option value="true">Sim</option>
-                <option value="false">Não</option>
-              </select>
-              {errors.entrega_pelo_fornecedor && (
-                <p className="text-red-500 text-sm">{errors.entrega_pelo_fornecedor.message}</p>
-              )}
-            </div>
-            <Input
-              label="Cidade"
-              placeholder="Ex: Salvador"
-              className="w-full bg-white"
-              {...register("cidade")}
-              errors={errors.cidade?.message}
-            />
-            <Controller
-              control={control}
-              name="image"
-              render={({ field }) => (
-                <ImageUploadInput
-                  label="Imagem do Produto"
-                  value={field.value}
-                  onChange={field.onChange}
-                  errors={errors.image?.message}
+            {etapa === 1 && (
+              <>
+                <Input
+                  label="Título do Anúncio"
+                  placeholder="Ex: Oferta de Tomate"
+                  {...register("titulo")}
+                  errors={errors.titulo?.message}
+                  className="w-full"
+
                 />
-              )}
-            />
+                <Input
+                  label="Cidade"
+                  placeholder="Ex: Salvador"
+                  {...register("cidade")}
+                  errors={errors.cidade?.message}
+                  className="w-full"
+                />
+                <div>
+                  <label className="text-sm font-medium">Entrega pelo Fornecedor</label>
+                  <SelectInput
+                    data={[{value: true, text: "Sim"}, { value: false, text:"Não"}]}
+                    className="w-full bg-white border border-gray-300 rounded p-2 mt-1"
+                    {...register("entrega_pelo_fornecedor")}
+                  >
+                   
+                  </SelectInput>
+                  {errors.entrega_pelo_fornecedor && (
+                    <p className="text-red-500 text-sm">{errors.entrega_pelo_fornecedor.message}</p>
+                  )}
+                </div>
+                <Input
+                  label="Data de Expiração"
+                  type="date"
+                  {...register("data_expiracao")}
+                  errors={errors.data_expiracao?.message}
+                  className="w-full"
+                />
+              </>
+            )}
+
+            {etapa === 2 && (
+              <>
+                <Input
+                  label="Nome do Produto"
+                  placeholder="Ex: Tomate"
+                  {...register("nome")}
+                  errors={errors.nome?.message}
+                  className="w-full"
+                />
+                <Input
+                  label="Quantidade"
+                  type="number"
+                  {...register("quantidade")}
+                  errors={errors.quantidade?.message}
+                  className="w-full"
+
+                />
+                <Input
+                  label="Preço por Unidade"
+                  type="number"
+                  {...register("preco_unidade")}
+                  errors={errors.preco_unidade?.message}
+                  className="w-full"
+
+                />
+                <Input
+                  label="Data de Validade"
+                  type="date"
+                  {...register("data_validade")}
+                  errors={errors.data_validade?.message}
+                  className="w-full"
+
+                />
+                <Controller
+                  control={control}
+                  name="image"
+                  render={({ field }) => (
+                    <ImageUploadInput
+                      label="Imagem do Produto"
+                      value={field.value}
+                      onChange={field.onChange}
+                      errors={errors.image?.message}
+                      className="w-full"
+
+                    />
+
+                  )}
+                />
+              </>
+            )}
+
             <Modal.Actions>
-              <Button className="px-4 py-1" type="submit">
-                Criar
-              </Button>
-              <Button
-                className="px-4 py-1"
-                variant="outlined"
-                onClick={() => setOpen(false)}
-              >
+              {etapa > 1 && (
+                <Button variant="outlined" onClick={() => setEtapa(etapa - 1)} type="button">
+                  Voltar
+                </Button>
+              )}
+              {etapa < 2 && (
+                <Button onClick={handleNext} type="button">
+                  Próximo
+                </Button>
+              )}
+              {etapa === 2 && (
+                <Button type="submit">
+                  Criar
+                </Button>
+              )}
+              <Button variant="outlined" onClick={() => setOpen(false)} type="button">
                 Fechar
               </Button>
             </Modal.Actions>
