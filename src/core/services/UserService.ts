@@ -73,7 +73,6 @@ export async function verOutroPerfil(id: string) {
       method: "GET",
       headers:{
         'Content-Type' : 'application/json',
-        
       }
     })
 
@@ -82,11 +81,12 @@ export async function verOutroPerfil(id: string) {
 }
 
 export async function deslogar(){
-   const res = await fetch(`${BASE_URL}/usuarios/deslogar`,{
+   const res = await fetch(`${BASE_URL}/auth/logout`,{
       method: "GET",
       headers:{
         'Content-Type' : 'application/json',
       },
+      credentials: "include"
     })
 
     if(!res.ok) throw new Error("Não foi deslogar  o usuário");
