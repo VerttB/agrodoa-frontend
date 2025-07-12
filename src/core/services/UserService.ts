@@ -56,11 +56,12 @@ export async function cadastroUsuario(data: any) {
 
 
 export async function verPerfil() {
-    const res = await fetch(`${BASE_URL}/usuarios/ver_perfil`,{
+    const res = await fetch(`${BASE_URL}/usuarios/meu_perfil`,{
       method: "GET",
       headers:{
         'Content-Type' : 'application/json',
       },
+      credentials: "include"
     })
 
     if(!res.ok) throw new Error("Não foi possível encontrar o usuário") ;
@@ -72,7 +73,8 @@ export async function verOutroPerfil(id: string) {
       method: "GET",
       headers:{
         'Content-Type' : 'application/json',
-      },
+        
+      }
     })
 
     if(!res.ok) throw new Error("Não foi possível encontrar o usuário") ;

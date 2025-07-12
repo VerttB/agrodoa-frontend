@@ -68,6 +68,30 @@ export async function criarAnuncio(anuncio: any){
         throw new Error("Erro ao criar Anúncio");
   }
      return await res.json();
+}
 
+export async function salvarAnuncio(id:string){
+   const res = await fetch(`http://localhost:8080/anuncios/${id}/salvar`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
 
+      if (!res.ok) {
+        throw new Error("Erro ao salvar Anúncio");
+  }
+     return await res.json();
+}
+
+export async function getAnunciosSalvos(){
+   const res = await fetch(`http://localhost:8080/usuarios/meu_perfil/meus_salvos`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        throw new Error("Erro ao pegar anuncios salvos");
+  }
+     return await res.json();
 }
