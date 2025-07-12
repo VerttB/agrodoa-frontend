@@ -95,3 +95,16 @@ export async function getAnunciosSalvos(){
   }
      return await res.json();
 }
+
+export async function getAnunciosEmNegociacao(){
+   const res = await fetch(`http://localhost:8080/usuarios/meu_perfil/minhas_negociacoes`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+      });
+
+      if (!res.ok) {
+        throw new Error("Erro ao pegar anuncios em negociacao");
+  }
+     return await res.json();
+}
