@@ -1,15 +1,13 @@
-'use client';
-
 import { TabsContent } from "@/components/ui/tabs";
 import { AnuncioList } from "@/components/anuncio/AnuncioList";
 import { Anuncio } from "@/core/interfaces/Anuncio";
 
 interface Props {
-  anuncios: Anuncio[],
-  tipoUsuario: string | null
+  anunciosPorAba: Partial<Record<string, Anuncio[]>>;
+  tipoUsuario: string | null;
 }
 
-export function AnuncioTabsContent({ anuncios,tipoUsuario }: Props) {
+export function AnuncioTabsContent({ anunciosPorAba, tipoUsuario }: Props) {
   const isFornecedor = tipoUsuario === "fornecedor";
 
   return (
@@ -17,25 +15,25 @@ export function AnuncioTabsContent({ anuncios,tipoUsuario }: Props) {
       {isFornecedor ? (
         <>
           <TabsContent value="abertos">
-            <AnuncioList anuncios={anuncios} />
+            <AnuncioList anuncios={anunciosPorAba.abertos || []} />
           </TabsContent>
-          <TabsContent value="negociacao">
-            <AnuncioList anuncios={anuncios} />
+          {/* <TabsContent value="negociacao">
+            <AnuncioList anuncios={anunciosPorAba.negociacao || []} />
           </TabsContent>
           <TabsContent value="finalizados">
-            <AnuncioList anuncios={anuncios} />
-          </TabsContent>
+            <AnuncioList anuncios={anunciosPorAba.finalizados || []} />
+          </TabsContent> */}
         </>
       ) : (
         <>
           <TabsContent value="disponiveis">
-            <AnuncioList anuncios={anuncios} />
+            <AnuncioList anuncios={anunciosPorAba.disponiveis || []} />
           </TabsContent>
-          <TabsContent value="negociacao">
-            <AnuncioList anuncios={anuncios} />
-          </TabsContent>
+          {/* <TabsContent value="negociacao">
+            <AnuncioList anuncios={anunciosPorAba.negociacao || []} />
+          </TabsContent> */}
           <TabsContent value="salvos">
-            <AnuncioList anuncios={anuncios} />
+            <AnuncioList anuncios={anunciosPorAba.salvos || []} />
           </TabsContent>
         </>
       )}

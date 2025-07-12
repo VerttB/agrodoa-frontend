@@ -6,17 +6,28 @@ import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
 import { AnuncioDropdownMenu } from "./AnuncioDropdown";
 import { useUserContext } from "@/providers/UserProvider";
+import { salvarAnuncio } from "@/core/services/AnuncioService";
 
 export const AnuncioCard = ({ anuncio }: { anuncio: Anuncio }) => {
   const router = useRouter();
   const { user } = useUserContext();
   
+
+  const handleSave = (id: string) => {
+    console.log(id)
+      try{
+        const res = salvarAnuncio(id)
+        console.log(res)
+      }catch(e){
+        console.log(e);
+      }
+  }
   return (
     <Card.Root
       key={anuncio.titulo}
       className="relative flex flex-col justify-around hover:scale-105 transition-transform duration-200 shadow-[0px_6px_21px_-6px_rgba(249,_115,_22,_0.5)]"
     >
-       {user?.tipo === "fornecedor" && (
+       {user?.tipoUsuario === "fornecedor" && (
         <div className="absolute top-2 right-2 z-10">
           <AnuncioDropdownMenu anuncio={anuncio} />
         </div>
@@ -44,6 +55,7 @@ export const AnuncioCard = ({ anuncio }: { anuncio: Anuncio }) => {
         <Button
           className="flex w-full justify-center gap-1 px-2 py-1"
           variant="outlined"
+          onClick={() => handleSave(anuncio.idAnuncio)}
         >
           Salvar<Heart></Heart>
         </Button>

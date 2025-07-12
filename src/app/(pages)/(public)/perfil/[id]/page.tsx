@@ -1,11 +1,9 @@
 import { UserAvaliacao } from "@/components/usuario/userAvaliacao";
-import { Anuncio } from "@/core/interfaces/Anuncio";
-import { Usuario } from "@/core/interfaces/Usuario";
-import { getAnunciosUsuario } from "@/core/services/AnuncioService";
 import { verOutroPerfil } from "@/core/services/UserService";
-import { AnuncioList } from "@/components/anuncio/AnuncioList";
 import { capitalize } from "@/core/utils/capitalize";
 import { DenunciarUsuario } from "@/components/usuario/denunciarUsuario";
+import { UserAnuncio } from "@/components/usuario/usuarioAnuncioCard";
+
 
 export default async function Perfil({
   params,
@@ -15,12 +13,13 @@ export default async function Perfil({
   const { id } = await params;
   
   const avaliacoes = Array(4).fill(0);
-  const usuario:Usuario = await verOutroPerfil(String(id))
-  let anuncios: Anuncio[] = [];
-  if(usuario.tipoUsuario !== "beneficiário") anuncios = await getAnunciosUsuario(String(id))
+  const usuario = await verOutroPerfil(String(id))
+  console.log(usuario)
+ 
+ // if(usuario.tipoUsuario !== "beneficiario") anuncios = await getAnunciosUsuario(String(id))
   return (
     <div className="min-h-screen bg-[#fefae0] text-black px-4 py-6 flex flex-col items-center border-x-2 border-[#6c757d]">
-     
+    
       <div className="flex flex-col items-center gap-1 mb-6">
         <div className="w-32 h-32 rounded-full bg-black flex items-center justify-center text-white text-4xl">
           <span>👤</span>
@@ -37,15 +36,11 @@ export default async function Perfil({
         </div>
         <p className="text-sm">Avaliação média : 0</p>
       </div>
-
-      {/* Anúncios Disponíveis */}
-     {usuario.tipoUsuario !== "beneficiário" && <div className="w-full max-w-5xl mb-10">
-        <h3 className="text-lg font-semibold border-b pb-1">Anúncios Disponíveis</h3>
-        <div className=" overflow-x-auto gap-4 py-4">
-         <AnuncioList className="flex flex-row " anuncios={anuncios}/>
-        </div>
-      </div>}
-
+    <div className="w-full  max-w-5xl overflow-x-auto overflow-y-hidden flex gap-2">
+       {usuario.anunciosPostados?.map((anuncio:any) => (
+        <UserAnuncio key={anuncio.idAnuncio} anuncio={anuncio} nomeAnunciante={usuario.nome}/>
+      ))}
+  </div>
       {/* Avaliações */}
       <div className="w-full max-w-5xl">
         <h3 className="text-lg font-semibold border-b pb-1">Avaliações</h3>

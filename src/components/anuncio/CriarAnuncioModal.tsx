@@ -11,6 +11,7 @@ import { ImageUploadInput } from "../ui/imageInput";
 import { SelectInput } from "../ui/selectInput";
 import { criarProduto } from "@/core/services/ProdutoService";
 import { criarAnuncio } from "@/core/services/AnuncioService";
+import { useRouter } from "next/navigation";
 
 const createAdSchema = z.object({
   titulo: z.string().min(3, "Título muito curto").max(100),
@@ -39,6 +40,10 @@ const createAdSchema = z.object({
 
   cidade: z.string().min(1, "Informe a cidade"),
 
+  tipoAnuncio: z.enum(["DOACAO", "VENDA"], {
+    required_error: "Informe o tipo do anúncio",
+  }),
+
   image: z.instanceof(File, { message: "Deve ser uma imagem" })
     .refine(file => file?.size <= MAX_FILE_SIZE, "Máximo 5MB")
     .refine(file => ACCEPTED_IMAGE_TYPE.includes(file?.type), "Extensão inválida"),
@@ -49,7 +54,7 @@ type CreateAdData = z.infer<typeof createAdSchema>;
 export const CriarAnuncio = () => {
   const [open, setOpen] = useState(false);
   const [etapa, setEtapa] = useState(1);
-
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -70,7 +75,7 @@ export const CriarAnuncio = () => {
       precoUnidade: data.preco_unidade,
     };
     try {
-      const res = await criarProduto(produto)
+      const res = await criarProduto(produto);
       if (res.idProduto) idAnuncio = res.idProduto;
     } catch (e) {
       console.error("Erro ao criar produto:", e);
@@ -80,8 +85,8 @@ export const CriarAnuncio = () => {
       titulo: data.titulo,
       nomeArquivoFoto: data.image.name,
       entregaPeloFOrnecedor: data.entrega_pelo_fornecedor === "true" ? 1 : 0,
-      tipoAnuncio: "Venda",
-      cidadeId: "CID0001", // pode ser alterado se tiver cidade dinâmica
+      tipoAnuncio: data.tipoAnuncio,
+      cidadeId: "CID0001", // ajuste conforme necessidade
       produtoId: idAnuncio,
       dataExpiracao: data.data_expiracao,
     };
@@ -92,13 +97,21 @@ export const CriarAnuncio = () => {
       setOpen(false);
       reset();
       setEtapa(1);
-      }catch (e) {
+      router.refresh();
+    } catch (e) {
       console.error("Erro ao criar anúncio:", e);
     }
   };
 
   const handleNext = async () => {
-    const valid = await trigger(["titulo", "cidade", "entrega_pelo_fornecedor", "data_expiracao"]);
+    // validar campos da etapa 1, incluindo tipoAnuncio
+    const valid = await trigger([
+      "titulo",
+      "cidade",
+      "entrega_pelo_fornecedor",
+      "data_expiracao",
+      "tipoAnuncio",
+    ]);
     if (valid) setEtapa(2);
   };
 
@@ -119,7 +132,6 @@ export const CriarAnuncio = () => {
                   {...register("titulo")}
                   errors={errors.titulo?.message}
                   className="w-full"
-
                 />
                 <Input
                   label="Cidade"
@@ -131,16 +143,33 @@ export const CriarAnuncio = () => {
                 <div>
                   <label className="text-sm font-medium">Entrega pelo Fornecedor</label>
                   <SelectInput
-                    data={[{value: true, text: "Sim"}, { value: false, text:"Não"}]}
+                    data={[
+                      { value: "true", text: "Sim" },
+                      { value: "false", text: "Não" },
+                    ]}
                     className="w-full bg-white border border-gray-300 rounded p-2 mt-1"
                     {...register("entrega_pelo_fornecedor")}
-                  >
-                   
-                  </SelectInput>
+                  />
                   {errors.entrega_pelo_fornecedor && (
                     <p className="text-red-500 text-sm">{errors.entrega_pelo_fornecedor.message}</p>
                   )}
                 </div>
+
+                <div>
+                  <label className="text-sm font-medium">Tipo do Anúncio</label>
+                  <SelectInput
+                    data={[
+                      { value: "DOACAO", text: "Doação" },
+                      { value: "VENDA", text: "Venda" },
+                    ]}
+                    className="w-full bg-white border border-gray-300 rounded p-2 mt-1"
+                    {...register("tipoAnuncio")}
+                  />
+                  {errors.tipoAnuncio && (
+                    <p className="text-red-500 text-sm">{errors.tipoAnuncio.message}</p>
+                  )}
+                </div>
+
                 <Input
                   label="Data de Expiração"
                   type="date"
@@ -166,7 +195,6 @@ export const CriarAnuncio = () => {
                   {...register("quantidade")}
                   errors={errors.quantidade?.message}
                   className="w-full"
-
                 />
                 <Input
                   label="Preço por Unidade"
@@ -174,7 +202,6 @@ export const CriarAnuncio = () => {
                   {...register("preco_unidade")}
                   errors={errors.preco_unidade?.message}
                   className="w-full"
-
                 />
                 <Input
                   label="Data de Validade"
@@ -182,7 +209,6 @@ export const CriarAnuncio = () => {
                   {...register("data_validade")}
                   errors={errors.data_validade?.message}
                   className="w-full"
-
                 />
                 <Controller
                   control={control}
@@ -194,9 +220,7 @@ export const CriarAnuncio = () => {
                       onChange={field.onChange}
                       errors={errors.image?.message}
                       className="w-full"
-
                     />
-
                   )}
                 />
               </>

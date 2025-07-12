@@ -46,6 +46,8 @@ export async function getAnunciosUsuario(id:string,params: AnuncioQueryParams = 
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include",
+    method: "GET"
   });
 
   if (!res.ok) {
@@ -108,3 +110,19 @@ export async function getAnunciosEmNegociacao(){
   }
      return await res.json();
 }
+
+
+export async function cancelarAnuncio(idAnuncio:string){
+   const res = await fetch(`http://localhost:8080/anuncios/${idAnuncio}/cancelar`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(idAnuncio)
+      });
+
+      if (!res.ok) {
+        throw new Error("Erro ao cancelar anuncios");
+  }
+     return await res.json();
+}
+

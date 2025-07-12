@@ -13,6 +13,7 @@ import { SelectInput } from "@/components/ui/selectInput";
 import { useEstadosECidades } from "@/hooks/useEstadosECidades";
 import { useUserContext } from "@/providers/UserProvider";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 
 const userRegisterSchema = z
   .object({
@@ -51,7 +52,7 @@ type UserRegisterData = z.infer<typeof userRegisterSchema>;
 export default function Cadastro() {
   const [etapa, setEtapa] = useState(1);
   const [registerError, setRegisterError] = useState<string | null>(null);
-
+  const router = useRouter();
   const {
     estados,
     cidades,
@@ -100,6 +101,7 @@ export default function Cadastro() {
       const success = await cadastro(dadoUsuario);
       if (success) {
         console.log("Usuário cadastrado");
+        router.push("/anuncios")
         setEtapa(1);
       } else {
         setRegisterError("Erro ao cadastrar usuário");

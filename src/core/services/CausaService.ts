@@ -33,3 +33,23 @@ export async function getCausas(params: CausaQueryParams = {}) {
 
   return res.json();
 }
+
+export async function criarCausa(data: any) {
+
+   const res = await fetch(`${BASE_URL}/causas/criar_causa`, {
+    cache: "no-store", 
+    headers: {
+      "Content-Type": "application/json",
+    },
+    method: "POST",
+    credentials: "include",
+    body: JSON.stringify(data)
+  });
+
+  if (!res.ok) {
+    throw new Error("Erro ao criar causa causas");
+  }
+
+  return res.json();
+
+}

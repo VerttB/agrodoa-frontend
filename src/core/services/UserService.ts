@@ -3,10 +3,8 @@ const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 export async function getUsuarios() {
   const res = await fetch(`${BASE_URL}/usuarios`, {
-    cache: "no-store", 
-    headers: {
-      "Content-Type": "application/json",
-    },
+    method: "GET",
+    credentials: "include",
   });
 
   if (!res.ok) {
@@ -82,7 +80,7 @@ export async function verOutroPerfil(id: string) {
 
 export async function deslogar(){
    const res = await fetch(`${BASE_URL}/auth/logout`,{
-      method: "GET",
+      method: "POST",
       headers:{
         'Content-Type' : 'application/json',
       },
@@ -90,5 +88,11 @@ export async function deslogar(){
     })
 
     if(!res.ok) throw new Error("Não foi deslogar  o usuário");
+
+    const contentType = res.headers.get('content-type');
+
+    if (res.status === 204 || !contentType || !contentType.includes('application/json')) {
+        return; 
+    }
     return await res.json();
 }

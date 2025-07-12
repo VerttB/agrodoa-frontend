@@ -38,7 +38,6 @@ export const CausaCard = ({ causa }: { causa: Causas }) => {
           <Button className="flex-1" onClick={() => router.push(`/causas/${causa.idCausa}`)}>
             Doar
           </Button>
-          <Button  className="flex-1" variant="outlined">Salvar</Button>
         </Card.Actions>
       </Card.Content>
     </Card.Root>

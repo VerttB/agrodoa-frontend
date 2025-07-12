@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge"
 interface SelectInputProps extends React.InputHTMLAttributes<HTMLSelectElement> {
     label?: string,
     errors?:string,
-    data: {value: string, text: string}[],
+    data: {value: any, text: string}[],
 
 }
 
