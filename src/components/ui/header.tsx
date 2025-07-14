@@ -16,7 +16,7 @@ export const Header = () => {
     <header className="bg-secondary-darker flex h-12 w-full flex-row-reverse items-center justify-between text-white">
       <ul className="flex gap-4 px-4 text-lg">
         {user && (
-          <Button className="text-sm" onClick={() => logout()}>
+          <Button variant="ghost" className="text-sm py-1" onClick={() => logout()}>
             Deslogar
           </Button>
         )}
