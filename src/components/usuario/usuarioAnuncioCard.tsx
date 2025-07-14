@@ -7,7 +7,7 @@ import { Usuario } from "@/core/interfaces/Usuario";
 
 interface UserAnuncioProps {
   anuncio: Anuncio;
-  nomeAnunciante: string,
+  nomeAnunciante: string;
 }
 
 export const UserAnuncio = ({ anuncio, nomeAnunciante }: UserAnuncioProps) => {
@@ -16,10 +16,10 @@ export const UserAnuncio = ({ anuncio, nomeAnunciante }: UserAnuncioProps) => {
   return (
     <Card.Root
       key={anuncio.idAnuncio}
-      className="relative flex flex-col min-w-[240px] max-w-[240px] max-h-[320] justify-around hover:scale-105 transition-transform duration-200 shadow-[0px_6px_21px_-6px_rgba(249,_115,_22,_0.5)]"
+      className="relative flex max-h-[320] max-w-[240px] min-w-[240px] flex-col justify-around shadow-[0px_6px_21px_-6px_rgba(249,_115,_22,_0.5)] transition-transform duration-200 hover:scale-105"
     >
       <Card.Image imageUrl="/mato.jpg" alt="imagem do anúncio" />
-      
+
       <Card.Content>
         <div className="h-full">
           <h1 className="mb-4 text-xl font-bold">{anuncio.titulo}</h1>
@@ -32,7 +32,9 @@ export const UserAnuncio = ({ anuncio, nomeAnunciante }: UserAnuncioProps) => {
                 })
               : "Grátis"}
           </p>
-          <p className="text-sm">Quantidade: {anuncio.produto?.quantidade ?? 0}</p>
+          <p className="text-sm">
+            Quantidade: {anuncio.produto?.quantidade ?? 0}
+          </p>
         </div>
       </Card.Content>
 
@@ -43,7 +45,6 @@ export const UserAnuncio = ({ anuncio, nomeAnunciante }: UserAnuncioProps) => {
         >
           Ver Detalhes
         </Button>
-       
       </Card.Actions>
     </Card.Root>
   );

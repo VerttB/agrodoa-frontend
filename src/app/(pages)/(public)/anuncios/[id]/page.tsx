@@ -40,14 +40,20 @@ export default function AnuncioUnico() {
             <p className="flex items-center gap-2 text-xl">
               <CalendarDays aria-hidden="true" /> Prazo: {anuncio.dataExpiracao}
             </p>
-            <p  className="flex items-center gap-2 text-xl">
-              <MapPinCheck/>
+            <p className="flex items-center gap-2 text-xl">
+              <MapPinCheck />
               Local:{`${anuncio.local.cidade} - ${anuncio.local.estado}`}
             </p>
-            {anuncio.tipo === "VENDA" && <p className="flex items-center gap-2 text-xl">
-              <Banknote/>
-              Preço por Unidade: {anuncio.produto.precoUnidade.toLocaleString("pt-BR", { style: "currency", currency:"BRL"})}
-            </p>}
+            {anuncio.tipo === "VENDA" && (
+              <p className="flex items-center gap-2 text-xl">
+                <Banknote />
+                Preço por Unidade:{" "}
+                {anuncio.produto.precoUnidade.toLocaleString("pt-BR", {
+                  style: "currency",
+                  currency: "BRL",
+                })}
+              </p>
+            )}
           </ItemPage.description>
         </ItemPage.content>
         <ItemPage.content>
@@ -58,22 +64,20 @@ export default function AnuncioUnico() {
               className="border-accent w-full rounded-3xl border-2 px-4 py-2"
               placeholder="Diga a quantidade que deseja comprar"
               onChange={(e) => {
-                setAmount(_ => Number(e.target.value));
+                setAmount((_) => Number(e.target.value));
               }}
             />
             <Button
               className="w-full py-2 text-3xl"
               onClick={() =>
-                router.push(`/pagamento?id=${anuncio.idAnuncio}&amount=${amount}&type=anuncio`)
+                router.push(
+                  `/pagamento?id=${anuncio.idAnuncio}&amount=${amount}&type=anuncio`,
+                )
               }
             >
               Negociar
             </Button>
-            <Button
-              className="w-full py-2 text-3xl"
-              variant="outlined"
-            
-            >
+            <Button className="w-full py-2 text-3xl" variant="outlined">
               Salvar
             </Button>
           </ItemPage.actions>

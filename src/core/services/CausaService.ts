@@ -6,7 +6,7 @@ function buildQueryString(params: object): string {
   const query = new URLSearchParams();
 
   for (const [key, value] of Object.entries(params)) {
-    if (value !== undefined && value !== null && value !== '') {
+    if (value !== undefined && value !== null && value !== "") {
       query.set(key, String(value));
     }
   }
@@ -15,13 +15,13 @@ function buildQueryString(params: object): string {
 }
 
 export async function getCausas(params: CausaQueryParams = {}) {
-  console.log(typeof(params))
-  
+  console.log(typeof params);
+
   const queryString = buildQueryString(params);
-  const url = `${BASE_URL}/causas${queryString ? `?${queryString}` : ''}`;
+  const url = `${BASE_URL}/causas${queryString ? `?${queryString}` : ""}`;
 
   const res = await fetch(url, {
-    cache: "no-store", 
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
     },
@@ -35,15 +35,14 @@ export async function getCausas(params: CausaQueryParams = {}) {
 }
 
 export async function criarCausa(data: any) {
-
-   const res = await fetch(`${BASE_URL}/causas/criar_causa`, {
-    cache: "no-store", 
+  const res = await fetch(`${BASE_URL}/causas/criar_causa`, {
+    cache: "no-store",
     headers: {
       "Content-Type": "application/json",
     },
     method: "POST",
     credentials: "include",
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
   });
 
   if (!res.ok) {
@@ -51,5 +50,4 @@ export async function criarCausa(data: any) {
   }
 
   return res.json();
-
 }

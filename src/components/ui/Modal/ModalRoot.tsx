@@ -4,8 +4,11 @@ import { ComponenteInterativo } from "@/core/interfaces/ComponenteInterativo";
 import { useEffect } from "react";
 import { createPortal } from "react-dom";
 
-
-export const ModalRoot = ({ open, onOpenChange, children }: ComponenteInterativo) => {
+export const ModalRoot = ({
+  open,
+  onOpenChange,
+  children,
+}: ComponenteInterativo) => {
   useEffect(() => {
     const escEvent = (e: KeyboardEvent) => {
       if (e.key === "Escape") onOpenChange(false);

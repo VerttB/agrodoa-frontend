@@ -15,7 +15,7 @@ import { Causas } from "@/core/interfaces/Causas";
 export default function CausaUnica() {
   const { id } = useParams();
   const router = useRouter();
-  const {data: causa} = useCausa<Causas>(String(id))
+  const { data: causa } = useCausa<Causas>(String(id));
   const [donationValue, setDonationValue] = useState(0);
   const { user } = useUserContext();
 
@@ -38,14 +38,17 @@ export default function CausaUnica() {
               <User aria-hidden="true" /> Responsável: Vazio
             </p>
             <p className="flex items-center gap-2 text-xl">
-              <CalendarDays aria-hidden="true" /> Prazo: {causa.prazo.toString()}
+              <CalendarDays aria-hidden="true" /> Prazo:{" "}
+              {causa.prazo.toString()}
             </p>
 
             <div className="mt-4">
               <div className="h-2 w-full overflow-hidden rounded bg-gray-200">
                 <div
                   className="bg-accent h-full rounded"
-                  style={{ width: `${(causa.valorArrecadado / causa.meta) * 100}%` }}
+                  style={{
+                    width: `${(causa.valorArrecadado / causa.meta) * 100}%`,
+                  }}
                 />
               </div>
 
@@ -83,7 +86,9 @@ export default function CausaUnica() {
               className="w-full py-2 text-3xl"
               onClick={() => {
                 if (!user) router.push("/login");
-                router.push(`/pagamento?id=${causa.idCausa}&value=${donationValue}&name=${causa.nome}&type=causa`);
+                router.push(
+                  `/pagamento?id=${causa.idCausa}&value=${donationValue}&name=${causa.nome}&type=causa`,
+                );
               }}
             >
               Apoiar Causa

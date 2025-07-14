@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { ReactNode, useState, useEffect } from "react";
@@ -10,9 +10,16 @@ interface AnuncioTabsProps {
   value?: string; // opcional para controle externo
 }
 
-export const AnuncioTabs = ({ children, tipoUsuario, onTabChange, value }: AnuncioTabsProps) => {
+export const AnuncioTabs = ({
+  children,
+  tipoUsuario,
+  onTabChange,
+  value,
+}: AnuncioTabsProps) => {
   const isFornecedor = tipoUsuario === "fornecedor";
-  const [internalValue, setInternalValue] = useState(isFornecedor ? "abertos" : "disponiveis");
+  const [internalValue, setInternalValue] = useState(
+    isFornecedor ? "abertos" : "disponiveis",
+  );
 
   const selectedValue = value !== undefined ? value : internalValue;
 
@@ -28,8 +35,12 @@ export const AnuncioTabs = ({ children, tipoUsuario, onTabChange, value }: Anunc
   };
 
   return (
-    <Tabs value={selectedValue} onValueChange={handleChange} className="flex w-full justify-center">
-      <TabsList className="bg-background h-auto -space-x-px p-0 shadow-xs rtl:space-x-reverse max-md:text-sm">
+    <Tabs
+      value={selectedValue}
+      onValueChange={handleChange}
+      className="flex w-full justify-center"
+    >
+      <TabsList className="bg-background h-auto -space-x-px p-0 shadow-xs max-md:text-sm rtl:space-x-reverse">
         {isFornecedor ? (
           <>
             <TabsTrigger value="abertos">Abertos</TabsTrigger>

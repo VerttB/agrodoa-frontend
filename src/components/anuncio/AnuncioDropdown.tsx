@@ -30,13 +30,14 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white">
           <DropdownMenuItem>Ver Negociantes</DropdownMenuItem>
-          <DropdownMenuItem onClick={() => setOpenEdit(true)}>Editar</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpenEdit(true)}>
+            Editar
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenDelete(true)}>
             Cancelar
           </DropdownMenuItem>
         </DropdownMenuContent>
       </DropdownMenu>
-
 
       <CancelarAnuncioModal
         id={anuncio.idAnuncio}
@@ -45,11 +46,11 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
         onOpenChange={setOpenDelete}
       />
 
-      <EditarAnuncio 
+      <EditarAnuncio
         anuncio={anuncio}
         open={openEdit}
-        onOpenChange={setOpenEdit}/>
-        
+        onOpenChange={setOpenEdit}
+      />
     </>
   );
 };

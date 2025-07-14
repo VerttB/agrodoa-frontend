@@ -1,5 +1,5 @@
 export interface CausaQueryParams {
-  nome?: string,
-  metaMin?:number,
-  metaMax?:number,
+  nome?: string;
+  metaMin?: number;
+  metaMax?: number;
 }

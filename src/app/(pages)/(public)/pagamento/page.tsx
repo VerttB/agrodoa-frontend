@@ -1,9 +1,8 @@
-
 import { Input } from "@/components/ui/input";
 import { Suspense } from "react";
 
 interface PagamentoProps {
-  searchParams:Promise<{
+  searchParams: Promise<{
     id?: string;
     value?: string;
     name?: string;
@@ -11,9 +10,8 @@ interface PagamentoProps {
 }
 
 export default async function Pagamento({ searchParams }: PagamentoProps) {
-
-  const { id,value,name} = await searchParams
-  console.log(id, value, name)
+  const { id, value, name } = await searchParams;
+  console.log(id, value, name);
   return (
     <Suspense>
       <div className="flex min-h-screen w-full flex-col gap-8 p-8 md:flex-row">
@@ -22,19 +20,19 @@ export default async function Pagamento({ searchParams }: PagamentoProps) {
           <div className="flex w-full flex-col">
             <Input
               label="Produto"
-              className="bg-neutral border-accent rounded-xl w-full"
+              className="bg-neutral border-accent w-full rounded-xl"
               value={name}
               disabled
             />
             <Input
               label="Quantidade"
-              className="bg-neutral border-accent rounded-xl w-full"
+              className="bg-neutral border-accent w-full rounded-xl"
               value={value}
               disabled
             />
             <Input
               label="Preço "
-              className="bg-neutral border-accent rounded-xl w-full"
+              className="bg-neutral border-accent w-full rounded-xl"
               value={`R$: ${value}`}
               disabled
             />
@@ -45,7 +43,7 @@ export default async function Pagamento({ searchParams }: PagamentoProps) {
           <h2 className="text-2xl">Selecione a forma de pagamento</h2>
           <div className="flex w-full flex-col">
             <Input
-              className="bg-neutral border-accent rounded-xl w-full"
+              className="bg-neutral border-accent w-full rounded-xl"
               label="Forma de Pagamento"
               value={"PIX"}
               disabled
@@ -55,7 +53,7 @@ export default async function Pagamento({ searchParams }: PagamentoProps) {
               code
             </h3>
             <Input
-              className="bg-neutral border-accent rounded-xl w-full"
+              className="bg-neutral border-accent w-full rounded-xl"
               label="Chave Pix"
               disabled
             />

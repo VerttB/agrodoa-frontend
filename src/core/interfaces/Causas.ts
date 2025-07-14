@@ -5,5 +5,5 @@ export interface Causas {
   meta: number;
   prazo: Date;
   descricao: string;
-  nomeArquivoFoto: string,
+  nomeArquivoFoto: string;
 }

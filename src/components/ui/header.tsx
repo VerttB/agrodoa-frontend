@@ -15,10 +15,19 @@ export const Header = () => {
   return (
     <header className="bg-secondary-darker flex h-12 w-full flex-row-reverse items-center justify-between text-white">
       <ul className="flex gap-4 px-4 text-lg">
-        {user && <Button className="text-sm" onClick={() => logout()}>Deslogar</Button>}
+        {user && (
+          <Button className="text-sm" onClick={() => logout()}>
+            Deslogar
+          </Button>
+        )}
         {headerItens.map((item) => (
           <li key={item}>
-            <Link className="hover:text-secondary-light" href={`/${item.toLowerCase()}`}>{item}</Link>
+            <Link
+              className="hover:text-secondary-light"
+              href={`/${item.toLowerCase()}`}
+            >
+              {item}
+            </Link>
           </li>
         ))}
       </ul>

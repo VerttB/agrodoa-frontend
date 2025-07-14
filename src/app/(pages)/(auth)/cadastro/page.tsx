@@ -53,12 +53,8 @@ export default function Cadastro() {
   const [etapa, setEtapa] = useState(1);
   const [registerError, setRegisterError] = useState<string | null>(null);
   const router = useRouter();
-  const {
-    estados,
-    cidades,
-    estadoSelecionado,
-    setEstadoSelecionado,
-  } = useEstadosECidades();
+  const { estados, cidades, estadoSelecionado, setEstadoSelecionado } =
+    useEstadosECidades();
 
   const tiposUsuario = [
     { value: "fornecedor", text: "Fornecedor" },
@@ -101,7 +97,7 @@ export default function Cadastro() {
       const success = await cadastro(dadoUsuario);
       if (success) {
         console.log("Usuário cadastrado");
-        router.push("/anuncios")
+        router.push("/anuncios");
         setEtapa(1);
       } else {
         setRegisterError("Erro ao cadastrar usuário");
@@ -121,7 +117,7 @@ export default function Cadastro() {
 
         <form
           onSubmit={handleSubmit(onSubmit)}
-          className="flex h-full w-full flex-col items-center gap-6 self-center rounded-md p-5 min-h-[480px]"
+          className="flex h-full min-h-[480px] w-full flex-col items-center gap-6 self-center rounded-md p-5"
         >
           <div className="flex flex-col gap-1 lg:w-2/3">
             <h3 className="text-2xl font-medium">Cadastro</h3>
@@ -138,7 +134,7 @@ export default function Cadastro() {
                     {...register("nome")}
                     placeholder="Insira seu nome completo"
                     errors={errors.nome?.message}
-                    className="bg-white py-2 w-full"
+                    className="w-full bg-white py-2"
                   />
                   <Input
                     label="Email"
@@ -146,7 +142,7 @@ export default function Cadastro() {
                     {...register("email")}
                     placeholder="Insira seu email"
                     errors={errors.email?.message}
-                    className="bg-white py-2 w-full"
+                    className="w-full bg-white py-2"
                   />
                 </div>
                 <div className="flex gap-2">
@@ -197,7 +193,7 @@ export default function Cadastro() {
                   />
                 </div>
 
-                <div className="flex gap-2 w-full">
+                <div className="flex w-full gap-2">
                   <SelectInput
                     {...register("estado")}
                     data={estados.map((e) => ({ value: e.id, text: e.nome }))}
@@ -208,7 +204,7 @@ export default function Cadastro() {
                     label="Estado"
                     errors={errors.estado?.message}
                     placeholder="Ex: Bahia"
-                    className="bg-white py-2 flex-1"
+                    className="flex-1 bg-white py-2"
                   />
                   <SelectInput
                     {...register("idCidade")}
@@ -219,7 +215,7 @@ export default function Cadastro() {
                     label="Cidade"
                     errors={errors.idCidade?.message}
                     placeholder="Selecione a cidade"
-                    className="bg-white py-2 flex-1"
+                    className="flex-1 bg-white py-2"
                   />
                 </div>
 
@@ -227,7 +223,7 @@ export default function Cadastro() {
                   {...register("tipoUsuario")}
                   label="Tipo do Usuário"
                   data={tiposUsuario}
-                  className="bg-white py-2 w-full"
+                  className="w-full bg-white py-2"
                   placeholder="Tipo do usuário"
                   errors={errors.tipoUsuario?.message}
                 />
@@ -237,7 +233,7 @@ export default function Cadastro() {
                   label="Nome da Foto (opcional)"
                   placeholder="foto-perfil.png"
                   errors={errors.nomeArquivoFoto?.message}
-                  className="bg-white py-2 w-full"
+                  className="w-full bg-white py-2"
                 />
               </>
             )}
@@ -260,9 +256,9 @@ export default function Cadastro() {
 
               {etapa === 2 && (
                 <>
-                  <div className="flex gap-2 w-full">
+                  <div className="flex w-full gap-2">
                     <Button
-                      className="py-1 w-full"
+                      className="w-full py-1"
                       variant="outlined"
                       type="button"
                       onClick={handleBack}
@@ -270,7 +266,7 @@ export default function Cadastro() {
                       Voltar
                     </Button>
                     <Button
-                      className="py-1 w-full"
+                      className="w-full py-1"
                       variant="primary"
                       type="submit"
                     >

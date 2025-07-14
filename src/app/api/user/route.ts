@@ -5,7 +5,7 @@ export async function POST() {
     id: "1",
     nome: "Ana Silva",
     senha: "senha123",
-    email:"ana@gmail.com",
+    email: "ana@gmail.com",
     cpf_ou_cnpj: "123.456.789-00",
     tipo: "fornecedor",
     voluntario: false,

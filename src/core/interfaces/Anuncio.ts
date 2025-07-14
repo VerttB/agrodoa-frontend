@@ -5,10 +5,10 @@ import { StatusAnuncio } from "../enums/StatusAnuncio";
 import { TipoAnuncio } from "../enums/TipoAnuncio";
 
 export interface Anuncio {
-  idAnuncio: string,
+  idAnuncio: string;
   titulo: string;
   nomeArquivoFoto: string;
-  dataExpiracao: string; 
+  dataExpiracao: string;
   entregaPeloFornecedor: boolean;
   status: StatusAnuncio;
   tipo: TipoAnuncio;

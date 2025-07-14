@@ -1,14 +1,13 @@
 import { Local } from "./Local";
 
-
 export interface Usuario {
-  tipo:string,
+  tipo: string;
   nome: string;
   email: string;
   cpfOuCnpj: string;
   telefone: string;
   tipoUsuario: string;
-  cidade: string,
-  estado:string
-  avaliacaoMedia: number
+  cidade: string;
+  estado: string;
+  avaliacaoMedia: number;
 }

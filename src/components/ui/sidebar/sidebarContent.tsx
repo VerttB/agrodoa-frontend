@@ -5,9 +5,5 @@ interface SidebarContentProps {
 }
 
 export function SidebarContent({ children }: SidebarContentProps) {
-  return (
-    <div className="flex-1 overflow-y-auto p-4">
-      {children}
-    </div>
-  );
+  return <div className="flex-1 overflow-y-auto p-4">{children}</div>;
 }

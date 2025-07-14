@@ -5,9 +5,5 @@ interface SidebarFooterProps {
 }
 
 export function SidebarFooter({ children }: SidebarFooterProps) {
-  return (
-    <div className="px-4 py-2 border-t border-gray-200">
-      {children}
-    </div>
-  );
+  return <div className="border-t border-gray-200 px-4 py-2">{children}</div>;
 }

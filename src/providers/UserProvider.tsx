@@ -1,17 +1,22 @@
 "use client";
 
 import { Usuario } from "@/core/interfaces/Usuario";
-import { cadastroUsuario, deslogar, loginUsuario, verPerfil } from "@/core/services/UserService";
+import {
+  cadastroUsuario,
+  deslogar,
+  loginUsuario,
+  verPerfil,
+} from "@/core/services/UserService";
 import { useRouter } from "next/navigation";
 import { createContext, useState, useContext, useEffect } from "react";
 
 type UserContextType = {
-  user: Usuario | null,
-  isLoading: boolean,
-  isAuthenticated: boolean,
-  login: (email:string, senha:string) => Promise<boolean>,
-  logout: () => void,
-  cadastro: (data: any) => Promise<boolean>
+  user: Usuario | null;
+  isLoading: boolean;
+  isAuthenticated: boolean;
+  login: (email: string, senha: string) => Promise<boolean>;
+  logout: () => void;
+  cadastro: (data: any) => Promise<boolean>;
 };
 
 export const UserContext = createContext<UserContextType | null>(null);
@@ -37,29 +42,29 @@ export default function UserProvider({
   useEffect(() => {
     const loadUser = async () => {
       setIsLoading(true);
-      try{
-          const userData = await verPerfil();
-          setUser(userData)
-      }catch(e){
-          console.warn("Nenhum perfil ativo", e);
-          setUser(null);
-      } finally{
+      try {
+        const userData = await verPerfil();
+        setUser(userData);
+      } catch (e) {
+        console.warn("Nenhum perfil ativo", e);
+        setUser(null);
+      } finally {
         setIsLoading(false);
       }
-  }
-  loadUser()
-  },[])
+    };
+    loadUser();
+  }, []);
 
-  const login = async (email: string, senha: string):Promise<boolean> => {
-     setIsLoading(true); 
+  const login = async (email: string, senha: string): Promise<boolean> => {
+    setIsLoading(true);
     try {
-      const userData = await loginUsuario(email, senha); 
-      setUser(userData); 
-      return true; 
+      const userData = await loginUsuario(email, senha);
+      setUser(userData);
+      return true;
     } catch (error) {
       console.error("Erro no login:", error);
-      setUser(null); 
-      return false; 
+      setUser(null);
+      return false;
     } finally {
       setIsLoading(false);
     }
@@ -68,30 +73,30 @@ export default function UserProvider({
   const logout = () => {
     setIsLoading(true);
 
-    try{
+    try {
       deslogar();
-      setUser(null)
+      setUser(null);
       router.push("/");
-    }catch(e){
-      console.error("Erro ao deslogar", e)
-    }finally{
+    } catch (e) {
+      console.error("Erro ao deslogar", e);
+    } finally {
       setIsLoading(false);
     }
   };
 
-  const cadastro = async (data:any):Promise<boolean> => {
+  const cadastro = async (data: any): Promise<boolean> => {
     setIsLoading(true);
-    try{
-      const userData = await cadastroUsuario(data)
-      setUser(data)
+    try {
+      const userData = await cadastroUsuario(data);
+      setUser(data);
       return true;
-    }catch(e){
+    } catch (e) {
       console.error("Erro no cadastro", e);
       return false;
-    }finally{
+    } finally {
       setIsLoading(false);
     }
-  }
+  };
 
   const contextValue = {
     user,
@@ -99,11 +104,9 @@ export default function UserProvider({
     isAuthenticated,
     login,
     logout,
-    cadastro
-  }
+    cadastro,
+  };
   return (
-    <UserContext.Provider value={contextValue}>
-      {children}
-    </UserContext.Provider>
+    <UserContext.Provider value={contextValue}>{children}</UserContext.Provider>
   );
 }

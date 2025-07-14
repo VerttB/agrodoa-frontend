@@ -24,7 +24,7 @@ export const CancelarAnuncioModal = ({
   const [loading, setLoading] = useState(false);
 
   const isNomeValido = inputNome.trim() === titulo.trim();
-  console.log(id)
+  console.log(id);
   const handleConfirmar = async () => {
     if (!isNomeValido) {
       setError("O nome digitado não corresponde ao título do anúncio.");
@@ -62,19 +62,21 @@ export const CancelarAnuncioModal = ({
             Digite o nome completo do anúncio que deseja excluir no campo abaixo
             para prosseguir com o cancelamento.
           </h2>
-          <p className="text-sm text-gray-600">Essa ação não poderá ser desfeita.</p>
+          <p className="text-sm text-gray-600">
+            Essa ação não poderá ser desfeita.
+          </p>
           <p className="font-bold">{titulo}</p>
           <input
             type="text"
-            className="border rounded px-3 py-2 mt-2"
+            className="mt-2 rounded border px-3 py-2"
             placeholder="Digite o nome do anúncio aqui"
             value={inputNome}
             onChange={(e) => setInputNome(e.target.value)}
             disabled={loading}
           />
-          {error && <p className="text-red-600 text-sm mt-1">{error}</p>}
+          {error && <p className="mt-1 text-sm text-red-600">{error}</p>}
         </div>
-        <Modal.Actions className="justify-end mt-4">
+        <Modal.Actions className="mt-4 justify-end">
           <Button
             onClick={handleConfirmar}
             disabled={!isNomeValido || loading}
@@ -82,7 +84,11 @@ export const CancelarAnuncioModal = ({
           >
             {loading ? "Cancelando..." : "Confirmar"}
           </Button>
-          <Button onClick={handleClose} variant="outlined" className="px-4 py-2">
+          <Button
+            onClick={handleClose}
+            variant="outlined"
+            className="px-4 py-2"
+          >
             Fechar
           </Button>
         </Modal.Actions>

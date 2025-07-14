@@ -11,7 +11,7 @@ import { useState } from "react";
 import { useUserContext } from "@/providers/UserProvider";
 
 export default function Login() {
-  const { login} = useUserContext();
+  const { login } = useUserContext();
   const router = useRouter();
   const [loginError, setLoginError] = useState<string | null>(null);
 
@@ -34,27 +34,24 @@ export default function Login() {
   });
 
   const onInvalid = () => {
-
-      console.log(errors)
-      setTimeout(() => clearErrors(), 3000)
-    
-  }
+    console.log(errors);
+    setTimeout(() => clearErrors(), 3000);
+  };
 
   const onSubmit = async (data: userLoginData) => {
-  try {
-    setLoginError(null); 
-    const sucess = await login(data.email, data.senha);
-    if(sucess)
-      router.push("/anuncios"); 
-    else setLoginError("Credencias inválidas ou erro de servidor")
-  } catch (error: any) {
-    setLoginError(error.message || "Erro ao realizar login");
-  }
-};
+    try {
+      setLoginError(null);
+      const sucess = await login(data.email, data.senha);
+      if (sucess) router.push("/anuncios");
+      else setLoginError("Credencias inválidas ou erro de servidor");
+    } catch (error: any) {
+      setLoginError(error.message || "Erro ao realizar login");
+    }
+  };
 
   return (
     <div className="flex h-screen items-center justify-center bg-[url(/backgroundAuth.jpg)] bg-cover">
-      <div className="m-2 xl:w-2/6 xl:min-h-[520px] flex flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60 lg:m-0 lg:w-2/5">
+      <div className="m-2 flex flex-col justify-around rounded-tl-[100px] rounded-br-[100px] bg-white/60 shadow-2xl backdrop-blur-2xl backdrop-opacity-60 lg:m-0 lg:w-2/5 xl:min-h-[520px] xl:w-2/6">
         <div className="flex h-1/5 w-full items-center justify-center gap-2 self-center border-b-1">
           <Image
             src="/logo.png"
@@ -80,7 +77,7 @@ export default function Login() {
               {...register("email")}
               placeholder="Insira seu email"
               errors={errors.email?.message}
-              className="bg-white py-2 w-full rounded-lg"
+              className="w-full rounded-lg bg-white py-2"
             />
             <Input
               type="text"
@@ -89,7 +86,7 @@ export default function Login() {
               label="Senha"
               errors={errors.senha?.message}
               placeholder="Insira sua senha"
-              className="bg-white py-2 w-full rounded-lg"
+              className="w-full rounded-lg bg-white py-2"
             />
 
             <div className="mt-4 flex flex-col gap-2 max-lg:items-center">
@@ -103,15 +100,14 @@ export default function Login() {
               >
                 Entrar
               </Button>
-              <Button
-                className=" py-1 max-lg:w-4/5"
-                variant="outlined"
-              >
+              <Button className="py-1 max-lg:w-4/5" variant="outlined">
                 Entrar com Google
               </Button>
               {loginError && (
-                  <p className="text-red-600 text-sm mt-2 text-center">{loginError}</p>
-)}
+                <p className="mt-2 text-center text-sm text-red-600">
+                  {loginError}
+                </p>
+              )}
             </div>
           </div>
         </form>

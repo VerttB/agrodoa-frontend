@@ -16,23 +16,32 @@ import { useRouter } from "next/navigation";
 const createAdSchema = z.object({
   titulo: z.string().min(3, "Título muito curto").max(100),
   nome: z.string().min(3, "Nome do produto muito curto").max(100),
-  quantidade: z.coerce.number()
-    .int().gte(1, "Quantidade mínima 1").lte(10000, "Quantidade máxima 10000"),
+  quantidade: z.coerce
+    .number()
+    .int()
+    .gte(1, "Quantidade mínima 1")
+    .lte(10000, "Quantidade máxima 10000"),
   preco_unidade: z.coerce.number().gte(0.05, "Preço mínimo R$0,05"),
 
-  data_validade: z.string().refine((val) => {
-    const date = new Date(val);
-    return date > new Date();
-  }, {
-    message: "A data de validade deve ser futura",
-  }),
+  data_validade: z.string().refine(
+    (val) => {
+      const date = new Date(val);
+      return date > new Date();
+    },
+    {
+      message: "A data de validade deve ser futura",
+    },
+  ),
 
-  data_expiracao: z.string().refine((val) => {
-    const date = new Date(val);
-    return date > new Date();
-  }, {
-    message: "A data de expiração deve ser futura",
-  }),
+  data_expiracao: z.string().refine(
+    (val) => {
+      const date = new Date(val);
+      return date > new Date();
+    },
+    {
+      message: "A data de expiração deve ser futura",
+    },
+  ),
 
   entrega_pelo_fornecedor: z.enum(["true", "false"], {
     required_error: "Informe se o fornecedor entrega",
@@ -44,9 +53,13 @@ const createAdSchema = z.object({
     required_error: "Informe o tipo do anúncio",
   }),
 
-  image: z.instanceof(File, { message: "Deve ser uma imagem" })
-    .refine(file => file?.size <= MAX_FILE_SIZE, "Máximo 5MB")
-    .refine(file => ACCEPTED_IMAGE_TYPE.includes(file?.type), "Extensão inválida"),
+  image: z
+    .instanceof(File, { message: "Deve ser uma imagem" })
+    .refine((file) => file?.size <= MAX_FILE_SIZE, "Máximo 5MB")
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPE.includes(file?.type),
+      "Extensão inválida",
+    ),
 });
 
 type CreateAdData = z.infer<typeof createAdSchema>;
@@ -141,17 +154,21 @@ export const CriarAnuncio = () => {
                   className="w-full"
                 />
                 <div>
-                  <label className="text-sm font-medium">Entrega pelo Fornecedor</label>
+                  <label className="text-sm font-medium">
+                    Entrega pelo Fornecedor
+                  </label>
                   <SelectInput
                     data={[
                       { value: "true", text: "Sim" },
                       { value: "false", text: "Não" },
                     ]}
-                    className="w-full bg-white border border-gray-300 rounded p-2 mt-1"
+                    className="mt-1 w-full rounded border border-gray-300 bg-white p-2"
                     {...register("entrega_pelo_fornecedor")}
                   />
                   {errors.entrega_pelo_fornecedor && (
-                    <p className="text-red-500 text-sm">{errors.entrega_pelo_fornecedor.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.entrega_pelo_fornecedor.message}
+                    </p>
                   )}
                 </div>
 
@@ -162,11 +179,13 @@ export const CriarAnuncio = () => {
                       { value: "DOACAO", text: "Doação" },
                       { value: "VENDA", text: "Venda" },
                     ]}
-                    className="w-full bg-white border border-gray-300 rounded p-2 mt-1"
+                    className="mt-1 w-full rounded border border-gray-300 bg-white p-2"
                     {...register("tipoAnuncio")}
                   />
                   {errors.tipoAnuncio && (
-                    <p className="text-red-500 text-sm">{errors.tipoAnuncio.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.tipoAnuncio.message}
+                    </p>
                   )}
                 </div>
 
@@ -228,7 +247,11 @@ export const CriarAnuncio = () => {
 
             <Modal.Actions>
               {etapa > 1 && (
-                <Button variant="outlined" onClick={() => setEtapa(etapa - 1)} type="button">
+                <Button
+                  variant="outlined"
+                  onClick={() => setEtapa(etapa - 1)}
+                  type="button"
+                >
                   Voltar
                 </Button>
               )}
@@ -237,12 +260,12 @@ export const CriarAnuncio = () => {
                   Próximo
                 </Button>
               )}
-              {etapa === 2 && (
-                <Button type="submit">
-                  Criar
-                </Button>
-              )}
-              <Button variant="outlined" onClick={() => setOpen(false)} type="button">
+              {etapa === 2 && <Button type="submit">Criar</Button>}
+              <Button
+                variant="outlined"
+                onClick={() => setOpen(false)}
+                type="button"
+              >
                 Fechar
               </Button>
             </Modal.Actions>

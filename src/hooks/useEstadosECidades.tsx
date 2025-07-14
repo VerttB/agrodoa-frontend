@@ -16,16 +16,19 @@ export function useEstadosECidades() {
   const [estados, setEstados] = useState<Estado[]>([]);
   const [cidades, setCidades] = useState<Cidade[]>([]);
 
-  const { data: estadosData } = useFetch<Estado[]>("http://localhost:8080/estados");
-  const { data: cidadesData } = useFetch<Cidade[]>(
-    estadoSelecionado ? `http://localhost:8080/estados/${estadoSelecionado}/cidades` : ""
+  const { data: estadosData } = useFetch<Estado[]>(
+    "http://localhost:8080/estados",
   );
-
+  const { data: cidadesData } = useFetch<Cidade[]>(
+    estadoSelecionado
+      ? `http://localhost:8080/estados/${estadoSelecionado}/cidades`
+      : "",
+  );
 
   useEffect(() => {
     if (estadosData?.length) {
       setEstados(estadosData);
-      setEstadoSelecionado(estadosData[0].id); 
+      setEstadoSelecionado(estadosData[0].id);
     }
   }, [estadosData]);
 
@@ -33,7 +36,7 @@ export function useEstadosECidades() {
     if (cidadesData) {
       setCidades(cidadesData);
     } else {
-      setCidades([]); 
+      setCidades([]);
     }
   }, [cidadesData]);
 

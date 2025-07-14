@@ -16,23 +16,26 @@ const solicitarCausaSchema = z.object({
   nome: z
     .string({ required_error: "O campo de nome de causa não deve estar vazio" })
     .min(3, "Nome muito curto"),
-  meta: z
-    .coerce.number()
-    .min(0.01, "Meta deve ser maior que zero"),
-  prazo: z
-    .string({ required_error: "Informe a data limite" })
-    .refine((dateStr) => {
+  meta: z.coerce.number().min(0.01, "Meta deve ser maior que zero"),
+  prazo: z.string({ required_error: "Informe a data limite" }).refine(
+    (dateStr) => {
       const date = new Date(dateStr);
       return !isNaN(date.getTime()) && date > new Date();
-    }, {
+    },
+    {
       message: "A data deve ser válida e futura",
-    }),
-  image: z.instanceof(File, { message: "Deve ser uma imagem" })
-    .refine(file => file?.size <= MAX_FILE_SIZE, "Máximo 5MB")
-    .refine(file => ACCEPTED_IMAGE_TYPE.includes(file?.type), "Extensão inválida"),
+    },
+  ),
+  image: z
+    .instanceof(File, { message: "Deve ser uma imagem" })
+    .refine((file) => file?.size <= MAX_FILE_SIZE, "Máximo 5MB")
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPE.includes(file?.type),
+      "Extensão inválida",
+    ),
   descricao: z
-  .string({ required_error: "Descrição é obrigatória" })
-  .min(10, "A descrição deve ter pelo menos 10 caracteres"),
+    .string({ required_error: "Descrição é obrigatória" })
+    .min(10, "A descrição deve ter pelo menos 10 caracteres"),
 });
 
 type SolicitarCausaData = z.infer<typeof solicitarCausaSchema>;
@@ -51,34 +54,43 @@ export const SolicitarCausa = () => {
   } = useForm<SolicitarCausaData>({
     resolver: zodResolver(solicitarCausaSchema),
   });
-console.log(errors)
+  console.log(errors);
   const onSubmit = async (data: any) => {
-    
-    console.log("Solicitando.......")
-  try {
-    data.image = ""
-    await criarCausa(data);
+    console.log("Solicitando.......");
+    try {
+      data.image = "";
+      await criarCausa(data);
 
-    reset(); 
-    setOpen(false); 
-    router.refresh();
-  } catch (error) {
-    console.error("Erro ao criar causa:", error);
-  }
-};
+      reset();
+      setOpen(false);
+      router.refresh();
+    } catch (error) {
+      console.error("Erro ao criar causa:", error);
+    }
+  };
 
   return (
-          <>
+    <>
       {user?.tipoUsuario === "fornecedor" && (
         <>
-          <Button className="w-32" variant="outlined" onClick={() => setOpen(true)}>
+          <Button
+            className="w-32"
+            variant="outlined"
+            onClick={() => setOpen(true)}
+          >
             Criar
           </Button>
 
           <Modal.Root onOpenChange={setOpen} open={open}>
-            <Modal.Header title="Solicitar Causa" onClose={() => setOpen(false)} />
+            <Modal.Header
+              title="Solicitar Causa"
+              onClose={() => setOpen(false)}
+            />
             <Modal.Content className="min-w-[640px]">
-              <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
+              <form
+                className="w-full space-y-4"
+                onSubmit={handleSubmit(onSubmit)}
+              >
                 <Input
                   label="Nome da Causa"
                   placeholder="Insira o nome da causa"
@@ -103,16 +115,18 @@ console.log(errors)
                   errors={errors.prazo?.message}
                 />
                 <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-1">
+                  <label className="mb-1 block text-sm font-medium text-gray-700">
                     Descrição
                   </label>
                   <textarea
                     {...register("descricao")}
                     placeholder="Descreva os motivos, o contexto ou o objetivo desta causa"
-                    className="w-full min-h-[100px] p-2 border border-gray-300 rounded bg-white"
+                    className="min-h-[100px] w-full rounded border border-gray-300 bg-white p-2"
                   />
                   {errors.descricao && (
-                    <p className="text-sm text-red-500">{errors.descricao.message}</p>
+                    <p className="text-sm text-red-500">
+                      {errors.descricao.message}
+                    </p>
                   )}
                 </div>
                 <Controller
@@ -142,9 +156,8 @@ console.log(errors)
               </form>
             </Modal.Content>
           </Modal.Root>
-          </>
-          )}
         </>
- 
+      )}
+    </>
   );
 };
