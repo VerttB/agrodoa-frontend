@@ -22,7 +22,6 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
 
   useEffect(() => {
     if (!isLogged) {
-      // Usuário não logado só vê disponíveis, não precisa carregar mais nada
       setAnunciosPorAba({ disponiveis: anuncios })
       setTab("disponiveis")
       return
@@ -37,11 +36,9 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
           setAnunciosPorAba({ disponiveis: anuncios, salvos, negociacao })
           setTab("disponiveis")
         } else {
-          // fornecedor
-          const abertos = anuncios.filter(a => a.anunciante.nome === user?.nome) // Buscar abertos
-          const negociacao:Anuncio[]  = []
+          const abertos = anuncios.filter(a => a.anunciante.nome === user?.nome) 
           const finalizados: Anuncio[] = [] // Buscar finalizados
-          setAnunciosPorAba({ abertos, negociacao, finalizados })
+          setAnunciosPorAba({ abertos, finalizados })
           setTab("abertos")
         }
       } catch (e) {
@@ -59,11 +56,9 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
     <AnuncioTabs
       tipoUsuario={user?.tipoUsuario || null}
       onTabChange={setTab}
-      // Se não estiver logado, forçamos valor e removemos a troca de aba
       value={isLogged ? undefined : "disponiveis"}
     >
       <div className="flex flex-col gap-4">
-        {/* Filtros e busca só para beneficiário e aba disponíveis */}
         {user?.tipoUsuario === "beneficiario" && tab === "disponiveis" && (
           <div className="flex gap-2">
             <AnuncioFiltros />
@@ -71,7 +66,6 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
           </div>
         )}
 
-        {/* Criar anúncio só para fornecedor */}
         {isFornecedor && <CriarAnuncio />}
 
         <AnuncioTabsContent anunciosPorAba={anunciosPorAba} tipoUsuario={user?.tipoUsuario || null} />
