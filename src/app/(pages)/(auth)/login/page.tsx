@@ -45,7 +45,7 @@ export default function Login() {
     setLoginError(null); 
     const sucess = await login(data.email, data.senha);
     if(sucess)
-      router.push("/"); 
+      router.push("/anuncios"); 
     else setLoginError("Credencias inválidas ou erro de servidor")
   } catch (error: any) {
     setLoginError(error.message || "Erro ao realizar login");
