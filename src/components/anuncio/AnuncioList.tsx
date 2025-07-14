@@ -13,7 +13,7 @@ export const AnuncioList = ({ anuncios, className }: AnuncioListProps) => {
   return (
     <div className={twMerge(`grid w-4/4 gap-2 md:grid-cols-2 lg:grid-cols-4`, className)}>
       {anuncios.map((a) => (
-        <AnuncioCard key={a.dataExpiracao} anuncio={a} />
+        <AnuncioCard key={a.idAnuncio} anuncio={a} />
       ))}
     </div>
   );
