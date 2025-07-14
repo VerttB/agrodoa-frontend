@@ -13,12 +13,12 @@ export const Header = () => {
     : ["Anuncios", "Causas"]; // deslogado
 
   return (
-    <header className="bg-secondary-darker flex h-16 w-full flex-row-reverse items-center justify-between text-white">
-      <ul className="flex gap-4 px-4 text-2xl">
+    <header className="bg-secondary-darker flex h-12 w-full flex-row-reverse items-center justify-between text-white">
+      <ul className="flex gap-4 px-4 text-lg">
         {user && <Button className="text-sm" onClick={() => logout()}>Deslogar</Button>}
         {headerItens.map((item) => (
           <li key={item}>
-            <Link href={`/${item.toLowerCase()}`}>{item}</Link>
+            <Link className="hover:text-secondary-light" href={`/${item.toLowerCase()}`}>{item}</Link>
           </li>
         ))}
       </ul>
