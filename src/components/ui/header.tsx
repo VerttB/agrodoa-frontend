@@ -35,7 +35,7 @@ export const Header = () => {
         onClick={() => router.push("/")}
         className="flex cursor-pointer items-center px-4"
       >
-        <Image src="/logo.png" height={64} width={64} alt="Logo imagem" />
+        <Image src="/logo.png" height={48} width={48} alt="Logo imagem" />
         <span className="font-sofia ml-2 text-xl">Agrodoa</span>
       </div>
     </header>
