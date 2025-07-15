@@ -1,6 +1,6 @@
 import { TabsContent } from "@/components/ui/tabs";
 import { AnuncioList } from "@/components/anuncio/AnuncioList";
-import { Anuncio } from "@/core/interfaces/Anuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
 
 interface Props {
   anunciosPorAba: Partial<Record<string, Anuncio[]>>;

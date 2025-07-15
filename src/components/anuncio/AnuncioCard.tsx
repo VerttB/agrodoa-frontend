@@ -1,13 +1,13 @@
 "use client";
 import { Card } from "../ui/Card";
-import { Anuncio } from "@/core/interfaces/Anuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
 import { useRouter } from "next/navigation";
 import { Button } from "../ui/button";
 import { Heart } from "lucide-react";
 import { AnuncioDropdownMenu } from "./AnuncioDropdown";
 import { useUserContext } from "@/providers/UserProvider";
 import { salvarAnuncio } from "@/core/services/AnuncioService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   Tooltip,
   TooltipContent,
@@ -19,6 +19,7 @@ export const AnuncioCard = ({ anuncio }: { anuncio: Anuncio }) => {
   const router = useRouter();
   const { user } = useUserContext();
   const [sucess, setSucess] = useState(false);
+
 
   const handleSave = (id: string) => {
     console.log(id);
@@ -42,7 +43,7 @@ export const AnuncioCard = ({ anuncio }: { anuncio: Anuncio }) => {
             <AnuncioDropdownMenu anuncio={anuncio} />
           </div>
         )}
-        <Card.Image  imageUrl={imgValidate(anuncio.nomeArquivoFoto)} alt="imagem do anuncio"></Card.Image>
+        <Card.Image className=""  imageUrl={imgValidate(anuncio.nomeArquivoFoto)} alt="imagem do anuncio"></Card.Image>
         <Card.Content>
           <div className="h-full">
             <h1 className="mb-4 text-xl font-bold line-clamp-1 hover:line-clamp-none">{anuncio.titulo}</h1>

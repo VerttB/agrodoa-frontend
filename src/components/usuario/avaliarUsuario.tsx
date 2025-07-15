@@ -1,11 +1,13 @@
 "use client";
 
-import { z } from "zod";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Button } from "../ui/button";
-import { Modal } from "../ui/Modal";
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Star, StarOff } from "lucide-react";
+import { Modal } from "../ui/Modal";
+import { Button } from "../ui/button";
+import { avaliar } from "@/core/services/UserService";
 
 const avaliacaoSchema = z.object({
   nota: z.number().min(1, "Escolha uma nota de 1 a 5"),
@@ -14,73 +16,87 @@ const avaliacaoSchema = z.object({
 
 type AvaliacaoData = z.infer<typeof avaliacaoSchema>;
 
-export const AvaliarUsuario = ({ nomeUsuario }: { nomeUsuario: string }) => {
+export const AvaliarUsuario = ({ nomeUsuario, idUsuario }: { nomeUsuario: string; idUsuario: string }) => {
   const [open, setOpen] = useState(false);
+  const [hoveredStar, setHoveredStar] = useState<number | null>(null);
   const {
     register,
     handleSubmit,
     setValue,
+    watch,
+    reset,
     formState: { errors },
   } = useForm<AvaliacaoData>({
     resolver: zodResolver(avaliacaoSchema),
   });
 
-  const onSubmit = (data: AvaliacaoData) => {
-    console.log("Enviando avaliação:", data);
-    // await api.post("/avaliacoes", data)
+  const notaSelecionada = watch("nota");
+
+  const handleSetNota = (n: number) => {
+    setValue("nota", n);
   };
+
+  const onSubmit = async (data: AvaliacaoData) => {
+    try {
+      console.log("Enviando avaliação", data);
+      const res = await avaliar(data, idUsuario);
+      setOpen(false);
+    } catch (e) {
+      console.error("Erro ao enviar avaliação:", e);
+    }
+  };
+
+  const handleClose = () => {
+    reset();
+    setOpen(false);
+  }
 
   return (
     <>
-      <Button className="w-32" variant="outlined" onClick={() => setOpen(true)}>
-        Criar
+      <Button variant="outlined" className="w-32" onClick={() => setOpen(true)}>
+        Avaliar
       </Button>
+
       <Modal.Root open={open} onOpenChange={setOpen}>
         <Modal.Header title={`Avaliando ${nomeUsuario}`} />
         <Modal.Content>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mx-auto w-full max-w-md rounded-md border border-teal-400 bg-orange-50 p-6 shadow-md"
+            className="mx-auto xl:min-w-[480px] w-full max-w-md rounded-md borderp-6 shadow-md space-y-4"
           >
-            <div className="mb-4 flex justify-center gap-1 text-2xl">
-              {[1, 2, 3, 4, 5].map((n) => (
-                <span
-                  key={n}
-                  className="cursor-pointer"
-                  onClick={() => setValue("nota", n)}
-                >
-                  ★
-                </span>
-              ))}
+            {/* Estrelas interativas */}
+            <div className="flex justify-center gap-2 my-4 text-3xl">
+              {[1, 2, 3, 4, 5].map((n) => {
+                const filled = hoveredStar ? n <= hoveredStar : n <= notaSelecionada;
+                return (
+                  <Button
+                    key={n}
+                    type="button"
+                    variant="ghost"
+                    onMouseEnter={() => setHoveredStar(n)}
+                    onMouseLeave={() => setHoveredStar(null)}
+                    onClick={() => handleSetNota(n)}
+                    className="p-0"
+                  >
+                    {filled ? <Star className="text-yellow-400 fill-yellow-400" /> : <Star className="text-gray-400" />}
+                  </Button>
+                );
+              })}
             </div>
-            {errors.nota && (
-              <p className="text-center text-sm text-red-600">
-                {errors.nota.message}
-              </p>
-            )}
+            {errors.nota && <p className="text-center text-sm text-red-600">{errors.nota.message}</p>}
 
             <textarea
               {...register("comentario")}
               placeholder="Deixe um comentário..."
               className="min-h-[100px] w-full rounded-md border border-green-400 p-2"
             />
-            {errors.comentario && (
-              <p className="text-sm text-red-600">
-                {errors.comentario.message}
-              </p>
-            )}
+            {errors.comentario && <p className="text-sm text-red-600">{errors.comentario.message}</p>}
+
             <Modal.Actions>
-              <Button
-                type="submit"
-                className="mt-4 w-full rounded-md bg-orange-400 py-2 font-semibold text-white shadow-md transition hover:bg-orange-500"
-              >
-                Avaliar
+              <Button type="submit" className="flex-1">
+                Enviar Avaliação
               </Button>
-              <Button
-                className="px-4 py-1"
-                variant="outlined"
-                onClick={() => setOpen(false)}
-              >
+              <Button type="button" className="flex-1" variant="outlined" onClick={() => handleClose()}>
                 Cancelar
               </Button>
             </Modal.Actions>

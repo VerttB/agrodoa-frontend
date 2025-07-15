@@ -100,3 +100,58 @@ export async function deslogar() {
   }
   return await res.json();
 }
+
+
+export async function denunciar(data:any,id:string) {
+  const res = await fetch(`${BASE_URL}/usuarios/ver_perfil/${id}/denunciar`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    credentials: "include",
+  });
+
+  if (!res.ok){
+    console.log(await res.json())
+    throw new Error("Não foi denunciar  o usuário");
+  }
+
+  const contentType = res.headers.get("content-type");
+
+  if (
+    res.status === 204 ||
+    !contentType ||
+    !contentType.includes("application/json")
+  ) {
+    return;
+  }
+  return await res.json();
+}
+
+export async function avaliar(data:any,id:string) {
+  const res = await fetch(`${BASE_URL}/usuarios/ver_perfil/${id}/avaliar`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    credentials: "include",
+  });
+
+  if (!res.ok){
+    console.log(await res.json())
+    throw new Error("Não foi avaliar o usuário");
+  }
+
+  const contentType = res.headers.get("content-type");
+
+  if (
+    res.status === 204 ||
+    !contentType ||
+    !contentType.includes("application/json")
+  ) {
+    return;
+  }
+  return await res.json();
+}

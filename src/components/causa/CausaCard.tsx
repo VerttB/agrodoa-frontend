@@ -8,13 +8,13 @@ export const CausaCard = ({ causa }: { causa: Causas }) => {
   const router = useRouter();
 
   return (
-    <Card.Root className="flex w-3/4 flex-col overflow-hidden rounded bg-white max-md:place-self-center md:w-full md:flex-row md:justify-center">
+    <Card.Root className="flex w-3/4 flex-col overflow-hidden rounded bg-white place-self-center md:w-full md:flex-row md:justify-center xl:w-full">
       <Card.Image
         alt="Imagem da causa"
         imageUrl={
            imgValidate(causa.nomeArquivoFoto)
         }
-        className="h-full w-[240px] max-md:h-[240px] max-md:w-full"
+        className="xl:h-[220px] w-[240px] max-lg:w-1/2 max-lg:h-[240px] max-md:w-full"
       />
       <Card.Content className="flex flex-col md:w-3/5 md:justify-between md:gap-2 md:p-4 2xl:w-full">
         <div className="max-h-[100px]">

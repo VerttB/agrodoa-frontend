@@ -6,7 +6,7 @@ import AnuncioSearch from "./AnuncioSearch";
 import { AnuncioTabs } from "./AnuncioTabs";
 import { CriarAnuncio } from "./CriarAnuncioModal";
 import { AnuncioTabsContent } from "./AnuncioTabsContent";
-import { Anuncio } from "@/core/interfaces/Anuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
 import { useEffect, useState } from "react";
 import {
   getAnunciosEmNegociacao,

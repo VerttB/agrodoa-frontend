@@ -1,4 +1,4 @@
-import { Anuncio } from "@/core/interfaces/Anuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
 import { AnuncioCard } from "./AnuncioCard";
 import { twMerge } from "tailwind-merge";
 

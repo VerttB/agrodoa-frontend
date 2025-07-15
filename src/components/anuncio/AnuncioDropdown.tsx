@@ -9,7 +9,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { EllipsisIcon } from "lucide-react";
 import { CancelarAnuncioModal } from "./CancelarAnuncioModal";
-import { Anuncio } from "@/core/interfaces/Anuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
 import { useState } from "react";
 import { EditarAnuncio } from "./EditarAnuncioModal";
 

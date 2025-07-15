@@ -37,6 +37,7 @@ export const DenunciarUsuario = ({ nomeUsuario,id }: { nomeUsuario: string, id:s
     try{
       const res = await denunciar(data,id)
       console.log(await res)
+      setOpen(false)
     }catch(e){
       console.log(e)
     }

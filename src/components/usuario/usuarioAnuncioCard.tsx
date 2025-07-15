@@ -2,8 +2,9 @@
 import { useRouter } from "next/navigation";
 import { Card } from "../ui/Card";
 import { Button } from "../ui/button";
-import { Anuncio } from "@/core/interfaces/Anuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
 import { Usuario } from "@/core/interfaces/Usuario";
+import { imgValidate } from "@/core/utils/imageValidate";
 
 interface UserAnuncioProps {
   anuncio: Anuncio;
@@ -18,7 +19,7 @@ export const UserAnuncio = ({ anuncio, nomeAnunciante }: UserAnuncioProps) => {
       key={anuncio.idAnuncio}
       className="relative flex max-h-[320] max-w-[240px] min-w-[240px] flex-col justify-around shadow-[0px_6px_21px_-6px_rgba(249,_115,_22,_0.5)] transition-transform duration-200 hover:scale-105"
     >
-      <Card.Image imageUrl="/mato.jpg" alt="imagem do anúncio" />
+      <Card.Image imageUrl={imgValidate(anuncio.nomeArquivoFoto)} alt="imagem do anúncio" />
 
       <Card.Content>
         <div className="h-full">

@@ -7,9 +7,11 @@ import { Input } from "@/components/ui/input";
 import { ItemPage } from "@/components/ui/ItemPage";
 import { useRouter } from "next/navigation";
 import { useAnuncio } from "@/hooks/useAnuncio";
-import { Anuncio } from "@/core/interfaces/Anuncio";
+import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
 import { LoadingSpin } from "@/components/ui/loadingComponent";
 import { useState } from "react";
+import Link from "next/link";
+import { imgValidate } from "@/core/utils/imageValidate";
 
 export default function AnuncioUnico() {
   const { id } = useParams();
@@ -26,17 +28,19 @@ export default function AnuncioUnico() {
     <div className="bg-primary relative z-0 min-h-screen px-16">
       <ItemPage.root>
         <ItemPage.content>
+          <div className="w-full md:w-3/4 flex justify-center">
           <Image
             className="w-full rounded-xl border border-black md:w-3/4"
             alt="Imagem da causa"
-            src="/mato.jpg"
-            width={512}
-            height={320}
+            src={imgValidate(anuncio.nomeArquivoFoto)}
+            width={256}
+            height={52}
           />
+          </div>
           <ItemPage.description title={anuncio.titulo}>
-            <p className="flex items-center gap-2 text-xl">
+            <Link href={`/perfil/${anuncio.anunciante.idAnunciante}`} className="flex items-center gap-2 text-xl underline text-gray-900">
               <User aria-hidden="true" /> Responsável: {anuncio.anunciante.nome}
-            </p>
+            </Link>
             <p className="flex items-center gap-2 text-xl">
               <CalendarDays aria-hidden="true" /> Prazo: {anuncio.dataExpiracao}
             </p>
