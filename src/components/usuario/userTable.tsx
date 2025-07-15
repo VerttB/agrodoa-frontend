@@ -7,17 +7,18 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { Usuario } from "@/core/interfaces/Usuario";
 import { useFetch } from "@/hooks/useFetch";
 import { useRouter } from "next/navigation";
 import { UsuarioDropdown } from "./usuarioDropdown";
+import { UsuarioCompleto } from "@/core/interfaces/UsuarioCompleto";
+import { LoadingSpin } from "../ui/loadingComponent";
 
-export const UserTable = ({ usuario }: { usuario: Usuario[] }) => {
-  //  const {data: usuario, loading} = useFetch<Usuario[]>("http://localhost:8080/usuarios")
+export const UserTable = () => {
+  const {data: usuario, loading} = useFetch<UsuarioCompleto[]>("http://localhost:8080/usuarios")
 
   const router = useRouter();
 
-  if (!usuario) return <p>n achei</p>;
+  if (!usuario) return <LoadingSpin/>;
   return (
     <div className="flex h-screen items-center justify-center">
       <div className="w-1/2">
@@ -36,7 +37,7 @@ export const UserTable = ({ usuario }: { usuario: Usuario[] }) => {
             {usuario.map((u) => (
               <TableRow
                 className="hover:bg-secondary-light cursor-pointer"
-                key={u.id}
+                key={u.idUser}
               >
                 <TableCell>
                   <div className="flex items-center gap-3">
