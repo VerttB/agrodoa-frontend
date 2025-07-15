@@ -3,13 +3,17 @@ import { Causas } from "@/core/interfaces/Causas";
 import { Card } from "../ui/Card";
 import { Button } from "../ui/button";
 import { useRouter } from "next/navigation";
+import { imgValidate } from "@/core/utils/imageValidate";
 export const CausaCard = ({ causa }: { causa: Causas }) => {
   const router = useRouter();
+
   return (
     <Card.Root className="flex w-3/4 flex-col overflow-hidden rounded bg-white max-md:place-self-center md:w-full md:flex-row md:justify-center">
       <Card.Image
         alt="Imagem da causa"
-        imageUrl="/mato.jpg"
+        imageUrl={
+           imgValidate(causa.nomeArquivoFoto)
+        }
         className="h-full w-[240px] max-md:h-[240px] max-md:w-full"
       />
       <Card.Content className="flex flex-col md:w-3/5 md:justify-between md:gap-2 md:p-4 2xl:w-full">
