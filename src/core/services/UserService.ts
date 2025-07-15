@@ -25,9 +25,11 @@ export async function loginUsuario(email: string, senha: string) {
     }),
     credentials: "include",
   });
-
+  
   if (!res.ok) throw new Error("Credenciais inválidas");
-  return await res.json();
+  const data = await res.json();
+  console.log(data)
+  return data;
 }
 
 export async function getUsuarioAutenticado() {}

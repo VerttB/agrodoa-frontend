@@ -1,4 +1,3 @@
-import { Local } from "./Local";
 
 export interface Usuario {
   tipo: string;
