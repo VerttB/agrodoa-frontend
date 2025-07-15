@@ -9,7 +9,7 @@ interface CardImageProps {
 export const CardImage = ({ imageUrl, alt, className }: CardImageProps) => {
   return (
     <div
-      className={`relative h-[140px] rounded-t-lg border-1 border-gray-300 ${className}`}
+      className={`relative h-[140px] rounded-t-lg  ${className}`}
     >
       <Image
         src={imageUrl}
