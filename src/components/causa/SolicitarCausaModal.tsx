@@ -58,8 +58,15 @@ export const SolicitarCausa = () => {
   const onSubmit = async (data: any) => {
     console.log("Solicitando.......");
     try {
-      data.image = "";
-      await criarCausa(data);
+      
+      const formData = new FormData();
+      formData.append("nome", data.nome);
+      formData.append("descricao", data.descricao);
+      formData.append("meta", String(data.meta));
+      formData.append("prazo", data.prazo);
+      formData.append("imagem", data.image); 
+
+      await criarCausa(formData);
 
       reset();
       setOpen(false);

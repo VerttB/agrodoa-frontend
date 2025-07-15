@@ -94,18 +94,18 @@ export const CriarAnuncio = () => {
       console.error("Erro ao criar produto:", e);
     }
 
-    const anuncio = {
-      titulo: data.titulo,
-      nomeArquivoFoto: data.image.name,
-      entregaPeloFOrnecedor: data.entrega_pelo_fornecedor === "true" ? 1 : 0,
-      tipoAnuncio: data.tipoAnuncio,
-      cidadeId: "CID0001", // ajuste conforme necessidade
-      produtoId: idAnuncio,
-      dataExpiracao: data.data_expiracao,
-    };
+   const formData = new FormData();
+
+formData.append("titulo", data.titulo);
+formData.append("imagem", data.image); 
+formData.append("entregaPeloFornecedor", data.entrega_pelo_fornecedor ? "1" : "0"); 
+formData.append("tipoAnuncio", data.tipoAnuncio);
+formData.append("cidadeId", data.cidade); 
+formData.append("produtoId", String(idAnuncio));
+formData.append("dataExpiracao", data.data_expiracao);
 
     try {
-      const res = await criarAnuncio(anuncio);
+      const res = await criarAnuncio(formData);
       console.log(res);
       setOpen(false);
       reset();
@@ -219,6 +219,7 @@ export const CriarAnuncio = () => {
                   label="Preço por Unidade"
                   type="number"
                   {...register("preco_unidade")}
+                  step={0.01}
                   errors={errors.preco_unidade?.message}
                   className="w-full"
                 />
