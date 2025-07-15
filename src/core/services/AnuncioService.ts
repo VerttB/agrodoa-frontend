@@ -62,8 +62,7 @@ export async function getAnunciosUsuario(
 export async function criarAnuncio(anuncio: any) {
   const res = await fetch("http://localhost:8080/anuncios/criar_anuncio", {
     method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(anuncio),
+    body: anuncio,
     credentials: "include",
   });
 
