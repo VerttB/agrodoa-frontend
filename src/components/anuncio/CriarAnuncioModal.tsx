@@ -117,7 +117,6 @@ formData.append("dataExpiracao", data.data_expiracao);
   };
 
   const handleNext = async () => {
-    // validar campos da etapa 1, incluindo tipoAnuncio
     const valid = await trigger([
       "titulo",
       "cidade",
