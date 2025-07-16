@@ -44,17 +44,19 @@ export const AnuncioTabs = ({
       <TabsList className="bg-background w-full h-auto -space-x-px p-0 shadow-xs max-md:text-sm rtl:space-x-reverse">
         {isFornecedor ? (
           <div className="flex justify-between w-full">
-            <TabsTrigger value="abertos">Abertos</TabsTrigger>
-            {/* <TabsTrigger value="negociacao">Em Negociação</TabsTrigger>
-            <TabsTrigger value="finalizados">Finalizados</TabsTrigger> */}
+            <div className="flex gap-2">
+            <TabsTrigger className="hover:bg-accent hover:text-foreground data-[state=active]:after:bg-secondary data-[state=active]:text-accent data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none" value="abertos">Abertos</TabsTrigger>
+            <TabsTrigger className="data-[state=active]:after:bg-secondary data-[state=active]:text-accent data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none" value="negociacao">Em Negociação</TabsTrigger>
+            {/* <TabsTrigger value="finalizados">Finalizados</TabsTrigger> */} 
+            </div>
             <CriarAnuncio/>
           </div>
         ) : (
-          <>
-            <TabsTrigger value="disponiveis">Disponíveis</TabsTrigger>
+          <div className="flex w-full">
+            <TabsTrigger className="data-[state=active]:after:bg-secondary data-[state=active]:text-accent data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none" value="disponiveis">Disponíveis</TabsTrigger>
             {/* <TabsTrigger value="negociacao">Em Negociação</TabsTrigger> */}
-            <TabsTrigger value="salvos">Salvos</TabsTrigger>
-          </>
+            <TabsTrigger className="data-[state=active]:after:bg-secondary data-[state=active]:text-accent data-[state=active]:hover:bg-accent relative after:absolute after:inset-x-0 after:bottom-0 after:-mb-1 after:h-0.5 data-[state=active]:bg-transparent data-[state=active]:shadow-none" value="salvos">Salvos</TabsTrigger>
+          </div>
         )}
        
       </TabsList>
