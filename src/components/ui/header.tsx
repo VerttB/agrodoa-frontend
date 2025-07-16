@@ -10,7 +10,7 @@ export const Header = () => {
   const { user, logout } = useUserContext();
   const headerItens = user
     ? ["Anuncios", "Causas", "Perfil"] // logado
-    : ["Anuncios", "Causas"]; // deslogado
+    : ["Login","Anuncios", "Causas"]; // deslogado
 
   return (
     <header className="bg-secondary-darker flex h-12 w-full flex-row-reverse items-center justify-between text-white">
