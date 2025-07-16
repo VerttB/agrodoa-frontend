@@ -13,6 +13,7 @@ import { criarProduto } from "@/core/services/ProdutoService";
 import { criarAnuncio } from "@/core/services/AnuncioService";
 import { useRouter } from "next/navigation";
 import { useEstadosECidades } from "@/hooks/useEstadosECidades";
+import { PlusCircle } from "lucide-react";
 
 const createAdSchema = z
   .object({
@@ -140,8 +141,8 @@ export const CriarAnuncio = () => {
 
   return (
     <>
-      <Button className="w-32" variant="outlined" onClick={() => setOpen(true)}>
-        Criar
+      <Button className="w-fit gap-2" onClick={() => setOpen(true)}>
+        <PlusCircle/> Criar Novo
       </Button>
       <Modal.Root onOpenChange={() => setOpen(false)} open={open}>
         <Modal.Header title="Criar Anúncio" onClose={() => setOpen(false)} />
@@ -179,6 +180,19 @@ export const CriarAnuncio = () => {
                     placeholder="Selecione a cidade"
                     className="flex-1 bg-white py-2"
                   />
+                </div>
+                <div className="fex flex-col">
+                  <label htmlFor="Desricão do An~uncio"></label>
+                  <textarea
+                    placeholder="Descrição do anúncio"
+                    {...register("descricao")}
+                    className="w-full rounded border border-gray-300 p-2 text-sm"
+                  />
+                  {errors.descricao && (
+                    <p className="text-sm text-red-500">
+                      {errors.descricao.message}
+                    </p>
+                  )}
                 </div>
                 <SelectInput
                   label="Entrega pelo Fornecedor"
@@ -219,16 +233,7 @@ export const CriarAnuncio = () => {
                   errors={errors.nome?.message}
                   className="w-full"
                 />
-                <textarea
-                  placeholder="Descrição do produto"
-                  {...register("descricao")}
-                  className="w-full rounded border border-gray-300 p-2 text-sm"
-                />
-                {errors.descricao && (
-                  <p className="text-sm text-red-500">
-                    {errors.descricao.message}
-                  </p>
-                )}
+               
                 <Input
                   label="Quantidade"
                   type="number"

@@ -60,11 +60,13 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
   if (loading) return <div>Carregando anúncios...</div>;
 
   return (
+    <div className="flex flex-col">
     <AnuncioTabs
       tipoUsuario={user?.tipoUsuario || null}
       onTabChange={setTab}
       value={isLogged ? undefined : "disponiveis"}
     >
+
       <div className="flex flex-col gap-4">
         {user?.tipoUsuario === "beneficiario" && tab === "disponiveis" && (
           <div className="flex gap-2">
@@ -73,13 +75,12 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
           </div>
         )}
 
-        {isFornecedor && <CriarAnuncio />}
-
         <AnuncioTabsContent
           anunciosPorAba={anunciosPorAba}
           tipoUsuario={user?.tipoUsuario || null}
         />
       </div>
     </AnuncioTabs>
+    </div>
   );
 };
