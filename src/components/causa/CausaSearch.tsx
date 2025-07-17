@@ -29,16 +29,16 @@ export default function CausaSearch() {
   }
 
   return (
-    <div className="flex w-full items-center ">
+    <div className="flex items-center lg:w-128 ">
       <Input
-        className="w-full rounded-r-none border-r-0 h-full"
+        className="w-full rounded-r-none border-r-0 h-full lg:h-10"
         placeholder="Insira o nome do anúncio"
         onChange={(e) => {
           setSearch(e.target.value);
         }}
         value={search}
       />
-      <Button className="rounded-l-none h-full" onClick={handleSearch}>
+      <Button className="rounded-l-none lg:h-10 relative -translate-x-0.5" onClick={handleSearch}>
         <Search size={18}></Search>
       </Button>
     </div>

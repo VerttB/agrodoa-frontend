@@ -10,8 +10,9 @@ import {
 import { EllipsisVertical } from "lucide-react";
 import { useState } from "react";
 import { Usuario } from "@/core/interfaces/Usuario";
+import { UsuarioCompleto } from "@/core/interfaces/UsuarioCompleto";
 
-export const UsuarioDropdown = ({ usuario }: { usuario: Usuario }) => {
+export const UsuarioDropdown = ({ usuario }: { usuario: UsuarioCompleto }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   return (

@@ -12,12 +12,19 @@ import { useRouter } from "next/navigation";
 import { UsuarioDropdown } from "./usuarioDropdown";
 import { UsuarioCompleto } from "@/core/interfaces/UsuarioCompleto";
 import { LoadingSpin } from "../ui/loadingComponent";
+import { useEffect, useState } from "react";
+import { getUsuarios } from "@/core/services/UserService";
 
 export const UserTable = () => {
-  const {data: usuario, loading} = useFetch<UsuarioCompleto[]>("http://localhost:8080/usuarios")
-
+  const [ usuario, setUsuario] = useState<UsuarioCompleto[]>([])
   const router = useRouter();
-
+  useEffect(() => {
+    const handleGetUser = async () => {
+      const data = await getUsuarios();
+      setUsuario(data)
+    }
+    handleGetUser()
+  },[])
   if (!usuario) return <LoadingSpin/>;
   return (
     <div className="flex h-screen items-center justify-center">

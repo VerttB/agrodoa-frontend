@@ -20,7 +20,7 @@ export default async function CausasPage({ searchParams }: CausaProps) {
   return (
     <div className="flex min-h-screen flex-col items-center p-8">
       <div className="flex w-full flex-col items-center gap-8">
-        <div className="flex w-full justify-center">
+        <div className="flex w-full xl:w-4/5">
           <CausaSearch />
         </div>
 

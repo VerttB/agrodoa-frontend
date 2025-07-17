@@ -67,7 +67,7 @@ export async function criarAnuncio(anuncio: any) {
   });
 
   if (!res.ok) {
-    throw new Error("Erro ao criar Anúncio");
+    return res;
   }
   return await res.json();
 }

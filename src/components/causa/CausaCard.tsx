@@ -8,20 +8,20 @@ export const CausaCard = ({ causa }: { causa: Causas }) => {
   const router = useRouter();
 
   return (
-    <Card.Root className="flex w-3/4 flex-col overflow-hidden rounded bg-white place-self-center md:w-full md:flex-row md:justify-center xl:w-full">
+    <Card.Root className="flex w-3/4 flex-col overflow-hidden rounded bg-white place-self-center md:w-full md:flex-col md:justify-center xl:w-full">
       <Card.Image
         alt="Imagem da causa"
         imageUrl={
            imgValidate(causa.nomeArquivoFoto)
         }
-        className="xl:h-[220px] w-[240px] max-lg:w-1/2 max-lg:h-[240px] max-md:w-full"
+        className="w-full h-[240px]"
       />
-      <Card.Content className="flex flex-col md:w-3/5 md:justify-between md:gap-2 md:p-4 2xl:w-full">
-        <div className="max-h-[100px]">
-          <h1 className="text-center text-3xl font-bold text-wrap max-md:mb-2 md:text-xl">
+      <Card.Content className="flex flex-col w-full md:justify-between md:gap-2 ">
+        <div className="h-[100px]">
+          <h1 className="text-left text-3xl font-bold text-gray-800 text-wrap max-md:mb-2 md:text-2xl">
             {causa.nome}
           </h1>
-          <p className="line-clamp-2 text-wrap">{causa.descricao}</p>
+          <p className="line-clamp-2 hover:line-clamp-none text-wrap">{causa.descricao}</p>
         </div>
         <div className="flex flex-col gap-2">
           <div className="h-2 w-full rounded bg-gray-200">
@@ -37,9 +37,9 @@ export const CausaCard = ({ causa }: { causa: Causas }) => {
             <p>Meta: R${causa.meta.toLocaleString("pt-br")}</p>
           </div>
         </div>
-        <Card.Actions className="flex w-4/5 justify-center gap-2 self-center border-none p-0">
+        <Card.Actions className="flex w-full mt-4 py-2  justify-center gap-2 ">
           <Button
-            className=""
+            className="w-1/2"
             onClick={() => router.push(`/causas/${causa.idCausa}`)}
           >
             Ver Detalhes

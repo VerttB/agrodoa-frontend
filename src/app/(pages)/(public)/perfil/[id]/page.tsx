@@ -43,15 +43,18 @@ export default async function Perfil({
     </div>
         <AvaliarUsuario nomeUsuario={usuario.nome} idUsuario={usuario.idUser}/>
       </div>
+      {usuario.anunciosPostados && <div className="flex flex-col w-full max-w-5xl gap-2 overflow-x-auto overflow-y-hidden">
+          <h3 className="border-b pb-1 text-lg font-semibold">Anúncios Postados</h3>
       <div className="flex w-full max-w-5xl gap-2 overflow-x-auto overflow-y-hidden">
-        {usuario.anunciosPostados?.map((anuncio: any) => (
+        {usuario.anunciosPostados.map((anuncio: any) => (
           <UserAnuncio
             key={anuncio.idAnuncio}
             anuncio={anuncio}
             nomeAnunciante={usuario.nome}
           />
         ))}
-      </div>
+        </div>
+      </div> }
       <div className="w-full max-w-5xl">
         <h3 className="border-b pb-1 text-lg font-semibold">Avaliações</h3>
         <div className="flex flex-col gap-4 py-4">
