@@ -29,18 +29,19 @@ export default function AnuncioSearch() {
   }
 
   return (
-    <div className="flex">
+    <div className="flex items-center lg:w-128">
       <Input
-        className="w-full"
+        className="w-full rounded-r-none border-r-0 h-full lg:h-10"
         placeholder="Insira o nome do anúncio"
         onChange={(e) => {
           setSearch(e.target.value);
         }}
         value={search}
       />
-      <Button onClick={handleSearch}>
-        <Search></Search>
+      <Button className="rounded-l-none lg:h-10 relative -translate-x-0.5" onClick={handleSearch}>
+        <Search strokeWidth={3} size={24}></Search>
       </Button>
     </div>
   );
 }
+

@@ -70,8 +70,8 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
       <div className="flex flex-col gap-4">
         {user?.tipoUsuario === "beneficiario" && tab === "disponiveis" && (
           <div className="flex gap-2">
-            <AnuncioFiltros />
             <AnuncioSearch />
+            <AnuncioFiltros />
           </div>
         )}
 

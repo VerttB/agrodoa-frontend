@@ -18,6 +18,7 @@ import { sidebar } from "@/components/ui/sidebar";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { SelectInput } from "../ui/selectInput";
 import { Input } from "../ui/input";
+import { FilterIcon } from "lucide-react";
 export const AnuncioFiltros = () => {
   const searchParams = useSearchParams();
   const [tipoAnuncio, setTipoAnuncio] = useState("");
@@ -114,7 +115,7 @@ export const AnuncioFiltros = () => {
 
   return (
     <>
-      <Button onClick={handleOpen}>Abrir</Button>
+      <Button onClick={handleOpen}><FilterIcon fill="white"/>Filtrar</Button>
       {!isMobile ? (
         <>
           <sidebar.root open={open} onOpenChange={setOpen}>
