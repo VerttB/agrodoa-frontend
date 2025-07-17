@@ -11,7 +11,7 @@ import { ImageUploadInput } from "../ui/imageInput";
 import { useUserContext } from "@/providers/UserProvider";
 import { criarCausa } from "@/core/services/CausaService";
 import { useRouter } from "next/navigation";
-
+import { PlusCircle } from "lucide-react";
 const solicitarCausaSchema = z.object({
   nome: z
     .string({ required_error: "O campo de nome de causa não deve estar vazio" })
@@ -54,9 +54,8 @@ export const SolicitarCausa = () => {
   } = useForm<SolicitarCausaData>({
     resolver: zodResolver(solicitarCausaSchema),
   });
-  console.log(errors);
   const onSubmit = async (data: any) => {
-    console.log("Solicitando.......");
+    console.log("ENVIANDO CAUSA")
     try {
       
       const formData = new FormData();
@@ -76,22 +75,24 @@ export const SolicitarCausa = () => {
     }
   };
 
+  const handleClose = () => {
+    setOpen(false);
+    reset();
+  }
   return (
     <>
-      {user?.tipoUsuario === "fornecedor" && (
-        <>
           <Button
-            className="w-32"
-            variant="outlined"
+            className="py-0 gap-1"
+            variant="primary"
             onClick={() => setOpen(true)}
           >
-            Criar
+            {user?.tipo === "fornecedor" ? "Solicitar Causa" : <><PlusCircle/> Nova Causa</>}
           </Button>
 
           <Modal.Root onOpenChange={setOpen} open={open}>
             <Modal.Header
               title="Solicitar Causa"
-              onClose={() => setOpen(false)}
+              onClose={() => handleClose()}
             />
             <Modal.Content className="min-w-[640px]">
               <form
@@ -122,7 +123,7 @@ export const SolicitarCausa = () => {
                   errors={errors.prazo?.message}
                 />
                 <div>
-                  <label className="mb-1 block text-sm font-medium text-gray-700">
+                  <label className="mb-1 block  font-medium text-gray-800">
                     Descrição
                   </label>
                   <textarea
@@ -150,12 +151,12 @@ export const SolicitarCausa = () => {
                 />
                 <Modal.Actions>
                   <Button className="px-4 py-1" type="submit">
-                    Solicitar Causa
+                    {user?.tipo === "fornecedor" ? "Solicitar Causa" : "Criar Causa"}
                   </Button>
                   <Button
                     className="px-4 py-1"
                     variant="outlined"
-                    onClick={() => setOpen(false)}
+                    onClick={() => handleClose()}
                   >
                     Fechar
                   </Button>
@@ -163,8 +164,6 @@ export const SolicitarCausa = () => {
               </form>
             </Modal.Content>
           </Modal.Root>
-        </>
-      )}
     </>
   );
 };

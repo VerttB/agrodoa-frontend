@@ -49,12 +49,6 @@ export const AnuncioCard = ({ anuncio }: { anuncio: Anuncio }) => {
             <h1 className="mb-4 text-xl font-bold line-clamp-1 hover:line-clamp-none">{anuncio.titulo}</h1>
 
             <p className="text-sm">{anuncio.anunciante.nome}</p>
-              {anuncio.produto.precoUnidade
-                ? <p className="text-accent font-medium"> {anuncio.produto.precoUnidade.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL",
-                  })} </p>
-                :<p className="text-secondary font-medium">Grátis</p>}
             <p className="text-sm">Quantidade: {anuncio.produto.quantidade}</p>
           </div>
         </Card.Content>

@@ -42,7 +42,7 @@ export default function CausaUnica() {
               {causa.prazo.toString()}
             </p>
 
-            <div className="mt-4">
+            {/* <div className="mt-4">
               <div className="h-2 w-full overflow-hidden rounded bg-gray-200">
                 <div
                   className="bg-accent h-full rounded"
@@ -56,7 +56,7 @@ export default function CausaUnica() {
                 <p>Arrecadado: R$ {causa.valorArrecadado}</p>
                 <p>Meta: R$ {causa.meta}</p>
               </div>
-            </div>
+            </div> */}
           </ItemPage.description>
         </ItemPage.content>
         <ItemPage.content>
