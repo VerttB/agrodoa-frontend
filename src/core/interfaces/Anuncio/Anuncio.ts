@@ -13,4 +13,5 @@ export interface Anuncio extends AnuncioResumido{
   tipo: TipoAnuncio;
   anunciante: Anunciante;
   local: Local;
+  descricao:string
 }

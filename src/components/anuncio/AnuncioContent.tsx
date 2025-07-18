@@ -34,12 +34,14 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
     async function loadData() {
       setLoading(true);
       try {
+    
         if (user?.tipoUsuario === "beneficiario") {
           const salvos = await getAnunciosSalvos();
           const negociacao = await getAnunciosEmNegociacao();
           setAnunciosPorAba({ disponiveis: anuncios, salvos, negociacao });
           setTab("disponiveis");
-        } else if(user?.tipo === "fornecedor") {
+        } else if(user?.tipoUsuario === "fornecedor") {
+          
           const abertos = anuncios.filter(
             (a) => a.anunciante.nome === user?.nome,
           );

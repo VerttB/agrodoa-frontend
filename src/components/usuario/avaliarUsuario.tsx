@@ -25,6 +25,7 @@ interface AvaliarUsuarioProps {
 export const AvaliarUsuario = ({ usuario, onAvaliado }: AvaliarUsuarioProps) => {
   const [open, setOpen] = useState(false);
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
+  
 
   const {
     register,

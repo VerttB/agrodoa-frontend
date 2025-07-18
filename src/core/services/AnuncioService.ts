@@ -113,5 +113,16 @@ export async function cancelarAnuncio(idAnuncio: string) {
 }
 
 
+export async function editarAnuncio(idAnuncio:string, anuncioEditado:any) {
+   const res = await fetch(
+    `${BASE_URL}/anuncios/${idAnuncio}/editar`,
+    {
+      method: "PATCH",
+      credentials: "include",
+      body: anuncioEditado,
+    }
+  );
 
+  return await verificaResposta(res);
+}
 
