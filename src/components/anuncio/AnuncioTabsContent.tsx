@@ -29,9 +29,9 @@ export function AnuncioTabsContent({ anunciosPorAba, tipoUsuario }: Props) {
           <TabsContent value="disponiveis">
             <AnuncioList anuncios={anunciosPorAba.disponiveis || []} />
           </TabsContent>
-          {/* <TabsContent value="negociacao">
+          <TabsContent value="negociacao">
             <AnuncioList anuncios={anunciosPorAba.negociacao || []} />
-          </TabsContent> */}
+          </TabsContent>
           <TabsContent value="salvos">
             <AnuncioList anuncios={anunciosPorAba.salvos || []} />
           </TabsContent>

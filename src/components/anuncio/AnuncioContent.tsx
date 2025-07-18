@@ -16,7 +16,6 @@ import {
 export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
   const { user } = useUserContext();
   const isLogged = !!user;
-  const isFornecedor = user?.tipoUsuario === "fornecedor";
   const [tab, setTab] = useState("disponiveis");
   const [anunciosPorAba, setAnunciosPorAba] = useState<
     Partial<Record<string, Anuncio[]>>
@@ -35,18 +34,20 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
     async function loadData() {
       setLoading(true);
       try {
-        if (user!.tipoUsuario === "beneficiario") {
+        if (user?.tipoUsuario === "beneficiario") {
           const salvos = await getAnunciosSalvos();
-          const negociacao = await getAnunciosEmNegociacao(); // Se tiver, busque aqui
+          const negociacao = await getAnunciosEmNegociacao();
           setAnunciosPorAba({ disponiveis: anuncios, salvos, negociacao });
           setTab("disponiveis");
-        } else {
+        } else if(user?.tipo === "fornecedor") {
           const abertos = anuncios.filter(
             (a) => a.anunciante.nome === user?.nome,
           );
           const finalizados: Anuncio[] = []; // Buscar finalizados
           setAnunciosPorAba({ abertos, finalizados });
           setTab("abertos");
+        }else{
+          setAnunciosPorAba({disponives: anuncios})
         }
       } catch (e) {
         console.error("Erro carregando anúncios:", e);
