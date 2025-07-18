@@ -117,7 +117,7 @@ export async function editarAnuncio(idAnuncio:string, anuncioEditado:any) {
    const res = await fetch(
     `${BASE_URL}/anuncios/${idAnuncio}/editar`,
     {
-      method: "PATCH",
+      method: "PUT",
       credentials: "include",
       body: anuncioEditado,
     }
