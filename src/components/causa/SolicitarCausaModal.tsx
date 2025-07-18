@@ -69,7 +69,7 @@ export const SolicitarCausa = () => {
       formData.append("descricao", data.descricao);
       formData.append("meta", String(data.meta));
       formData.append("prazo", data.prazo);
-      formData.append("imagem", data.image); 
+      formData.append("nomeArquivoFoto", data.image); 
 
       const sucess = await criarCausa(formData);
       showAlert("Causa Solicitada Com Sucesso", "success")
