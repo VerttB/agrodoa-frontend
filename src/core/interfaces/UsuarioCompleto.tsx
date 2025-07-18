@@ -13,4 +13,5 @@ export interface UsuarioCompleto{
     local: Local
     anunciosPostados: AnuncioResumido[]
     avaliacoes: Avaliacao[]
+    
 }

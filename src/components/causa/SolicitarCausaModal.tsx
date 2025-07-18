@@ -18,7 +18,7 @@ const solicitarCausaSchema = z.object({
   nome: z
     .string({ required_error: "O campo de nome de causa não deve estar vazio" })
     .min(3, "Nome muito curto"),
-  meta: z.coerce.number().min(0.01, "Meta deve ser maior que zero"),
+  metaVoluntarios: z.coerce.number().min(1, "Meta deve ser maior que zero"),
   prazo: z.string({ required_error: "Informe a data limite" }).refine(
     (dateStr) => {
       const date = new Date(dateStr);
@@ -67,10 +67,9 @@ export const SolicitarCausa = () => {
       const formData = new FormData();
       formData.append("nome", data.nome);
       formData.append("descricao", data.descricao);
-      formData.append("meta", String(data.meta));
+      formData.append("metaVoluntarios", String(data.metaVoluntarios));
       formData.append("prazo", data.prazo);
       formData.append("nomeArquivoFoto", data.image); 
-
       const sucess = await criarCausa(formData);
       showAlert("Causa Solicitada Com Sucesso", "success")
       reset();
@@ -91,12 +90,13 @@ export const SolicitarCausa = () => {
   return (
     <>
           <Alert message={message} type={type} show={show} onClose={hideAlert} />
+
           <Button
             className=" gap-1"
             variant="primary"
             onClick={() => setOpen(true)}
           >
-            {user?.tipo !== "administrador" ? "Solicitar Causa" : <><PlusCircle/> Nova Causa</>}
+            {user?.tipoUsuario !== "administrador" ? "Solicitar Causa" : <><PlusCircle/> Nova Causa</>}
           </Button>
 
           <Modal.Root onOpenChange={setOpen} open={open}>
@@ -117,13 +117,13 @@ export const SolicitarCausa = () => {
                   errors={errors.nome?.message}
                 />
                 <Input
-                  label="Meta (valor a arrecadar)"
+                  label="Meta Voluntários"
                   placeholder="Insira a meta financeira"
                   type="number"
                   step="0.01"
                   className="w-full bg-white"
-                  {...register("meta")}
-                  errors={errors.meta?.message}
+                  {...register("metaVoluntarios")}
+                  errors={errors.metaVoluntarios?.message}
                 />
                 <Input
                   label="Prazo (data limite)"
@@ -166,10 +166,12 @@ export const SolicitarCausa = () => {
                                   <Loader2 className="animate-spin w-4 h-4" />
                                   Enviando...
                                 </>
-                              ) : user?.tipo === "fornecedor" ? (
+                              ) : user?.tipoUsuario === "fornecedor" ? (
                                 "Solicitar Causa"
-                              ) : (
+                              ) : user?.github ? (
                                 "Criar Causa"
+                              ) : (
+                                "Ação Desconhecida"
                               )}
                   </Button>
                   <Button

@@ -41,15 +41,14 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
           setAnunciosPorAba({ disponiveis: anuncios, salvos, negociacao });
           setTab("disponiveis");
         } else if(user?.tipoUsuario === "fornecedor") {
-          
           const abertos = anuncios.filter(
             (a) => a.anunciante.nome === user?.nome,
           );
-          const finalizados: Anuncio[] = []; // Buscar finalizados
+          const finalizados: Anuncio[] = [];
           setAnunciosPorAba({ abertos, finalizados });
           setTab("abertos");
-        }else{
-          setAnunciosPorAba({disponives: anuncios})
+        }else if(user?.github){
+          setAnunciosPorAba({disponiveis: anuncios})
         }
       } catch (e) {
         console.error("Erro carregando anúncios:", e);
@@ -65,13 +64,13 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
   return (
     <div className="flex flex-col">
     <AnuncioTabs
-      tipoUsuario={user?.tipoUsuario || null}
+      user={user}
       onTabChange={setTab}
       value={isLogged ? undefined : "disponiveis"}
     >
 
       <div className="flex flex-col gap-4">
-        {user?.tipoUsuario === "beneficiario" && tab === "disponiveis" && (
+        {user?.tipoUsuario === "beneficiario" || user?.github && tab === "disponiveis" && (
           <div className="flex gap-2">
             <AnuncioSearch />
             <AnuncioFiltros />
@@ -80,7 +79,7 @@ export const AnuncioContent = ({ anuncios }: { anuncios: Anuncio[] }) => {
 
         <AnuncioTabsContent
           anunciosPorAba={anunciosPorAba}
-          tipoUsuario={user?.tipoUsuario || null}
+          user={user}
         />
       </div>
     </AnuncioTabs>

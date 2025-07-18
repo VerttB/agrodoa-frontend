@@ -17,7 +17,6 @@ function buildQueryString(params: object): string {
 
 export async function getCausas(params: CausaQueryParams = {}) {
   console.log(typeof params);
-
   const queryString = buildQueryString(params);
   const url = `${BASE_URL}/causas${queryString ? `?${queryString}` : ""}`;
 
@@ -26,6 +25,23 @@ export async function getCausas(params: CausaQueryParams = {}) {
     headers: {
       "Content-Type": "application/json",
     },
+    credentials: "include"
+  });
+
+   return await verificaResposta(res);
+}
+
+export async function getCausasAguardando(params: CausaQueryParams = {}) {
+  console.log(typeof params);
+  const queryString = buildQueryString(params);
+  const url = `${BASE_URL}/causas?statusCausa=AGUARDANDO`;
+
+  const res = await fetch(url, {
+    cache: "no-store",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include"
   });
 
    return await verificaResposta(res);
@@ -40,4 +56,92 @@ export async function criarCausa(data: any) {
   });
 
   return await verificaResposta(res);
+}
+
+
+export async function voluntariar(idCausa:string) {
+  const res = await fetch(`${BASE_URL}/causas/${idCausa}/virar_voluntario`, {
+    method: "POST",
+    credentials: "include",
+  });
+
+  return await verificaResposta(res);
+}
+
+// export async function apoiar(idCausa:string) {
+//   const res = await fetch(`${BASE_URL}/causas/${idCausa}/virar_voluntario`, {
+//     method: "POST",
+//     credentials: "include",
+//   });
+
+//   return await verificaResposta(res);
+// }
+
+
+export async function aprovarCausa(idCausa:string) {
+  const res = await fetch(`${BASE_URL}/causas/${idCausa}/aprovar_criacao_causa`, {
+    method: "PATCH",
+    credentials: "include",
+  });
+
+  return await verificaResposta(res);
+}
+
+export async function rejeitarCausa(idCausa:string) {
+  const res = await fetch(`${BASE_URL}/causas/${idCausa}/rejeitar_criacao_causa`, {
+    method: "PATCH",
+    credentials: "include",
+  });
+
+  return await verificaResposta(res);
+}
+
+
+export async function getCausasDisponiveis(params: CausaQueryParams = {}) {
+  console.log(typeof params);
+  const queryString = buildQueryString(params);
+  const url = `${BASE_URL}/causas$statusCausa=DISPONIVEIS`;
+
+  const res = await fetch(url, {
+    cache: "no-store",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include"
+  });
+
+   return await verificaResposta(res);
+}
+
+export async function getCausasVoluntarias(params: CausaQueryParams = {}) {
+ 
+  const url = `${BASE_URL}/usuarios/meu_perfil/causas_voluntarias`;
+
+  const res = await fetch(url, {
+    cache: "no-store",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include"
+  });
+
+   return await verificaResposta(res);
+}
+
+export async function getMinhasCausas() {
+  
+  const url = `${BASE_URL}/usuarios/meu_perfil/minhas_causas`;
+
+  const res = await fetch(url, {
+    cache: "no-store",
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include"
+  });
+
+   return await verificaResposta(res);
 }

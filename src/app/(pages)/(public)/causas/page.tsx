@@ -6,6 +6,8 @@ import { SolicitarCausa } from "@/components/causa/SolicitarCausaModal";
 import { CausaQueryParams } from "@/core/interfaces/QueryParams/CausaQueryParams";
 import { getCausas } from "@/core/services/CausaService";
 import CausaSearch from "@/components/causa/CausaSearch";
+import { CausaContent } from "@/components/causa/CausaContent";
+import { Causas } from "@/core/interfaces/Causas";
 
 interface CausaProps {
   searchParams: Promise<CausaQueryParams>;
@@ -13,20 +15,15 @@ interface CausaProps {
 
 export default async function CausasPage({ searchParams }: CausaProps) {
   const params = await searchParams;
-
-  // const { data: causas, loading, error } = useCausa<Causas[]>();
-  const causas = await getCausas(params);
+  const causas:Causas[] = await getCausas(params);
 
   return (
-    <div className="flex min-h-screen flex-col items-center p-8">
-      <div className="flex w-full flex-col items-center gap-8">
-        <div className="flex w-full xl:w-4/5">
-          <CausaSearch />
-          <SolicitarCausa />
+    <div className="flex min-h-screen w-full justify-center bg-radial p-2">
+          <div className="w-4/5">
+            <CausaContent causas={causas} />
+          </div>
         </div>
-
-        <CausaLista causas={causas} />
-      </div>
-    </div>
   );
 }
+
+

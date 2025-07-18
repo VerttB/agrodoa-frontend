@@ -12,15 +12,18 @@ import { useEffect, useState } from "react";
 import { Button } from "../ui/button";
 import { Causas } from "@/core/interfaces/Causas";
 import { imgValidate } from "@/core/utils/imageValidate";
-import { causasTeste } from "@/app/(pages)/(private)/admin/causas/page";
+
 import Image from "next/image";
+import { getCausas, getCausasAguardando } from "@/core/services/CausaService";
 
 export const CausasTable = ({onClick}:{onClick: (causa:Causas) => void}) => {
   const [ causas, setCausas] = useState<Causas[]>([])
   useEffect(() => {
     const handleGetUser = async () => {
-      //const data = await getCausas();
-      setCausas(causasTeste)
+      const data = await getCausasAguardando();
+      setCausas(data)
+     console.log(data)
+
     }
     handleGetUser()
   },[])
@@ -34,8 +37,8 @@ export const CausasTable = ({onClick}:{onClick: (causa:Causas) => void}) => {
               <TableHead className="rounded-tl-2xl">Nome</TableHead>
               <TableHead>Prazo</TableHead>
               <TableHead>Responsável</TableHead>
-              <TableHead>Descrição</TableHead>
-              <TableHead>Tipo</TableHead>
+              <TableHead>Meta Voluntários</TableHead>
+              <TableHead>Data</TableHead>
               <TableHead className="rounded-tr-2xl">Ações</TableHead>
             </TableRow>
           </TableHeader>
@@ -64,10 +67,10 @@ export const CausasTable = ({onClick}:{onClick: (causa:Causas) => void}) => {
                     </div>
                   </div>
                 </TableCell>
-                <TableCell>{c.prazo.toDateString()}</TableCell>
-                <TableCell>{c.prazo.toDateString()}</TableCell>
-                <TableCell>{c.nome}</TableCell>
-                <TableCell>{c.nome}</TableCell>
+                <TableCell>{c.prazo.toString()}</TableCell>
+                <TableCell>{c.contaCriadora.nome ? c.contaCriadora.nome : "Adm"}</TableCell>
+                <TableCell>{c.metaVoluntarios}</TableCell>
+                <TableCell>{c.dataCriacao.toString()}</TableCell>
                 <TableCell>
                   <Button variant="secondary" onClick={() => onClick(c)}>Ver Detalhes</Button>
                 </TableCell>

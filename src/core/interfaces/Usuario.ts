@@ -9,4 +9,5 @@ export interface Usuario {
   cidade: string;
   estado: string;
   avaliacaoMedia: number;
+  github?:string,
 }
