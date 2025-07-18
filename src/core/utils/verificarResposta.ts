@@ -1,4 +1,8 @@
 export async function verificaResposta(res: Response) {
+  if (res.status === 204) {
+    return null; 
+  }
+
   if (res.ok) {
     try {
       return await res.json();

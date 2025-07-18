@@ -15,49 +15,8 @@ import {
 } from "@/components/ui/table";
 import { imgValidate } from "@/core/utils/imageValidate";
 import Image from "next/image";
-
-const negociacoes: Negociacao[] = [
-  {
-    idNegociacao: "NEG001",
-    idAnuncio: "ANUN005",
-    pedinte: "João Silva",
-    quantidade: 2,
-    anuncioNome: "Cesta Básica para Família",
-    fotoBeneficiario: "example.com/joao_silva.jpg"
-  },
-  {
-    idNegociacao: "NEG002",
-    idAnuncio: "ANUN012",
-    pedinte: "Maria Oliveira",
-    quantidade: 1,
-    anuncioNome: "Kit Material Escolar Infantil",
-    fotoBeneficiario: "example.com/maria_oliveira.jpg"
-  },
-  {
-    idNegociacao: "NEG003",
-    idAnuncio: "ANUN008",
-    pedinte: "Pedro Costa",
-    quantidade: 3,
-    anuncioNome: "Cobertores Térmicos",
-    fotoBeneficiario: "example.com/pedro_costa.jpg"
-  },
-  {
-    idNegociacao: "NEG004",
-    idAnuncio: "ANUN005",
-    pedinte: "Ana Souza",
-    quantidade: 1,
-    anuncioNome: "Cesta Básica para Família",
-    fotoBeneficiario: "example.com/ana_souza.jpg"
-  },
-  {
-    idNegociacao: "NEG005",
-    idAnuncio: "ANUN015",
-    pedinte: "Carlos Pereira",
-    quantidade: 5,
-    anuncioNome: "Brinquedos Educativos",
-    fotoBeneficiario: "example.com/carlos_pereira.jpg"
-  }
-];
+import { useAlert } from "@/hooks/useAlert";
+import { Alert } from "../ui/alert";
 
 interface VerNegociantesProps {
   open: boolean;
@@ -68,13 +27,13 @@ interface VerNegociantesProps {
 export const VerNegociantes = ({ anuncioId, onOpenChange, open }: VerNegociantesProps) => {
   const [negociacoesList, setNegociacoesList] = useState<Negociacao[]>([]);
   const [error, setError] = useState("");
-
+  const { show, showAlert, message, type, hideAlert} = useAlert()
   const carregarNegociacoes = async () => {
     try {
-      //const data = await getNegociacoes(anuncioId);
-      setNegociacoesList(negociacoes);
+      const data = await getNegociacoes(anuncioId);
+      setNegociacoesList(data);
       setError("");
-    } catch (e) {
+    } catch (e:any) {
       setError("Não foi possível pegar as negociações");
     }
   };
@@ -88,8 +47,12 @@ export const VerNegociantes = ({ anuncioId, onOpenChange, open }: VerNegociantes
   const handleAprovar = async (id: string) => {
     try {
       await aprovarNegociacao(id);
-      await carregarNegociacoes();
-    } catch (e) {
+      showAlert("Negociação Aprovada Com Sucesso", "success")
+      const data = await getNegociacoes(anuncioId);
+      setNegociacoesList(data)
+
+    } catch (e:any) {
+     showAlert(e.message || "Ocorreu um erro ao aceitar a negociação", "error")
       console.error("Erro ao aprovar:", e);
       setError("Erro ao aprovar a negociação.");
     }
@@ -98,27 +61,37 @@ export const VerNegociantes = ({ anuncioId, onOpenChange, open }: VerNegociantes
   const handleRecusar = async (id: string) => {
     try {
       await recusarNegociacao(id);
-      await carregarNegociacoes();
-    } catch (e) {
+      showAlert("Negociação Recusada Com Sucesso", "success")
+      const data = await getNegociacoes(anuncioId);
+      setNegociacoesList(data)
+
+    } catch (e:any) {
+     showAlert(e.message || "Ocorreu um erro ao recusar a negociação", "error")
       console.error("Erro ao recusar:", e);
       setError("Erro ao recusar a negociação.");
     }
   };
 
   return (
+    <>
+    
+    <Alert message={message} type={type} show={show} onClose={hideAlert} />
     <Modal.Root open={open} onOpenChange={onOpenChange}>
       <Modal.Header title="Solicitações" onClose={() => onOpenChange(false)} />
-      <Modal.Content>
+      <Modal.Content className="min-w-[720px]">
+        {negociacoesList ? <>
         {error && (
           <div className="text-center text-red-600 font-semibold mb-4">{error}</div>
         )}
 
+
         <Table className="shadow-2xl">
-          <TableHeader className="bg-accent text-center text-xl py-2 ">
+          <TableHeader className="bg-accent  text-xl py-2 ">
             <TableRow>
-              <TableHead className="rounded-tl-2xl">Nome</TableHead>
+              <TableHead className="rounded-tl-2xl">Pedinte</TableHead>
+              <TableHead>Nome do Anúncio</TableHead>
               <TableHead>Quantidade</TableHead>
-              <TableHead className="text-center">Anúncio</TableHead>
+
               <TableHead className="rounded-tr-2xl">Ações</TableHead>
             </TableRow>
           </TableHeader>
@@ -168,7 +141,12 @@ export const VerNegociantes = ({ anuncioId, onOpenChange, open }: VerNegociantes
           <Button disabled>&lt;</Button>
           <Button disabled>&gt;</Button>
         </div>
+        </> : <>
+        
+            <h2>Nenhum negociante encontrado</h2>
+        </>}
       </Modal.Content>
     </Modal.Root>
+    </>
   );
 };

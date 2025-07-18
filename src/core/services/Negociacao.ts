@@ -1,3 +1,5 @@
+import { verificaResposta } from "../utils/verificarResposta";
+
 export async function iniciarNegociacao(idAnuncio: string, quantidade:number) {
     const res = await fetch(`http://localhost:8080/anuncios/${idAnuncio}/iniciar_negociacao`,
       {
@@ -25,36 +27,24 @@ export async function getNegociacoes(idAnuncio: string) {
       }
     )
 
-    if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || JSON.stringify(errorData));
-        }
-
-    return await res.json();
+   return await verificaResposta(res)
 }
 
 export async function aprovarNegociacao(idNegociacao: string) {
     const res = await fetch(`http://localhost:8080/anuncios/${idNegociacao}/aceitar_negociacao`,
       {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
+        method: "PATCH",
         credentials: "include",
       }
     )
 
-    if (!res.ok) {
-        const errorData = await res.json();
-        throw new Error(errorData.message || JSON.stringify(errorData));
-        }
-
-    return await res.json();
+   return verificaResposta(res)
 }
 
 export async function recusarNegociacao(idNegociacao: String) {
     const res = await fetch(`http://localhost:8080/anuncios/${idNegociacao}/cancelar_negociacao`,
       {
-        method: "POST",
-        headers: {"Content-Type": "application/json"},
+        method: "PATCH",
         credentials: "include",
       }
     )
