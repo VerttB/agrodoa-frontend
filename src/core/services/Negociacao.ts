@@ -19,7 +19,7 @@ export async function iniciarNegociacao(idAnuncio: string, quantidade:number) {
 }
 
 export async function getNegociacoes(idAnuncio: string) {
-    const res = await fetch(`http://localhost:8080/anuncios/${idAnuncio}/listar_negociacoes`,
+    const res = await fetch(`http://localhost:8080/anuncios/${idAnuncio}/negociacoes/listar`,
       {
         method: "GET",
         headers: {"Content-Type": "application/json"},
@@ -30,8 +30,8 @@ export async function getNegociacoes(idAnuncio: string) {
    return await verificaResposta(res)
 }
 
-export async function aprovarNegociacao(idNegociacao: string) {
-    const res = await fetch(`http://localhost:8080/anuncios/${idNegociacao}/aceitar_negociacao`,
+export async function aprovarNegociacao(idAnuncio:string,idNegociacao: string) {
+    const res = await fetch(`http://localhost:8080/anuncios/${idAnuncio}/negociacoes/${idNegociacao}/aceitar`,
       {
         method: "PATCH",
         credentials: "include",
@@ -41,8 +41,8 @@ export async function aprovarNegociacao(idNegociacao: string) {
    return verificaResposta(res)
 }
 
-export async function recusarNegociacao(idNegociacao: String) {
-    const res = await fetch(`http://localhost:8080/anuncios/${idNegociacao}/cancelar_negociacao`,
+export async function recusarNegociacao(idAnuncio: string, idNegociacao: String) {
+    const res = await fetch(`http://localhost:8080/anuncios/${idAnuncio}/negociacoes/${idNegociacao}/cancelar`,
       {
         method: "PATCH",
         credentials: "include",

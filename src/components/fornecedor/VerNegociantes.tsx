@@ -46,7 +46,7 @@ export const VerNegociantes = ({ anuncioId, onOpenChange, open }: VerNegociantes
 
   const handleAprovar = async (id: string) => {
     try {
-      await aprovarNegociacao(id);
+      await aprovarNegociacao(anuncioId, id);
       showAlert("Negociação Aprovada Com Sucesso", "success")
       const data = await getNegociacoes(anuncioId);
       setNegociacoesList(data)
@@ -60,7 +60,7 @@ export const VerNegociantes = ({ anuncioId, onOpenChange, open }: VerNegociantes
 
   const handleRecusar = async (id: string) => {
     try {
-      await recusarNegociacao(id);
+      await recusarNegociacao(anuncioId,id);
       showAlert("Negociação Recusada Com Sucesso", "success")
       const data = await getNegociacoes(anuncioId);
       setNegociacoesList(data)

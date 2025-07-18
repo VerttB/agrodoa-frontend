@@ -20,8 +20,8 @@ export const AnuncioTabs = ({
   onTabChange,
   value,
 }: AnuncioTabsProps) => {
-  const isFornecedor = user?.tipoUsuario === "fornecedor";
-  const isBeneficiario = user?.tipoUsuario === "beneficiario";
+  const isFornecedor = user?.tipoUsuario == "fornecedor";
+  const isBeneficiario = user?.tipoUsuario == "beneficiario";
   const isGithubOnly = !!user?.github && !isFornecedor && !isBeneficiario;
 
   const [internalValue, setInternalValue] = useState(
