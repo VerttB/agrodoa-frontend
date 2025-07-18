@@ -13,13 +13,16 @@ export function AnuncioTabsContent({ anunciosPorAba, user }: Props) {
 
   return (
     <>
-  {user?.tipoUsuario === "fornecedor" ? (
+  {user?.tipoUsuario == "fornecedor" ? (
     <>
       <TabsContent value="abertos">
         <AnuncioList anuncios={anunciosPorAba.abertos || []} />
       </TabsContent>
+      <TabsContent value="negociacao">
+        <AnuncioList anuncios={anunciosPorAba.negociacao || []} />
+      </TabsContent>
     </>
-  ) : user?.tipoUsuario === "beneficiario" ? (
+  ) : user?.tipoUsuario == "beneficiario" ? (
     <>
       <TabsContent value="disponiveis">
         <AnuncioList anuncios={anunciosPorAba.disponiveis || []} />
