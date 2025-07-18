@@ -15,16 +15,13 @@ import { imgValidate } from "@/core/utils/imageValidate";
 import Image from "next/image";
 import { getCausasAguardando } from "@/core/services/CausaService";
 
-export const CausasTable = ({ onClick }: { onClick: (causa: Causas) => void }) => {
-  const [causas, setCausas] = useState<Causas[] | null>(null);
+interface CausasTableProps {
+  causas: Causas[];
+  onClick: (causa: Causas) => void;
+}
+export const CausasTable = ({onClick, causas}: CausasTableProps) => {
 
-  useEffect(() => {
-    const handleGetUser = async () => {
-      const data = await getCausasAguardando();
-      setCausas(data);
-    };
-    handleGetUser();
-  }, []);
+ 
 
   if (causas === null) return <LoadingSpin />;
 

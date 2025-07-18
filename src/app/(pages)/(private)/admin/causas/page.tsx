@@ -1,20 +1,33 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 import { CausaModalAdm } from "@/components/causa/CausaModalAdm";
 import { Causas } from "@/core/interfaces/Causas";
 import { SolicitarCausa } from "@/components/causa/SolicitarCausaModal";
 import { CausasTable } from "@/components/causa/CausaTables";
-import { aprovarCausa, rejeitarCausa } from "@/core/services/CausaService";
+import { aprovarCausa, rejeitarCausa, getCausasAguardando } from "@/core/services/CausaService";
 import { useAlert } from "@/hooks/useAlert";
 import { Alert } from "@/components/ui/alert";
 
 export default function CausasAdmin() {
   const [open, setOpen] = useState(false);
   const [causaSelecionada, setCausaSelecionada] = useState<Causas | null>(null);
+  const [causas, setCausas] = useState<Causas[]>([]);
   const { show, message, type, showAlert, hideAlert } = useAlert();
-  const router = useRouter();
+
+  const loadCausas = async () => {
+    try {
+      const data = await getCausasAguardando(); // função do seu service
+      setCausas(data);
+    } catch (err: any) {
+      showAlert(err.message || "Erro ao carregar causas.", "error");
+    }
+  };
+
+  useEffect(() => {
+    loadCausas();
+  }, []);
 
   const handleCloseModal = () => {
     setCausaSelecionada(null);
@@ -32,12 +45,10 @@ export default function CausasAdmin() {
       await aprovarCausa(causaSelecionada.idCausa);
       showAlert("Causa aprovada com sucesso!", "success");
       handleCloseModal();
-     
+      await loadCausas(); // atualiza a lista
     } catch (err: any) {
       showAlert(err.message || "Erro ao aprovar causa.", "error");
     }
-
-     router.refresh();
   };
 
   const handleDecline = async () => {
@@ -46,12 +57,10 @@ export default function CausasAdmin() {
       await rejeitarCausa(causaSelecionada.idCausa);
       showAlert("Causa recusada com sucesso.", "success");
       handleCloseModal();
-     
+      await loadCausas(); // atualiza a lista
     } catch (err: any) {
       showAlert(err.message || "Erro ao recusar causa.", "error");
     }
-
-     router.refresh();
   };
 
   return (
@@ -66,7 +75,7 @@ export default function CausasAdmin() {
 
         <div className="bg-[#FFF7ED] min-h-screen p-6">
           <div className="space-y-4">
-            <CausasTable onClick={handleOpenModal} />
+            <CausasTable causas={causas} onClick={handleOpenModal} />
           </div>
         </div>
 
