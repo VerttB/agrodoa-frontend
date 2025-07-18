@@ -24,6 +24,9 @@ export default function Layout({
               <Button onClick={() => router.push("/admin/causas")}>
                 Causas
               </Button>
+              <Button onClick={() => router.push("/admin/denuncias")}>
+                Denuncias
+              </Button>
            
             </div>
           </div>

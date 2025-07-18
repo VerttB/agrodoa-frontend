@@ -1,3 +1,5 @@
+import { verificaResposta } from "../utils/verificarResposta";
+
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
 export async function getUsuarios() {
@@ -153,3 +155,42 @@ export async function avaliar(data:any,id:string) {
   }
   return await res.json();
 }
+
+export async function getDenuncias() {
+  const res = await fetch(`${BASE_URL}/denuncias`, {
+    method: "GET",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+ return  await verificaResposta(res)
+}
+
+export async function denunciaAprovar(idDenuncia:string) {
+  const res = await fetch(`${BASE_URL}/denuncias/${idDenuncia}/aprovar`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+ return  await verificaResposta(res)
+}
+
+export async function denunciaRecusar(idDenuncia:string) {
+  const res = await fetch(`${BASE_URL}/denuncias/${idDenuncia}/reprovar`, {
+    method: "PATCH",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    credentials: "include",
+  });
+
+ return  await verificaResposta(res)
+}
+
+
+
