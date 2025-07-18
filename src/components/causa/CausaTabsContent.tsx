@@ -27,7 +27,7 @@ export const CausaTabsContent = ({ causasPorAba, tab, user }: CausaTabsContentPr
   }
 
   return (
-    <div className="">
+    <div className="w-full">
       <CausaLista causas={causas} />
       </div>
   );

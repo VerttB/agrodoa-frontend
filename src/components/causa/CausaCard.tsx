@@ -23,20 +23,6 @@ export const CausaCard = ({ causa }: { causa: Causas }) => {
           </h1>
           <p className="line-clamp-2 hover:line-clamp-none text-wrap">{causa.descricao}</p>
         </div>
-        {/* <div className="flex flex-col gap-2">
-          <div className="h-2 w-full rounded bg-gray-200">
-            <div
-              className="bg-accent h-full max-w-full rounded"
-              style={{
-                width: `${(causa.valorArrecadado / causa.meta) * 100}%`,
-              }}
-            />
-          </div>
-          <div className="flex w-full justify-between text-sm xl:text-lg">
-            <p>Arrecadado: {causa.valorArrecadado.toLocaleString("pt-br")}</p>
-            <p>Meta: R${causa.meta.toLocaleString("pt-br")}</p>
-          </div>
-        </div> */}
         <Card.Actions className="flex w-full mt-4 py-2  justify-center gap-2 ">
           <Button
             className="w-1/2"
