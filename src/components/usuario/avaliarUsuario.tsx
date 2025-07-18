@@ -4,10 +4,11 @@ import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Star, StarOff } from "lucide-react";
+import { Star } from "lucide-react";
 import { Modal } from "../ui/Modal";
 import { Button } from "../ui/button";
 import { avaliar } from "@/core/services/UserService";
+import { UsuarioCompleto } from "@/core/interfaces/UsuarioCompleto";
 
 const avaliacaoSchema = z.object({
   nota: z.number().min(1, "Escolha uma nota de 1 a 5"),
@@ -16,9 +17,15 @@ const avaliacaoSchema = z.object({
 
 type AvaliacaoData = z.infer<typeof avaliacaoSchema>;
 
-export const AvaliarUsuario = ({ nomeUsuario, idUsuario }: { nomeUsuario: string; idUsuario: string }) => {
+interface AvaliarUsuarioProps {
+  usuario: UsuarioCompleto;
+  onAvaliado?: () => void; 
+}
+
+export const AvaliarUsuario = ({ usuario, onAvaliado }: AvaliarUsuarioProps) => {
   const [open, setOpen] = useState(false);
   const [hoveredStar, setHoveredStar] = useState<number | null>(null);
+
   const {
     register,
     handleSubmit,
@@ -38,8 +45,9 @@ export const AvaliarUsuario = ({ nomeUsuario, idUsuario }: { nomeUsuario: string
 
   const onSubmit = async (data: AvaliacaoData) => {
     try {
-      console.log("Enviando avaliação", data);
-      const res = await avaliar(data, idUsuario);
+      await avaliar(data, usuario.idUser);
+      onAvaliado?.(); 
+      reset();
       setOpen(false);
     } catch (e) {
       console.error("Erro ao enviar avaliação:", e);
@@ -49,7 +57,7 @@ export const AvaliarUsuario = ({ nomeUsuario, idUsuario }: { nomeUsuario: string
   const handleClose = () => {
     reset();
     setOpen(false);
-  }
+  };
 
   return (
     <>
@@ -58,13 +66,12 @@ export const AvaliarUsuario = ({ nomeUsuario, idUsuario }: { nomeUsuario: string
       </Button>
 
       <Modal.Root open={open} onOpenChange={setOpen}>
-        <Modal.Header title={`Avaliando ${nomeUsuario}`} />
+        <Modal.Header title={`Avaliando ${usuario.nome}`} />
         <Modal.Content>
           <form
             onSubmit={handleSubmit(onSubmit)}
-            className="mx-auto xl:min-w-[480px] w-full max-w-md rounded-md borderp-6 shadow-md space-y-4"
+            className="mx-auto xl:min-w-[480px] w-full max-w-md rounded-md p-6 shadow-md space-y-4"
           >
-            {/* Estrelas interativas */}
             <div className="flex justify-center gap-2 my-4 text-3xl">
               {[1, 2, 3, 4, 5].map((n) => {
                 const filled = hoveredStar ? n <= hoveredStar : n <= notaSelecionada;
@@ -78,25 +85,33 @@ export const AvaliarUsuario = ({ nomeUsuario, idUsuario }: { nomeUsuario: string
                     onClick={() => handleSetNota(n)}
                     className="p-0"
                   >
-                    {filled ? <Star className="text-yellow-400 fill-yellow-400" /> : <Star className="text-gray-400" />}
+                    <Star
+                      className={
+                        filled ? "text-yellow-400 fill-yellow-400" : "text-gray-400"
+                      }
+                    />
                   </Button>
                 );
               })}
             </div>
-            {errors.nota && <p className="text-center text-sm text-red-600">{errors.nota.message}</p>}
+            {errors.nota && (
+              <p className="text-center text-sm text-red-600">{errors.nota.message}</p>
+            )}
 
             <textarea
               {...register("comentario")}
               placeholder="Deixe um comentário..."
               className="min-h-[100px] w-full rounded-md border border-green-400 p-2"
             />
-            {errors.comentario && <p className="text-sm text-red-600">{errors.comentario.message}</p>}
+            {errors.comentario && (
+              <p className="text-sm text-red-600">{errors.comentario.message}</p>
+            )}
 
             <Modal.Actions>
               <Button type="submit" className="flex-1">
                 Enviar Avaliação
               </Button>
-              <Button type="button" className="flex-1" variant="outlined" onClick={() => handleClose()}>
+              <Button type="button" className="flex-1" variant="outlined" onClick={handleClose}>
                 Cancelar
               </Button>
             </Modal.Actions>
