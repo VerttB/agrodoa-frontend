@@ -1,12 +1,14 @@
 "use client";
 import { Button } from "@/components/ui/button";
-import { Header } from "@/components/ui/header";
+import { useRouter } from "next/navigation";
 import Image from "next/image";
+import Link from "next/link";
 export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const router = useRouter();
   return (
     <div className="flex min-h-screen flex-col">
       <main className="flex flex-1">
@@ -15,15 +17,13 @@ export default function Layout({
             <h1 className="text-lg font-bold text-white mb-2">Admin</h1>
             <h2 className="text-sm text-white mb-4">Opções</h2>
             <div className="flex flex-col gap-4">
-              <Button className="">
-                Usuários
+              <Button onClick={() => router.push("/admin/usuarios")} >
+               Usuários
               </Button>
-              <Button className="">
+              <Button onClick={() => router.push("/admin/causas")}>
                 Causas
               </Button>
-              <Button className="">
-                Enquetes
-              </Button>
+           
             </div>
           </div>
           <div className="mt-8 flex items-center gap-2 text-sm text-white">

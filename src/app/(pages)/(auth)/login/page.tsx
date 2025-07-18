@@ -9,11 +9,13 @@ import { z } from "zod";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 import { useUserContext } from "@/providers/UserProvider";
+import { Loader2 } from "lucide-react"; // ícone de loading (requer instalação de lucide-react)
 
 export default function Login() {
   const { login } = useUserContext();
   const router = useRouter();
   const [loginError, setLoginError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false); // estado de carregamento
 
   const userLoginSchema = z.object({
     email: z
@@ -41,11 +43,14 @@ export default function Login() {
   const onSubmit = async (data: userLoginData) => {
     try {
       setLoginError(null);
-      const sucess = await login(data.email, data.senha);
-      if (sucess) router.push("/anuncios");
-      else setLoginError("Credencias inválidas ou erro de servidor");
+      setIsLoading(true); // inicia loading
+      const success = await login(data.email, data.senha);
+      if (success) router.push("/anuncios");
+      else setLoginError("Credenciais inválidas ou erro de servidor");
     } catch (error: any) {
       setLoginError(error.message || "Erro ao realizar login");
+    } finally {
+      setIsLoading(false); // finaliza loading
     }
   };
 
@@ -58,8 +63,8 @@ export default function Login() {
             width={64}
             height={64}
             alt="Imagem da logo"
-          ></Image>
-          <h1 className="font-sofia"> Agrodoa</h1>
+          />
+          <h1 className="font-sofia">Agrodoa</h1>
         </div>
         <form
           onSubmit={handleSubmit(onSubmit, onInvalid)}
@@ -94,14 +99,14 @@ export default function Login() {
                 Não possui conta? Cadastre-se aqui
               </Link>
               <Button
-                className="py-1 max-lg:w-4/5"
+                className="py-1 max-lg:w-4/5 flex items-center justify-center gap-2"
                 variant="primary"
                 type="submit"
+                disabled={isLoading}
+                aria-busy={isLoading}
               >
-                Entrar
-              </Button>
-              <Button className="py-1 max-lg:w-4/5" variant="outlined">
-                Entrar com Google
+                {isLoading && <Loader2 className="animate-spin w-4 h-4" />}
+                {isLoading ? "Entrando..." : "Entrar"}
               </Button>
               {loginError && (
                 <p className="mt-2 text-center text-sm text-red-600">

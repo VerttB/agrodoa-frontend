@@ -14,6 +14,7 @@ import { useEstadosECidades } from "@/hooks/useEstadosECidades";
 import { useUserContext } from "@/providers/UserProvider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { Loader2 } from "lucide-react";
 
 const userRegisterSchema = z
   .object({
@@ -52,6 +53,7 @@ type UserRegisterData = z.infer<typeof userRegisterSchema>;
 export default function Cadastro() {
   const [etapa, setEtapa] = useState(1);
   const [registerError, setRegisterError] = useState<string | null>(null);
+  const [isLoading, setIsLoading] = useState(false)
   const router = useRouter();
   const { estados, cidades, estadoSelecionado, setEstadoSelecionado } =
     useEstadosECidades();
@@ -94,16 +96,21 @@ export default function Cadastro() {
     };
 
     try {
+      setRegisterError(null);
+      setIsLoading(true);
       const success = await cadastro(dadoUsuario);
       if (success) {
         console.log("Usuário cadastrado");
         router.push("/anuncios");
-        setEtapa(1);
+       
       } else {
         setRegisterError("Erro ao cadastrar usuário");
       }
     } catch (e: any) {
       setRegisterError(e.message || "Erro desconhecido ao cadastrar.");
+    }finally{
+      setIsLoading(false);
+      setEtapa(1);
     }
   };
 
@@ -269,13 +276,13 @@ export default function Cadastro() {
                       className="w-full py-1"
                       variant="primary"
                       type="submit"
+                      disabled={isLoading}
                     >
-                      Cadastrar
+                      {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+                     {isLoading ? "Cadastrando..." : "Cadastrar"}
                     </Button>
                   </div>
-                  <Button className="py-1 max-lg:w-4/5" variant="outlined">
-                    Cadastrar com Google
-                  </Button>
+               
                 </>
               )}
 

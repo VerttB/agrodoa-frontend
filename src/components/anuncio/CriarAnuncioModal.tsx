@@ -13,7 +13,7 @@ import { criarProduto } from "@/core/services/ProdutoService";
 import { criarAnuncio } from "@/core/services/AnuncioService";
 import { useRouter } from "next/navigation";
 import { useEstadosECidades } from "@/hooks/useEstadosECidades";
-import { PlusCircle } from "lucide-react";
+import { Loader2, PlusCircle } from "lucide-react";
 
 const createAdSchema = z
   .object({
@@ -25,7 +25,6 @@ const createAdSchema = z
       .int()
       .gte(1, "Quantidade mínima 1")
       .lte(10000, "Quantidade máxima 10000"),
-    preco_unidade: z.coerce.number().optional(),
     data_validade: z.string().refine(
       (val) => {
         const date = new Date(val);
@@ -44,9 +43,6 @@ const createAdSchema = z
       required_error: "Informe se o fornecedor entrega",
     }),
     cidade: z.string().min(1, "Informe a cidade"),
-    tipoAnuncio: z.enum(["DOACAO", "VENDA"], {
-      required_error: "Informe o tipo do anúncio",
-    }),
     image: z
       .instanceof(File, { message: "Deve ser uma imagem" })
       .refine((file) => file?.size <= MAX_FILE_SIZE, "Máximo 5MB")
@@ -55,23 +51,17 @@ const createAdSchema = z
         "Extensão inválida"
       ),
   })
-  .refine(
-    (data) =>
-      data.tipoAnuncio === "DOACAO" || (data.preco_unidade ?? 0) >= 0.05,
-    {
-      path: ["preco_unidade"],
-      message: "Preço mínimo R$0,05",
-    }
-  );
+
 
 type CreateAdData = z.infer<typeof createAdSchema>;
 
 export const CriarAnuncio = () => {
-  const { estados, cidades, estadoSelecionado, setEstadoSelecionado } =
-      useEstadosECidades();
+  const { estados, cidades, estadoSelecionado, setEstadoSelecionado } = useEstadosECidades();
   
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const [etapa, setEtapa] = useState(1);
+  const [ error,setError] = useState("");
   const router = useRouter();
   const {
     register,
@@ -85,7 +75,13 @@ export const CriarAnuncio = () => {
     resolver: zodResolver(createAdSchema),
   });
 
-  const tipoAnuncio = watch("tipoAnuncio");
+
+  const handleClose = () => {
+      setOpen(false);
+      reset();
+      setEtapa(1);
+      setError("");
+    };
 
   const onSubmit = async (data: CreateAdData) => {
     let idAnuncio = 0;
@@ -93,14 +89,15 @@ export const CriarAnuncio = () => {
       nome: data.nome,
       quantidade: data.quantidade,
       dataValidade: data.data_validade,
-      precoUnidade: data.tipoAnuncio === "DOACAO" ? 0 : data.preco_unidade,
     };
 
     try {
       const res = await criarProduto(produto);
+      setIsLoading(true);
       if (res.idProduto) idAnuncio = res.idProduto;
     } catch (e) {
-      console.error("Erro ao criar produto:", e);
+      setError("Erro ao criar o produto");
+      setIsLoading(false);
     }
 
     const formData = new FormData();
@@ -110,7 +107,6 @@ export const CriarAnuncio = () => {
       "entregaPeloFornecedor",
       data.entrega_pelo_fornecedor === "true" ? "1" : "0"
     );
-    formData.append("tipoAnuncio", data.tipoAnuncio);
     formData.append("cidadeId", data.cidade);
     formData.append("produtoId", String(idAnuncio));
     formData.append("dataExpiracao", data.data_expiracao);
@@ -118,13 +114,15 @@ export const CriarAnuncio = () => {
 
     try {
       const res = await criarAnuncio(formData);
-      console.log(res);
+      
+      router.refresh();
       setOpen(false);
       reset();
       setEtapa(1);
-      router.refresh();
     } catch (e) {
-      console.error("Erro ao criar anúncio:", e);
+      setError("Erro ao criar o anúncio")
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -134,7 +132,7 @@ export const CriarAnuncio = () => {
       "cidade",
       "entrega_pelo_fornecedor",
       "data_expiracao",
-      "tipoAnuncio",
+   
     ]);
     if (valid) setEtapa(2);
   };
@@ -144,8 +142,8 @@ export const CriarAnuncio = () => {
       <Button className="w-fit gap-2" onClick={() => setOpen(true)}>
         <PlusCircle/> Criar Novo
       </Button>
-      <Modal.Root onOpenChange={() => setOpen(false)} open={open}>
-        <Modal.Header title="Criar Anúncio" onClose={() => setOpen(false)} />
+      <Modal.Root onOpenChange={setOpen} open={open}>
+        <Modal.Header title="Criar Anúncio" onClose={() => handleClose()} />
         <Modal.Content className="min-w-[640px]">
           <form className="w-full space-y-4" onSubmit={handleSubmit(onSubmit)}>
             {etapa === 1 && (
@@ -182,7 +180,7 @@ export const CriarAnuncio = () => {
                   />
                 </div>
                 <div className="fex flex-col">
-                  <label htmlFor="Desricão do An~uncio"></label>
+                  <label className="font-medium text-gray-700" htmlFor="Desricão do Anuncio">Desricão do Anúncio</label>
                   <textarea
                     placeholder="Descrição do anúncio"
                     {...register("descricao")}
@@ -203,16 +201,6 @@ export const CriarAnuncio = () => {
                   className="mt-1 w-full"
                   {...register("entrega_pelo_fornecedor")}
                   errors={errors.entrega_pelo_fornecedor?.message}
-                />
-                <SelectInput
-                  label="Tipo do Anúncio"
-                  data={[
-                    { value: "DOACAO", text: "Doação" },
-                    { value: "VENDA", text: "Venda" },
-                  ]}
-                  className="mt-1 w-full"
-                  {...register("tipoAnuncio")}
-                  errors={errors.tipoAnuncio?.message}
                 />
                 <Input
                   label="Data de Expiração"
@@ -241,16 +229,7 @@ export const CriarAnuncio = () => {
                   errors={errors.quantidade?.message}
                   className="w-full"
                 />
-                {tipoAnuncio === "VENDA" && (
-                  <Input
-                    label="Preço por Unidade"
-                    type="number"
-                    {...register("preco_unidade")}
-                    step={0.01}
-                    errors={errors.preco_unidade?.message}
-                    className="w-full"
-                  />
-                )}
+                
                 <Input
                   label="Data de Validade"
                   type="date"
@@ -273,6 +252,7 @@ export const CriarAnuncio = () => {
                 />
               </>
             )}
+            {error && <span>{error}</span>}
             <Modal.Actions>
               {etapa > 1 && (
                 <Button
@@ -288,10 +268,13 @@ export const CriarAnuncio = () => {
                   Próximo
                 </Button>
               )}
-              {etapa === 2 && <Button type="submit">Criar</Button>}
+              {etapa === 2 && <Button disabled={isLoading} type="submit">
+                  {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+                  {isLoading ? "Criando..." : "Criar"}
+                </Button>}
               <Button
                 variant="outlined"
-                onClick={() => setOpen(false)}
+                onClick={() => handleClose()}
                 type="button"
               >
                 Fechar

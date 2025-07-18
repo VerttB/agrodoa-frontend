@@ -12,10 +12,12 @@ import { CancelarAnuncioModal } from "./CancelarAnuncioModal";
 import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
 import { useState } from "react";
 import { EditarAnuncio } from "./EditarAnuncioModal";
+import { VerNegociantes } from "../fornecedor/VerNegociantes";
 
 export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
+  const [openNegociantes, setOpenNegociantes] = useState(false);
   return (
     <>
       <DropdownMenu>
@@ -29,7 +31,9 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent className="bg-white">
-          <DropdownMenuItem>Ver Negociantes</DropdownMenuItem>
+          <DropdownMenuItem onClick={() => setOpenNegociantes(true)}>
+            Ver Negociantes
+          </DropdownMenuItem>
           <DropdownMenuItem onClick={() => setOpenEdit(true)}>
             Editar
           </DropdownMenuItem>
@@ -50,6 +54,13 @@ export const AnuncioDropdownMenu = ({ anuncio }: { anuncio: Anuncio }) => {
         anuncio={anuncio}
         open={openEdit}
         onOpenChange={setOpenEdit}
+
+      />
+
+      <VerNegociantes
+        anuncioId={anuncio.idAnuncio}
+        open={openNegociantes}
+        onOpenChange={setOpenNegociantes}
       />
     </>
   );

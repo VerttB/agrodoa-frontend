@@ -124,12 +124,31 @@ export async function cancelarAnuncio(idAnuncio: string) {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: JSON.stringify(idAnuncio),
-    },
+      body: JSON.stringify({ idAnuncio }),
+    }
   );
 
   if (!res.ok) {
-    throw new Error("Erro ao cancelar anuncios");
+    let errorMessage = `Erro ${res.status} - ${res.statusText}`;
+    try {
+      const errorData = await res.json();
+      errorMessage = errorData.message || JSON.stringify(errorData);
+    } catch {
+      try {
+        const errorText = await res.text();
+        if (errorText) errorMessage = errorText;
+      } catch {
+      }
+    }
+    throw new Error(errorMessage);
   }
-  return await res.json();
+
+  try {
+    return await res.json();
+  } catch {
+    return null; 
 }
+}
+
+
+

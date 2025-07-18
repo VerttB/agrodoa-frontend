@@ -41,57 +41,19 @@ export default function CausaUnica() {
               <CalendarDays aria-hidden="true" /> Prazo:{" "}
               {causa.prazo.toString()}
             </p>
-
-            {/* <div className="mt-4">
-              <div className="h-2 w-full overflow-hidden rounded bg-gray-200">
-                <div
-                  className="bg-accent h-full rounded"
-                  style={{
-                    width: `${(causa.valorArrecadado / causa.meta) * 100}%`,
-                  }}
-                />
-              </div>
-
-              <div className="mt-2 flex justify-between text-xl">
-                <p>Arrecadado: R$ {causa.valorArrecadado}</p>
-                <p>Meta: R$ {causa.meta}</p>
-              </div>
-            </div> */}
           </ItemPage.description>
         </ItemPage.content>
         <ItemPage.content>
           <ItemPage.actions>
-            <div className="flex flex-wrap justify-evenly gap-2">
-              {[5, 10, 25, 50].map((v) => (
-                <Button
-                  key={v}
-                  className="rounded-3xl px-6 py-2"
-                  onClick={() => setDonationValue(v)}
-                >
-                  R$ {v},00
-                </Button>
-              ))}
-            </div>
-
-            <Input
-              type="number"
-              className="border-accent focus:border-accent w-full rounded-3xl border-2 px-4 py-2"
-              placeholder="Digite um valor"
-              onChange={(e) => setDonationValue(Number(e.target.value))}
-              value={donationValue}
-              min={1}
-            />
-
+            <Button
+              className="w-full py-2 text-3xl">
+              Apoiar
+            </Button>
             <Button
               className="w-full py-2 text-3xl"
-              onClick={() => {
-                if (!user) router.push("/login");
-                router.push(
-                  `/pagamento?id=${causa.idCausa}&value=${donationValue}&name=${causa.nome}&type=causa`,
-                );
-              }}
+        
             >
-              Apoiar Causa
+            Voluntariar-se
             </Button>
           </ItemPage.actions>
 

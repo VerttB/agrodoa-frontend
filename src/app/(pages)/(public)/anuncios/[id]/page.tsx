@@ -1,6 +1,6 @@
 "use client";
 import { useParams } from "next/navigation";
-import { User, CalendarDays, MapPinCheck, Banknote } from "lucide-react";
+import { User, CalendarDays, MapPinCheck, Banknote, Loader2 } from "lucide-react";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -12,18 +12,45 @@ import { LoadingSpin } from "@/components/ui/loadingComponent";
 import { useState } from "react";
 import Link from "next/link";
 import { imgValidate } from "@/core/utils/imageValidate";
+import { iniciarNegociacao } from "@/core/services/Negociacao";
+import { useUserContext } from "@/providers/UserProvider";
 
 export default function AnuncioUnico() {
   const { id } = useParams();
   const { data: anuncio, loading } = useAnuncio<Anuncio>(String(id));
   const router = useRouter();
   const [amount, setAmount] = useState(0);
-
+  const [error,setError] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
+  const [sucess, setSucess] = useState("")
+  const { user } = useUserContext();
   if (loading) return <LoadingSpin />;
 
   if (!anuncio)
     return <p className="mt-10 text-center text-xl">Anuncio não encontrado.</p>;
 
+  const handleNegociar = async () => {
+    if(amount <=0){
+      setSucess("");
+      setError("Você deve selecionar uma quantidade para negociar!!!")
+    }
+    else{
+      try{
+        setIsLoading(true);
+        const res = await iniciarNegociacao(String(id),amount);
+        setError("")
+        setSucess("Negociação iniciada com sucesso");
+      }catch(e){
+        setError("Erro ao realizar negociação")
+      }finally{
+        setIsLoading(false);
+      }
+    }
+  }
+
+  const handleSalvar = async () => {
+
+  }
   return (
     <div className="bg-primary relative z-0 min-h-screen px-16">
       <ItemPage.root>
@@ -48,20 +75,12 @@ export default function AnuncioUnico() {
               <MapPinCheck />
               Local:{`${anuncio.local.cidade} - ${anuncio.local.estado}`}
             </p>
-            {anuncio.tipo === "VENDA" && (
-              <p className="flex items-center gap-2 text-xl">
-                <Banknote />
-                Preço por Unidade:{" "}
-                {anuncio.produto.precoUnidade.toLocaleString("pt-BR", {
-                  style: "currency",
-                  currency: "BRL",
-                })}
-              </p>
-            )}
           </ItemPage.description>
         </ItemPage.content>
         <ItemPage.content>
           <ItemPage.actions>
+            {error && <span className="text-red-500">{error}</span>}
+            {sucess && <span className="text-green-500">{sucess}</span>}
             <Input
               label="Quantidade"
               type="number"
@@ -73,13 +92,11 @@ export default function AnuncioUnico() {
             />
             <Button
               className="w-full py-2 text-3xl"
-              onClick={() =>
-                router.push(
-                  `/pagamento?id=${anuncio.idAnuncio}&amount=${amount}&type=anuncio`,
-                )
-              }
+              onClick={() => handleNegociar()}
+
             >
-              Negociar
+             {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
+              {isLoading ? "Negociando..." : "Negociar"}
             </Button>
             <Button className="w-full py-2 text-3xl" variant="outlined">
               Salvar

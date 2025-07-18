@@ -22,10 +22,10 @@ export default async function CausasPage({ searchParams }: CausaProps) {
       <div className="flex w-full flex-col items-center gap-8">
         <div className="flex w-full xl:w-4/5">
           <CausaSearch />
+          <SolicitarCausa />
         </div>
 
         <CausaLista causas={causas} />
-        <SolicitarCausa />
       </div>
     </div>
   );

@@ -41,6 +41,7 @@ export async function cadastroUsuario(data: any) {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(data),
+    credentials: "include"
   });
 
   if (!res.ok) {

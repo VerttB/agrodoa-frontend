@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { Causas } from "@/core/interfaces/Causas";
 import { useState } from "react";
 import { SolicitarCausa } from "@/components/causa/SolicitarCausaModal";
+import { CausasTable } from "@/components/causa/CausaTables";
 
 export const causasTeste: Causas[] = [
   {
@@ -40,7 +41,43 @@ export const causasTeste: Causas[] = [
     prazo: new Date("2025-08-22"),
     descricao: "Mobilização para doar alimentos não perecíveis a famílias de zona rural sem acesso regular a feiras.",
     nomeArquivoFoto: "mutirao-zona-rural.png",
+  }
+  ,
+  {
+    idCausa: "2b3c4d5e",
+    nome: "Ajuda às Comunidades Quilombolas",
+    prazo: new Date("2025-09-10"),
+    descricao: "Campanha de arrecadação de mantimentos e itens de higiene para comunidades quilombolas da região oeste.",
+    nomeArquivoFoto: "quilombolas-ajuda.png",
   },
+  {
+    idCausa: "2b3c4d5e",
+    nome: "Ajuda às Comunidades Quilombolas",
+    prazo: new Date("2025-09-10"),
+    descricao: "Campanha de arrecadação de mantimentos e itens de higiene para comunidades quilombolas da região oeste.",
+    nomeArquivoFoto: "quilombolas-ajuda.png",
+  },
+  {
+    idCausa: "2b3c4d5e",
+    nome: "Ajuda às Comunidades Quilombolas",
+    prazo: new Date("2025-09-10"),
+    descricao: "Campanha de arrecadação de mantimentos e itens de higiene para comunidades quilombolas da região oeste.",
+    nomeArquivoFoto: "quilombolas-ajuda.png",
+  },
+  {
+    idCausa: "2b3c4d5e",
+    nome: "Ajuda às Comunidades Quilombolas",
+    prazo: new Date("2025-09-10"),
+    descricao: "Campanha de arrecadação de mantimentos e itens de higiene para comunidades quilombolas da região oeste.",
+    nomeArquivoFoto: "quilombolas-ajuda.png",
+  },
+  {
+    idCausa: "2b3c4d5e",
+    nome: "Ajuda às Comunidades Quilombolas",
+    prazo: new Date("2025-09-10"),
+    descricao: "Campanha de arrecadação de mantimentos e itens de higiene para comunidades quilombolas da região oeste.",
+    nomeArquivoFoto: "quilombolas-ajuda.png",
+  }
 ];
 
 export default function CausasAdmin(){
@@ -57,7 +94,7 @@ export default function CausasAdmin(){
   }
   return(
    <div className="p-4">
-    <div className="flex p-4 bg-primary justify-between">
+    <div className="flex p-4 bg-[#FFF7ED] justify-between">
   <h1 className="text-2xl font-semibold text-center mb-6">Solicitações de Causas</h1>
     <SolicitarCausa/>
   </div>
@@ -65,17 +102,7 @@ export default function CausasAdmin(){
   <div className="bg-[#FFF7ED] min-h-screen p-6 relative">
 
   <div className="space-y-4">
-    {causasTeste.map((causa) => (
-      <div key={causa.idCausa} className="bg-neutral flex items-center justify-between p-4 rounded-lg shadow-xl relative">
-        <div className="absolute left-0 h-full w-2 bg-[#FF6B00] rounded-l-lg" />
-        <div className="ml-4">
-          <p className="font-bold">{causa.nome}</p>
-          
-        </div>
-        <Button variant="secondary" onClick={() => handleOpenModal(causa)}>Ver Detalhes</Button>
-          
-      </div>
-    ))}
+    <CausasTable onClick={handleOpenModal}/>
   </div>
   
 

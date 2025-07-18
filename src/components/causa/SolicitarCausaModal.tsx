@@ -11,7 +11,7 @@ import { ImageUploadInput } from "../ui/imageInput";
 import { useUserContext } from "@/providers/UserProvider";
 import { criarCausa } from "@/core/services/CausaService";
 import { useRouter } from "next/navigation";
-import { PlusCircle } from "lucide-react";
+import { Loader2, PlusCircle } from "lucide-react";
 const solicitarCausaSchema = z.object({
   nome: z
     .string({ required_error: "O campo de nome de causa não deve estar vazio" })
@@ -42,6 +42,8 @@ type SolicitarCausaData = z.infer<typeof solicitarCausaSchema>;
 
 export const SolicitarCausa = () => {
   const [open, setOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState(null)
   const { user } = useUserContext();
   const router = useRouter();
 
@@ -57,7 +59,7 @@ export const SolicitarCausa = () => {
   const onSubmit = async (data: any) => {
     console.log("ENVIANDO CAUSA")
     try {
-      
+      setIsLoading(true);
       const formData = new FormData();
       formData.append("nome", data.nome);
       formData.append("descricao", data.descricao);
@@ -65,13 +67,17 @@ export const SolicitarCausa = () => {
       formData.append("prazo", data.prazo);
       formData.append("imagem", data.image); 
 
-      await criarCausa(formData);
+      const sucess = await criarCausa(formData);
+      if(!sucess){
 
+      }
       reset();
       setOpen(false);
       router.refresh();
     } catch (error) {
       console.error("Erro ao criar causa:", error);
+    }finally{
+      setIsLoading(false)
     }
   };
 
@@ -82,11 +88,11 @@ export const SolicitarCausa = () => {
   return (
     <>
           <Button
-            className="py-0 gap-1"
+            className=" gap-1"
             variant="primary"
             onClick={() => setOpen(true)}
           >
-            {user?.tipo === "fornecedor" ? "Solicitar Causa" : <><PlusCircle/> Nova Causa</>}
+            {user?.tipo !== "administrador" ? "Solicitar Causa" : <><PlusCircle/> Nova Causa</>}
           </Button>
 
           <Modal.Root onOpenChange={setOpen} open={open}>
@@ -150,8 +156,17 @@ export const SolicitarCausa = () => {
                   )}
                 />
                 <Modal.Actions>
-                  <Button className="px-4 py-1" type="submit">
-                    {user?.tipo === "fornecedor" ? "Solicitar Causa" : "Criar Causa"}
+                  <Button disabled={isLoading} className="px-4 py-1" type="submit">
+                    {isLoading ? (
+                                <>
+                                  <Loader2 className="animate-spin w-4 h-4" />
+                                  Enviando...
+                                </>
+                              ) : user?.tipo === "fornecedor" ? (
+                                "Solicitar Causa"
+                              ) : (
+                                "Criar Causa"
+                              )}
                   </Button>
                   <Button
                     className="px-4 py-1"
