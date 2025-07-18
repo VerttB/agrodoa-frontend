@@ -10,6 +10,7 @@ export default function Layout({
 }>) {
   const router = useRouter();
   return (
+
     <div className="flex min-h-screen flex-col">
       <main className="flex flex-1">
         <aside className="w-64 bg-secondary-darker  border-gray-200 flex flex-col justify-between py-6 px-4">

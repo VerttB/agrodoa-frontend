@@ -34,7 +34,7 @@ export async function getCausas(params: CausaQueryParams = {}) {
 export async function getCausasAguardando(params: CausaQueryParams = {}) {
   console.log(typeof params);
   const queryString = buildQueryString(params);
-  const url = `${BASE_URL}/causas?statusCausa=AGUARDANDO`;
+  const url = `${BASE_URL}/causas?status=AGUARDANDO`;
 
   const res = await fetch(url, {
     cache: "no-store",

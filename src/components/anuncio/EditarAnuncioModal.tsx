@@ -87,7 +87,8 @@ export const EditarAnuncio = ({open,onOpenChange,anuncio,}: EditarAnuncioProps) 
     dataExpiracao: data.data_expiracao,
     entregaPeloFornecedor: data.entrega_pelo_fornecedor === "true" ? 1 : 0,
     produtoId: anuncio.produto.idProduto,
-    cidadeId: data.cidade
+    cidadeId: data.cidade,
+    quantidade: data.amount
   }
 
   

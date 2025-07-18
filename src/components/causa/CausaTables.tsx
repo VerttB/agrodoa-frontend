@@ -21,6 +21,7 @@ export const CausasTable = ({onClick}:{onClick: (causa:Causas) => void}) => {
   useEffect(() => {
     const handleGetUser = async () => {
       const data = await getCausasAguardando();
+      console.log("CAUSA COLETADAS", data)
       setCausas(data)
      console.log(data)
 
