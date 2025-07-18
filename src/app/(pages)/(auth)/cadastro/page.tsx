@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { zodResolver } from "@hookform/resolvers/zod";
 import Image from "next/image";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { z } from "zod";
 import { formatCpfCnpj } from "@/core/utils/formatCpfCnpj";
 import { formatTel } from "@/core/utils/formatTel";
@@ -15,6 +15,8 @@ import { useUserContext } from "@/providers/UserProvider";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { Loader2 } from "lucide-react";
+import { ACCEPTED_IMAGE_TYPE, MAX_FILE_SIZE } from "@/core/constants/values";
+import { ImageUploadInput } from "@/components/ui/imageInput";
 
 const userRegisterSchema = z
   .object({
@@ -42,6 +44,13 @@ const userRegisterSchema = z
     idCidade: z.string().nonempty("Cidade é obrigatória"),
     tipoUsuario: z.string().nonempty("Tipo de usuário é obrigatório"),
     nomeArquivoFoto: z.string().optional(),
+    image: z
+    .instanceof(File, { message: "Deve ser uma imagem" })
+    .refine((file) => file?.size <= MAX_FILE_SIZE, "Máximo 5MB")
+    .refine(
+      (file) => ACCEPTED_IMAGE_TYPE.includes(file?.type),
+      "Extensão inválida"
+    ),
   })
   .refine((data) => data.senha === data.confirmarSenha, {
     message: "As senhas devem ser iguais",
@@ -69,6 +78,7 @@ export default function Cadastro() {
     register,
     handleSubmit,
     setValue,
+    control,
     trigger,
     formState: { errors },
   } = useForm<UserRegisterData>({
@@ -94,11 +104,20 @@ export default function Cadastro() {
       idCidade: data.idCidade,
       tipoUsuario: data.tipoUsuario,
     };
-
+    const formData = new FormData();
+    formData.append("nome", data.nome);
+    formData.append("email", data.email);
+    formData.append("senha", data.senha);
+    formData.append("cpfOuCnpj", data.cpfOuCnpj);
+    formData.append("telefone", data.telefone);
+    formData.append("nomeArquivoFoto", data.nomeArquivoFoto || "");
+    formData.append("estado", data.estado);
+    formData.append("idCidade", data.idCidade)
+    formData.append("tipoUsuario", data.tipoUsuario); 
     try {
       setRegisterError(null);
       setIsLoading(true);
-      const success = await cadastro(dadoUsuario);
+      const success = await cadastro(formData);
       if (success) {
         console.log("Usuário cadastrado");
         router.push("/anuncios");
@@ -170,6 +189,18 @@ export default function Cadastro() {
                     className="w-full bg-white py-2"
                   />
                 </div>
+                <Controller
+                  control={control}
+                  name="image"
+                  render={({ field }) => (
+                    <ImageUploadInput
+                      label="Imagem da Causa"
+                      value={field.value}
+                      onChange={field.onChange}
+                      errors={errors.image?.message}
+                    />
+                  )}
+                />
               </>
             )}
 

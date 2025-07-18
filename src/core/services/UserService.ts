@@ -37,10 +37,7 @@ export async function getUsuarioAutenticado() {}
 export async function cadastroUsuario(data: any) {
   const res = await fetch(`${BASE_URL}/usuarios/cadastrar_usuario`, {
     method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
+    body: data,
     credentials: "include"
   });
 
