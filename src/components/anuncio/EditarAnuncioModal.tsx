@@ -3,19 +3,15 @@ import { Modal } from "../ui/Modal";
 import { Button } from "../ui/button";
 import { z } from "zod";
 import { Input } from "../ui/input";
-import { ACCEPTED_IMAGE_TYPE, MAX_FILE_SIZE } from "@/core/constants/values";
 import { useForm, Controller } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { ImageUploadInput } from "../ui/imageInput";
 import { Anuncio } from "@/core/interfaces/Anuncio/Anuncio";
-import { useEffect, useState } from "react";
 import { SelectInput } from "../ui/selectInput";
-import { imgValidate } from "@/core/utils/imageValidate";
 import { useEstadosECidades } from "@/hooks/useEstadosECidades";
 import { editarAnuncio } from "@/core/services/AnuncioService";
 import { useAlert } from "@/hooks/useAlert";
 import { Alert } from "../ui/alert";
-
+import { useRouter } from "next/navigation";
 interface EditarAnuncioProps {
   anuncio: Anuncio;
   open: boolean;
@@ -59,7 +55,7 @@ type EditAdData = z.infer<typeof editAdSchema>;
 export const EditarAnuncio = ({open,onOpenChange,anuncio,}: EditarAnuncioProps) => {
   const { estados, cidades, estadoSelecionado, setEstadoSelecionado } = useEstadosECidades();
   const { show, message, type, showAlert, hideAlert } = useAlert();
-  
+  const router = useRouter();
   const {
     register,
     handleSubmit,
@@ -84,23 +80,22 @@ export const EditarAnuncio = ({open,onOpenChange,anuncio,}: EditarAnuncioProps) 
 
 
  const onSubmit = async (data: EditAdData) => {
-  const formData = new FormData();
-  formData.append("titulo", data.name);
-  formData.append("nomeProduto", data.productName);
-  formData.append("quantidade", data.amount.toString());
-  formData.append(
-    "entregaPeloFornecedor",
-    data.entrega_pelo_fornecedor === "true" ? "1" : "0"
-  );
-  formData.append("cidadeId", data.cidade);
-  formData.append("produtoId", anuncio.produto.idProduto);
-  formData.append("dataExpiracao", data.data_expiracao);
-  formData.append("descricao", data.descricao);
+ 
+  const anuncioNovo = {
+    titulo: data.name,
+    descricao: data.descricao,
+    dataExpiracao: data.data_expiracao,
+    entregaPeloFornecedor: data.entrega_pelo_fornecedor === "true" ? 1 : 0,
+    produtoId: anuncio.produto.idProduto,
+    cidadeId: data.cidade
+  }
 
-
+  
+  console.log("ANUNCIO:" , data)
   try {
-    await editarAnuncio(anuncio.idAnuncio, formData);
+    await editarAnuncio(anuncio.idAnuncio, anuncioNovo);
     showAlert("Anúncio Editado com Sucesso", "success")
+    router.refresh()
     onOpenChange(false); 
   } catch (error:any) {
     showAlert(error.message || "Ocorreu um erro ao tentar editar o anúncio", "error")

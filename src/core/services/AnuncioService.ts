@@ -118,8 +118,9 @@ export async function editarAnuncio(idAnuncio:string, anuncioEditado:any) {
     `${BASE_URL}/anuncios/${idAnuncio}/editar`,
     {
       method: "PUT",
+       headers: { "Content-Type": "application/json" },
       credentials: "include",
-      body: anuncioEditado,
+      body: JSON.stringify(anuncioEditado),
     }
   );
 
