@@ -1,5 +1,7 @@
-export interface IDenuncia {
-  iddenuncia: number;
-  id_denunciado: number;
-  id_denunciante: number;
+export interface Denuncia {
+  idDenuncia: string;
+  motivo: string;
+  denunciante: string;
+  denunciado: string;
+  status: string,
 }
