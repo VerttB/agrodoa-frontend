@@ -85,7 +85,7 @@ export default function Login() {
               className="w-full rounded-lg bg-white py-2"
             />
             <Input
-              type="text"
+              type="password"
               id="senha"
               {...register("senha")}
               label="Senha"

@@ -14,6 +14,8 @@ import Link from "next/link";
 import { imgValidate } from "@/core/utils/imageValidate";
 import { iniciarNegociacao } from "@/core/services/Negociacao";
 import { useUserContext } from "@/providers/UserProvider";
+import { Alert } from "@/components/ui/alert";
+import { useAlert } from "@/hooks/useAlert";
 
 export default function AnuncioUnico() {
   const { id } = useParams();
@@ -24,10 +26,12 @@ export default function AnuncioUnico() {
   const [isLoading, setIsLoading] = useState(false);
   const [sucess, setSucess] = useState("")
   const { user } = useUserContext();
+  const { show, message, type, showAlert, hideAlert } = useAlert();
+
   if (loading) return <LoadingSpin />;
 
   if (!anuncio)
-    return <p className="mt-10 text-center text-xl">Anuncio não encontrado.</p>;
+    return <p className="mt-10 min-h-screen text-center text-xl">Anuncio não encontrado.</p>;
 
   const handleNegociar = async () => {
     if(amount <=0){
@@ -40,8 +44,11 @@ export default function AnuncioUnico() {
         const res = await iniciarNegociacao(String(id),amount);
         setError("")
         setSucess("Negociação iniciada com sucesso");
+        showAlert(" Negociação Iniciada com Sucesso", "success")
       }catch(e){
         setError("Erro ao realizar negociação")
+        showAlert(" Erro ao realizar negociação", "error")
+
       }finally{
         setIsLoading(false);
       }
@@ -52,6 +59,9 @@ export default function AnuncioUnico() {
 
   }
   return (
+    <>
+    <Alert message={message} type={type} show={show} onClose={hideAlert} />
+
     <div className="bg-primary relative z-0 min-h-screen px-16">
       <ItemPage.root>
         <ItemPage.content>
@@ -98,21 +108,16 @@ export default function AnuncioUnico() {
              {isLoading && <Loader2 className="w-4 h-4 animate-spin" />}
               {isLoading ? "Negociando..." : "Negociar"}
             </Button>
-            <Button className="w-full py-2 text-3xl" variant="outlined">
-              Salvar
-            </Button>
           </ItemPage.actions>
 
           <ItemPage.description title="Descrição">
             <p className="px-6 text-justify leading-relaxed">
-              {`Lorem ipsum dolor sit amet consectetur adipisicing elit. Architecto quam,
-              culpa eum corrupti perspiciatis voluptatum, eius qui voluptatem quas nisi
-              quia dolore repellendus. Tenetur rem culpa illum voluptatibus! Sapiente,
-              aspernatur.`}
+              {anuncio.descricao}
             </p>
           </ItemPage.description>
         </ItemPage.content>
       </ItemPage.root>
     </div>
+    </>
   );
 }
