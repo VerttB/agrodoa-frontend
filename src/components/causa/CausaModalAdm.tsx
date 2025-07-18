@@ -10,7 +10,7 @@ import { imgValidate } from "@/core/utils/imageValidate";
 import { aprovarCausa, rejeitarCausa } from "@/core/services/CausaService";
 import { useAlert } from "@/hooks/useAlert";
 import { Alert } from "../ui/alert";
-
+import { useRouter } from "next/navigation";
 interface CausaModalAdmProps {
   causa: Causas;
   open: boolean;
@@ -20,12 +20,13 @@ interface CausaModalAdmProps {
 export const CausaModalAdm = ({ causa, open, onClose }: CausaModalAdmProps) => {
   const [loading, setLoading] = useState(false);
   const { show, message, type, showAlert, hideAlert } = useAlert();
-
+  const router = useRouter();
   const handleApprove = async () => {
     try {
       setLoading(true);
       await aprovarCausa(causa.idCausa);
       showAlert("Causa aprovada com sucesso!", "success");
+      router.refresh();
       onClose();
     } catch (err: any) {
       showAlert(err.message || "Erro ao aprovar causa.", "error");
@@ -37,8 +38,9 @@ export const CausaModalAdm = ({ causa, open, onClose }: CausaModalAdmProps) => {
   const handleRefuse = async () => {
     try {
       setLoading(true);
-      await rejeitarCausa(causa.idCausa);
+      const sucess = await rejeitarCausa(causa.idCausa);
       showAlert("Causa recusada com sucesso.", "success");
+      router.refresh();
       onClose();
     } catch (err: any) {
       showAlert(err.message || "Erro ao recusar causa.", "error");

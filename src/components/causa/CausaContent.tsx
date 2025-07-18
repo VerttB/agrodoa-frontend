@@ -57,11 +57,14 @@ export const CausaContent = ({ causas}:{causas:Causas[]}) => {
     <div className="flex flex-col gap-4">
       
       <CausaTabs user={user} onTabChange={setTab} value={tab}>
+        <div className="flex">
           {tab === "disponiveis" && (
                   <div className="flex gap-2">
                     <CausaSearch />
                   </div>
                 )}
+            {user?.tipoUsuario == "fornecedor" && <SolicitarCausa/>}
+            </div>
             <CausaTabsContent causasPorAba={causasPorAba} tab={tab} user={user} />
     </CausaTabs>
 
