@@ -12,6 +12,8 @@ import { useUserContext } from "@/providers/UserProvider";
 import { criarCausa } from "@/core/services/CausaService";
 import { useRouter } from "next/navigation";
 import { Loader2, PlusCircle } from "lucide-react";
+import { useAlert } from "@/hooks/useAlert";
+import { Alert } from "../ui/alert";
 const solicitarCausaSchema = z.object({
   nome: z
     .string({ required_error: "O campo de nome de causa não deve estar vazio" })
@@ -46,6 +48,8 @@ export const SolicitarCausa = () => {
   const [error, setError] = useState(null)
   const { user } = useUserContext();
   const router = useRouter();
+  const { show, message, type, showAlert, hideAlert } = useAlert();
+  
 
   const {
     register,
@@ -68,14 +72,13 @@ export const SolicitarCausa = () => {
       formData.append("imagem", data.image); 
 
       const sucess = await criarCausa(formData);
-      if(!sucess){
-
-      }
+      showAlert("Causa Solicitada Com Sucesso", "success")
       reset();
       setOpen(false);
       router.refresh();
     } catch (error) {
       console.error("Erro ao criar causa:", error);
+      showAlert("Ocorreu um erro ao solicitar uma causa", "error")
     }finally{
       setIsLoading(false)
     }
@@ -87,6 +90,7 @@ export const SolicitarCausa = () => {
   }
   return (
     <>
+          <Alert message={message} type={type} show={show} onClose={hideAlert} />
           <Button
             className=" gap-1"
             variant="primary"

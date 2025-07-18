@@ -1,4 +1,5 @@
 import { CausaQueryParams } from "../interfaces/QueryParams/CausaQueryParams";
+import { verificaResposta } from "../utils/verificarResposta";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
@@ -27,11 +28,7 @@ export async function getCausas(params: CausaQueryParams = {}) {
     },
   });
 
-  if (!res.ok) {
-    throw new Error("Erro ao buscar causas");
-  }
-
-  return res.json();
+   return await verificaResposta(res);
 }
 
 export async function criarCausa(data: any) {
@@ -42,9 +39,5 @@ export async function criarCausa(data: any) {
     body: data,
   });
 
-  if (!res.ok) {
-    throw new Error("Erro ao criar causa causas");
-  }
-
-  return res.json();
+  return await verificaResposta(res);
 }

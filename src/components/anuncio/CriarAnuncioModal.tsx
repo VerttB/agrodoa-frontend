@@ -14,6 +14,8 @@ import { criarAnuncio } from "@/core/services/AnuncioService";
 import { useRouter } from "next/navigation";
 import { useEstadosECidades } from "@/hooks/useEstadosECidades";
 import { Loader2, PlusCircle } from "lucide-react";
+import { useAlert } from "@/hooks/useAlert";
+import { Alert } from "../ui/alert";
 
 const createAdSchema = z
   .object({
@@ -63,6 +65,9 @@ export const CriarAnuncio = () => {
   const [etapa, setEtapa] = useState(1);
   const [ error,setError] = useState("");
   const router = useRouter();
+  const { show, message, type, showAlert, hideAlert } = useAlert();
+  
+
   const {
     register,
     handleSubmit,
@@ -75,7 +80,7 @@ export const CriarAnuncio = () => {
     resolver: zodResolver(createAdSchema),
   });
 
-
+  
   const handleClose = () => {
       setOpen(false);
       reset();
@@ -95,7 +100,8 @@ export const CriarAnuncio = () => {
       const res = await criarProduto(produto);
       setIsLoading(true);
       if (res.idProduto) idAnuncio = res.idProduto;
-    } catch (e) {
+    } catch (e:any) {
+        showAlert(e.message || "Ocorreu um erro ao criar o produto", "error")
       setError("Erro ao criar o produto");
       setIsLoading(false);
     }
@@ -114,12 +120,13 @@ export const CriarAnuncio = () => {
 
     try {
       const res = await criarAnuncio(formData);
-      
+      showAlert("Anúncio Criado Com Sucesso", "success")
       router.refresh();
       setOpen(false);
       reset();
       setEtapa(1);
-    } catch (e) {
+    } catch (e:any) {
+      showAlert(e.message || "Ocorreu um erro ao criar o anúncio", "error")
       setError("Erro ao criar o anúncio")
     }finally{
       setIsLoading(false)
@@ -139,6 +146,7 @@ export const CriarAnuncio = () => {
 
   return (
     <>
+      <Alert message={message} type={type} show={show} onClose={hideAlert} />
       <Button className="w-fit gap-2" onClick={() => setOpen(true)}>
         <PlusCircle/> Criar Novo
       </Button>

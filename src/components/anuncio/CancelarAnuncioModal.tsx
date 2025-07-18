@@ -5,6 +5,8 @@ import { Button } from "../ui/button";
 import { Modal } from "../ui/Modal";
 import { cancelarAnuncio } from "@/core/services/AnuncioService";
 import { useRouter } from "next/navigation";
+import { Alert } from "../ui/alert";
+import { useAlert } from "@/hooks/useAlert";
 interface CancelarAnuncioProps {
   id: string;
   titulo: string;
@@ -22,6 +24,7 @@ export const CancelarAnuncioModal = ({
   const [inputNome, setInputNome] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const { show, message, type, showAlert, hideAlert } = useAlert();
 
   const isNomeValido = inputNome.trim() === titulo.trim();
   console.log(id);
@@ -36,12 +39,14 @@ export const CancelarAnuncioModal = ({
 
     try {
       await cancelarAnuncio(id);
-      alert("Anúncio cancelado com sucesso.");
+      showAlert("Anuncio Cancelado Com Sucesso", "success")
       onOpenChange(false);
       setInputNome("");
       router.refresh();
+      
     } catch (e: any) {
       setError(e.message || "Erro ao cancelar o anúncio.");
+      showAlert(e.message || "Erro ao cancelar o anúncio.", "error")
     } finally {
       setLoading(false);
     }
@@ -54,6 +59,8 @@ export const CancelarAnuncioModal = ({
   };
 
   return (
+    <>
+    <Alert message={message} type={type} show={show} onClose={hideAlert} />
     <Modal.Root open={open} onOpenChange={handleClose}>
       <Modal.Header title="Cancelar Anúncio" onClose={handleClose} />
       <Modal.Content className="min-w-[640px]">
@@ -94,5 +101,6 @@ export const CancelarAnuncioModal = ({
         </Modal.Actions>
       </Modal.Content>
     </Modal.Root>
+    </>
   );
 };

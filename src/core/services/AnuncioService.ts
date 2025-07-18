@@ -1,8 +1,9 @@
 import { AnuncioQueryParams } from "@/core/interfaces/QueryParams/AnuncioQueryParams";
+import { verificaResposta } from "../utils/verificarResposta";
 
 const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8080";
 
-function buildQueryString(params: object): string {
+function buildQueryString(params: Record<string, any>): string {
   const query = new URLSearchParams();
 
   for (const [key, value] of Object.entries(params)) {
@@ -27,11 +28,7 @@ export async function getAnuncios(params: AnuncioQueryParams = {}) {
     },
   });
 
-  if (!res.ok) {
-    throw new Error("Erro ao buscar anúncios");
-  }
-
-  return await res.json();
+ return await verificaResposta(res)
 }
 
 export async function getAnunciosUsuario(
@@ -52,42 +49,32 @@ export async function getAnunciosUsuario(
     method: "GET",
   });
 
-  if (!res.ok) {
-    throw new Error("Erro ao buscar anúncios");
-  }
-
-  return await res.json();
+ return await verificaResposta(res)
 }
 
 export async function criarAnuncio(anuncio: any) {
-  const res = await fetch("http://localhost:8080/anuncios/criar_anuncio", {
+  const res = await fetch(`${BASE_URL}/anuncios/criar_anuncio`, {
     method: "POST",
     body: anuncio,
     credentials: "include",
   });
 
-  if (!res.ok) {
-    return res;
-  }
-  return await res.json();
+  return await verificaResposta(res)
 }
 
 export async function salvarAnuncio(id: string) {
-  const res = await fetch(`http://localhost:8080/anuncios/${id}/salvar`, {
+  const res = await fetch(`${BASE_URL}/anuncios/${id}/salvar`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     credentials: "include",
   });
 
-  if (!res.ok) {
-    throw new Error("Erro ao salvar Anúncio");
-  }
-  return await res.json();
+  return await verificaResposta(res)
 }
 
 export async function getAnunciosSalvos() {
   const res = await fetch(
-    `http://localhost:8080/usuarios/meu_perfil/meus_salvos`,
+    `${BASE_URL}/usuarios/meu_perfil/meus_salvos`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -95,15 +82,12 @@ export async function getAnunciosSalvos() {
     },
   );
 
-  if (!res.ok) {
-    throw new Error("Erro ao pegar anuncios salvos");
-  }
-  return await res.json();
+  return await verificaResposta(res)
 }
 
 export async function getAnunciosEmNegociacao() {
   const res = await fetch(
-    `http://localhost:8080/usuarios/meu_perfil/minhas_negociacoes`,
+    `${BASE_URL}/usuarios/meu_perfil/minhas_negociacoes`,
     {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -111,15 +95,12 @@ export async function getAnunciosEmNegociacao() {
     },
   );
 
-  if (!res.ok) {
-    throw new Error("Erro ao pegar anuncios em negociacao");
-  }
-  return await res.json();
+ return await verificaResposta(res)
 }
 
 export async function cancelarAnuncio(idAnuncio: string) {
   const res = await fetch(
-    `http://localhost:8080/anuncios/${idAnuncio}/cancelar`,
+    `${BASE_URL}/anuncios/${idAnuncio}/cancelar`,
     {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
@@ -128,27 +109,9 @@ export async function cancelarAnuncio(idAnuncio: string) {
     }
   );
 
-  if (!res.ok) {
-    let errorMessage = `Erro ${res.status} - ${res.statusText}`;
-    try {
-      const errorData = await res.json();
-      errorMessage = errorData.message || JSON.stringify(errorData);
-    } catch {
-      try {
-        const errorText = await res.text();
-        if (errorText) errorMessage = errorText;
-      } catch {
-      }
-    }
-    throw new Error(errorMessage);
-  }
+  return await verificaResposta(res);
+}
 
-  try {
-    return await res.json();
-  } catch {
-    return null; 
-}
-}
 
 
 
