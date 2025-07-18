@@ -69,12 +69,8 @@ export default function CausaUnica() {
           </ItemPage.description>
         </ItemPage.content>
         <ItemPage.content>
-          <ItemPage.actions>
-            <Button
-              className="w-full py-2 text-3xl">
-              Apoiar
-            </Button>
-            <Button
+          <ItemPage.actions>         
+              <Button
               className="w-full py-2 text-3xl"
               onClick={() => handleVoluntariar()}
             >
