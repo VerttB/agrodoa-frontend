@@ -9,5 +9,6 @@ export interface Usuario {
   cidade: string;
   estado: string;
   avaliacaoMedia: number;
+  nomeArquivoFoto:string,
   github?:string,
 }

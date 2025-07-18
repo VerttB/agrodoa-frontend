@@ -9,6 +9,7 @@ import { formatTel } from "@/core/utils/formatTel";
 import { formatCpfCnpj } from "@/core/utils/formatCpfCnpj";
 import { StarRating } from "@/components/ui/StarRating";
 import Image from "next/image";
+import { imgValidate } from "@/core/utils/imageValidate";
 export default function Perfil() {
   const { user } = useUserContext();
   if (!user) return <p>Usuário não encontrado</p>;
@@ -18,7 +19,7 @@ export default function Perfil() {
         <Card.Content className="flex w-full flex-col items-center justify-center gap-8">
           <div className="flex flex-col items-center">
             <div className="relative h-[140px] w-[140px] rounded-full">
-              <Image className="object-cover rounded-full" fill alt="Foto do usuário" src={"/mato.jpg"}></Image>
+              <Image className="object-cover rounded-full" fill alt="Foto do usuário" src={imgValidate(user.nomeArquivoFoto)}></Image>
             </div>
             <h1 className="text-2xl font-bold">{user?.nome}</h1>
             <p className="text-xl font-medium text-gray-700">
